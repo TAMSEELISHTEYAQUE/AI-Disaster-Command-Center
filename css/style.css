@@ -250,6 +250,12 @@ opacity:1;
 
 .sidebar li{
 
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
     padding:15px;
 
     margin-bottom:12px;
@@ -260,17 +266,19 @@ opacity:1;
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:all .35s ease;
 
 }
 
 .sidebar li:hover{
 
-    background:#00BFFF;
+    background:#246bce;
 
-    color:#000;
+    color:#ffffff;
 
-    transform:translateX(6px);
+    transform:translateX(8px);
+
+    box-shadow:0 0 18px rgba(0,170,255,.45);
 
 }
 
@@ -302,49 +310,83 @@ opacity:1;
 
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 
-    gap:20px;
+    gap:22px;
 
 }
 
 .card{
 
-    background:linear-gradient(135deg,#18263d,#243a5a);
+    position:relative;
 
-    border:1px solid rgba(0,191,255,.25);
+    overflow:hidden;
 
-    border-radius:16px;
+    background:linear-gradient(145deg,#1a2940,#29486d);
 
-    padding:25px;
+    border:1px solid rgba(0,191,255,.30);
 
-    transition:.3s;
+    border-radius:20px;
 
-    box-shadow:0 10px 20px rgba(0,0,0,.30);
+    padding:28px;
+
+    transition:all .45s ease;
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.45),
+        inset 0 1px 1px rgba(255,255,255,.08);
+
+}
+
+/* Blue glowing strip */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:6px;
+
+    height:100%;
+
+    background:linear-gradient(#00BFFF,#1E88E5);
 
 }
 
 .card:hover{
 
-    transform:translateY(-8px);
+    transform:
+        translateY(-12px)
+        scale(1.03);
 
-    box-shadow:0 15px 30px rgba(0,191,255,.25);
+    box-shadow:
+        0 25px 45px rgba(0,191,255,.30),
+        0 0 30px rgba(0,191,255,.25);
 
 }
 
 .card h3{
 
-    color:#66d6ff;
+    color:#7ddcff;
 
-    margin-bottom:15px;
+    margin-bottom:18px;
 
     font-size:18px;
+
+    font-weight:600;
 
 }
 
 .card p{
 
-    font-size:30px;
+    font-size:34px;
 
     font-weight:700;
+
+    color:#ffffff;
 
 }
 
@@ -519,5 +561,21 @@ opacity:1;
     grid-template-columns:1fr;
 
 }
+
+}
+
+/* ===========================
+   ACTIVE SIDEBAR ITEM
+=========================== */
+
+.sidebar li.active{
+
+    background:#2d8cff;
+
+    color:#ffffff;
+
+    font-weight:600;
+
+    box-shadow:0 0 20px rgba(45,140,255,.55);
 
 }
