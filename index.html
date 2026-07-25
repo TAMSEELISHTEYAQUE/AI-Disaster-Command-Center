@@ -118,39 +118,67 @@
 
             <h2>🛰 Disaster Monitoring Dashboard</h2>
 
-            <!-- Statistics Cards -->
+            
+<!-- ===========================
+     KPI STATISTICS CARDS
+=========================== -->
 
 <div class="cards">
 
+    <!-- Satellite Card -->
     <div class="card">
+
         <h3>🛰 Satellites Online</h3>
-        <p>12</p>
-        <span class="status online">🟢 Operational</span>
+
+        <p id="satelliteCount">12</p>
+
+        <span class="card-status online">🟢 Operational</span>
+
         <small>+2 Today</small>
+
     </div>
 
+    <!-- Flood Alert Card -->
     <div class="card">
+
         <h3>🌊 Flood Alerts</h3>
-        <p>28</p>
-        <span class="status warning">🟡 Moderate Risk</span>
+
+        <p id="floodCount">28</p>
+
+        <span class="card-status warning">🟡 Moderate Risk</span>
+
         <small>+5 Today</small>
+
     </div>
 
+    <!-- Wildfire Alert Card -->
     <div class="card">
+
         <h3>🔥 Wildfire Alerts</h3>
-        <p>09</p>
-        <span class="status danger">🔴 High Risk</span>
+
+        <p id="fireCount">9</p>
+
+        <span class="card-status danger">🔴 High Risk</span>
+
         <small>+1 Today</small>
+
     </div>
 
+    <!-- AI Accuracy Card -->
     <div class="card">
+
         <h3>🤖 AI Accuracy</h3>
-        <p>98.4%</p>
-        <span class="status success">🟢 Excellent</span>
+
+        <p id="accuracyCount">98.4%</p>
+
+        <span class="card-status success">🟢 Excellent</span>
+
         <small>Updated 2 mins ago</small>
+
     </div>
 
 </div>
+
 
   <!-- ================= LIVE MAP ================= -->
 
