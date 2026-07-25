@@ -49,39 +49,30 @@ body{
 
     align-items:flex-start;
 
-    gap:25px;
+    gap:30px;
 
     padding:20px 30px;
 
-    background:rgba(17,24,39,0.95);
+    background:#111827;
 
-    border-bottom:1px solid rgba(30,136,229,0.35);
+    border-bottom:1px solid rgba(30,136,229,0.30);
 
-    backdrop-filter:blur(12px);
-
-    -webkit-backdrop-filter:blur(12px);
-
-    box-shadow:0 8px 20px rgba(0,0,0,0.35);
+    box-shadow:0 6px 20px rgba(0,0,0,0.30);
 
 }
-
 /* ===========================
    LOGO
 =========================== */
 
 .logo{
 
+    flex:0 0 420px;
+
     display:flex;
 
     flex-direction:column;
 
     justify-content:center;
-
-    align-items:flex-start;
-
-    flex:1 1 320px;
-
-    min-width:320px;
 
 }
 
@@ -95,112 +86,48 @@ body{
 
     margin:0;
 
-    font-size:30px;
-
-    font-weight:700;
+    font-size:28px;
 
     color:#ffffff;
-
-    line-height:1.2;
-
-    letter-spacing:0.5px;
-
-}
-
-.logo h2 i{
-
-    color:#00BFFF;
-
-    font-size:30px;
-
-    flex-shrink:0;
 
 }
 
 .logo p{
 
-    margin-top:8px;
-
-    font-size:14px;
-
-    font-weight:400;
+    margin-top:6px;
 
     color:#8db8d8;
 
-    line-height:1.5;
-
-    letter-spacing:0.3px;
-
 }
+/* ===========================
+   NAVBAR RIGHT
+=========================== */
+
 .navbar-right{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:flex-end;
-
-    align-items:center;
-
-    gap:12px;
 
     flex:1;
 
-}
+    display:grid;
 
-/* ===========================
-   SEARCH BOX
-=========================== */
+    grid-template-columns:repeat(3, auto);
+
+    justify-content:end;
+
+    gap:14px;
+
+    align-items:center;
+
+}
 
 .search-box{
 
-    position:relative;
+    width:240px;
 
 }
 
 .search-box input{
 
-    width:240px;
-
-    padding:12px 18px;
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:12px;
-
-    outline:none;
-
-    background:#1d2b42;
-
-    color:#ffffff;
-
-    font-size:14px;
-
-    font-family:'Poppins',sans-serif;
-
-    transition:all 0.3s ease;
-
-}
-
-.search-box input::placeholder{
-
-    color:#9bb6cf;
-
-}
-
-.search-box input:hover{
-
-    border-color:rgba(0,191,255,0.30);
-
-}
-
-.search-box input:focus{
-
-    border-color:#00BFFF;
-
-    background:#223654;
-
-    box-shadow:0 0 15px rgba(0,191,255,0.25);
+    width:100%;
 
 }
 
