@@ -152,65 +152,94 @@
 
 </div>
 
-            <!-- Live Map -->
+  <!-- ================= LIVE MAP ================= -->
 
-            <section class="map-section">
+<section class="map-section">
 
-                <h2>🌍 Live Satellite Monitoring</h2>
+    <div class="section-header">
 
-                <div class="map-box">
+        <h2>
+            <i class="fas fa-globe-asia"></i>
+            Live Satellite Monitoring
+        </h2>
 
-                    <div id="map"></div>
-
-                </div>
-
-            </section>
-
-            <!-- Bottom Panels -->
-
-            <div class="bottom-panels">
-
-                <div class="panel">
-
-                    <h2>🚨 Active Alerts</h2>
-
-                    <ul>
-
-                        <li>Flood Warning - Assam</li>
-
-                        <li>Cyclone Watch - Odisha</li>
-
-                        <li>Wildfire Risk - Uttarakhand</li>
-
-                        <li>Heavy Rain - Kerala</li>
-
-                    </ul>
-
-                </div>
-
-                <div class="panel">
-
-                    <h2>🤖 AI Recommendations</h2>
-
-                    <ul>
-
-                        <li>Deploy Rescue Team Alpha</li>
-
-                        <li>Issue Early Warning Notification</li>
-
-                        <li>Increase Satellite Monitoring</li>
-
-                        <li>Prepare Emergency Shelters</li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </main>
+        <div class="map-status">
+            <span class="live-dot"></span>
+            Live Data
+        </div>
 
     </div>
+
+    <div class="map-box">
+
+        <div id="map"></div>
+
+    </div>
+
+</section>
+
+<!-- ================= BOTTOM PANELS ================= -->
+
+<div class="bottom-panels">
+
+    <!-- Active Alerts -->
+
+    <div class="panel">
+
+        <h2>
+            <i class="fas fa-triangle-exclamation"></i>
+            Active Alerts
+        </h2>
+
+        <ul>
+
+            <li>🔴 Flood Warning — Assam</li>
+
+            <li>🟠 Cyclone Watch — Odisha</li>
+
+            <li>🟡 Wildfire Risk — Uttarakhand</li>
+
+            <li>🔵 Heavy Rain — Kerala</li>
+
+        </ul>
+
+    </div>
+
+    <!-- AI Recommendations -->
+
+    <div class="panel">
+
+        <h2>
+            <i class="fas fa-robot"></i>
+            AI Recommendations
+        </h2>
+
+        <ul>
+
+            <li>✅ Deploy Rescue Team Alpha</li>
+
+            <li>📢 Issue Early Warning Notification</li>
+
+            <li>🛰 Increase Satellite Monitoring</li>
+
+            <li>🏥 Prepare Emergency Shelters</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
 
     <script
 src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
