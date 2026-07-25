@@ -388,6 +388,72 @@ opacity:1;
 
     color:#ffffff;
 
+    margin-bottom:15px;
+
+}
+
+/* Status Badge */
+
+.status{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+}
+
+.online{
+
+    background:#1f8f4d;
+
+    color:#ffffff;
+
+}
+
+.warning{
+
+    background:#d6a100;
+
+    color:#ffffff;
+
+}
+
+.danger{
+
+    background:#c62828;
+
+    color:#ffffff;
+
+}
+
+.success{
+
+    background:#1565c0;
+
+    color:#ffffff;
+
+}
+
+/* Small Text */
+
+.card small{
+
+    display:block;
+
+    color:#b8c7d9;
+
+    font-size:13px;
+
+    margin-top:8px;
+
 }
 
 /* ===========================
