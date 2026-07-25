@@ -21,20 +21,39 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <div class="container">
 
         <!-- ================= NAVBAR ================= -->
+<header class="navbar">
 
-        <header class="navbar">
+    <div class="logo">
+        <h2>🛰 AI Disaster Command Center</h2>
+        <p>Real-Time Disaster Monitoring & AI Decision Support</p>
+    </div>
 
-            <div class="logo">
-                <h2>🛰 AI Disaster Command Center</h2>
-                <p>Real-Time Disaster Monitoring & AI Decision Support</p>
-            </div>
+    <div class="navbar-right">
 
-            <div class="status">
-                <span class="live-dot"></span>
-                <span>System Online</span>
-            </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search disasters, locations...">
+        </div>
 
-        </header>
+        <div class="weather">
+            🌤 <span>31°C Hyderabad</span>
+        </div>
+
+        <div class="clock" id="clock">
+            🕒 Loading...
+        </div>
+
+        <div class="status">
+            <span class="live-dot"></span>
+            <span>System Online</span>
+        </div>
+
+        <div class="profile">
+            👤 Admin
+        </div>
+
+    </div>
+
+</header>
 
         <!-- ================= SIDEBAR ================= -->
 

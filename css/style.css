@@ -1,6 +1,6 @@
 /* =====================================================
    AI DISASTER COMMAND CENTER
-   STYLE.CSS - VERSION 2
+   STYLE.CSS - VERSION 3
 ===================================================== */
 
 /* ===========================
@@ -47,7 +47,7 @@ body{
     justify-content:space-between;
     align-items:center;
 
-    padding:20px 35px;
+    padding:18px 30px;
 
     background:#111827;
 
@@ -60,9 +60,87 @@ body{
 }
 
 .logo p{
-    color:#8db8d8;
     margin-top:5px;
+    color:#8db8d8;
     font-size:14px;
+}
+
+/* ===========================
+   NAVBAR RIGHT
+=========================== */
+
+.navbar-right{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+/* ===========================
+   SEARCH BOX
+=========================== */
+
+.search-box input{
+
+    width:240px;
+
+    padding:10px 15px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:10px;
+
+    background:#1d2b42;
+
+    color:#ffffff;
+
+    font-size:14px;
+
+}
+
+.search-box input::placeholder{
+
+    color:#9bb6cf;
+
+}
+
+/* ===========================
+   WEATHER
+=========================== */
+
+.weather{
+
+    background:#18263d;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+}
+
+/* ===========================
+   LIVE CLOCK
+=========================== */
+
+.clock{
+
+    background:#18263d;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    color:#66d6ff;
+
 }
 
 /* ===========================
@@ -70,8 +148,11 @@ body{
 =========================== */
 
 .status{
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
 
     background:#18263d;
@@ -79,14 +160,21 @@ body{
     padding:10px 18px;
 
     border-radius:30px;
+
 }
 
 .live-dot{
+
     width:12px;
+
     height:12px;
+
     border-radius:50%;
+
     background:#00ff66;
+
     animation:pulse 1.5s infinite;
+
 }
 
 @keyframes pulse{
@@ -109,21 +197,55 @@ opacity:1;
 }
 
 /* ===========================
+   PROFILE
+=========================== */
+
+.profile{
+
+    background:#1E88E5;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.profile:hover{
+
+    background:#42A5F5;
+
+}
+
+/* ===========================
    SIDEBAR
 =========================== */
 
 .sidebar{
+
     background:#101b2d;
+
     padding:30px 20px;
+
 }
 
 .sidebar h3{
+
     color:#00BFFF;
+
     margin-bottom:25px;
+
 }
 
 .sidebar ul{
+
     list-style:none;
+
 }
 
 .sidebar li{
@@ -138,7 +260,7 @@ opacity:1;
 
     cursor:pointer;
 
-    transition:0.3s;
+    transition:.3s;
 
 }
 
@@ -146,7 +268,7 @@ opacity:1;
 
     background:#00BFFF;
 
-    color:#000000;
+    color:#000;
 
     transform:translateX(6px);
 
@@ -194,7 +316,7 @@ opacity:1;
 
     padding:25px;
 
-    transition:0.3s;
+    transition:.3s;
 
     box-shadow:0 10px 20px rgba(0,0,0,.30);
 
@@ -223,8 +345,6 @@ opacity:1;
     font-size:30px;
 
     font-weight:700;
-
-    color:#ffffff;
 
 }
 
@@ -260,10 +380,6 @@ opacity:1;
 
 }
 
-/* ===========================
-   LEAFLET MAP
-=========================== */
-
 #map{
 
     width:100%;
@@ -273,7 +389,7 @@ opacity:1;
 }
 
 /* ===========================
-   BOTTOM PANELS
+   PANELS
 =========================== */
 
 .bottom-panels{
@@ -302,9 +418,9 @@ opacity:1;
 
 .panel h2{
 
-    color:#66d6ff;
-
     margin-bottom:18px;
+
+    color:#66d6ff;
 
 }
 
@@ -324,7 +440,7 @@ opacity:1;
 
     border-radius:8px;
 
-    transition:0.3s;
+    transition:.3s;
 
 }
 
@@ -335,8 +451,34 @@ opacity:1;
 }
 
 /* ===========================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 =========================== */
+
+@media(max-width:1000px){
+
+.navbar{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.navbar-right{
+
+    width:100%;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+}
+
+}
 
 @media(max-width:900px){
 
@@ -351,12 +493,6 @@ opacity:1;
 .navbar{
 
     grid-column:1;
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-    gap:15px;
 
 }
 
