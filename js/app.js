@@ -7,7 +7,7 @@
    GLOBAL VARIABLES
 ===================================================== */
 
-const map = L.map("map").setView([22.9734, 78.6569], 5);
+const map = L.map("map").setView([22.9734, 78.6569], 4.8);
 
 /* =====================================================
    DASHBOARD INITIALIZATION
@@ -29,6 +29,8 @@ function initializeDashboard() {
     setInterval(updateAlerts, 5000);
 
     setInterval(updateAIRecommendations, 7000);
+
+    setInterval(updateDashboardData, 5000);
 
 }
 
@@ -97,6 +99,15 @@ disasterLocations.forEach(location => {
         .addTo(map)
         .bindPopup(`<b>${location.name}</b><br>${location.info}`);
 
+});
+const group = L.featureGroup(
+    disasterLocations.map(location =>
+        L.marker(location.coords)
+    )
+);
+
+map.fitBounds(group.getBounds(), {
+    padding: [40, 40]
 });
 
 /* =====================================================
