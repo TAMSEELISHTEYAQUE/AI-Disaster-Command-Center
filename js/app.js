@@ -109,7 +109,7 @@ const group = L.featureGroup(
 map.fitBounds(group.getBounds(), {
     padding: [40, 40]
 });
-
+}
 /* =====================================================
    LIVE CLOCK
 ===================================================== */
