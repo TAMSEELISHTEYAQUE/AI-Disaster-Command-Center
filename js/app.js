@@ -12,7 +12,6 @@ const map = L.map("map").setView([22.9734, 78.6569], 5);
 /* =====================================================
    DASHBOARD INITIALIZATION
 ===================================================== */
-
 function initializeDashboard() {
 
     initializeMap();
@@ -22,6 +21,14 @@ function initializeDashboard() {
     animateCards();
 
     animateCounters();
+
+    updateAlerts();
+
+    updateAIRecommendations();
+
+    setInterval(updateAlerts, 5000);
+
+    setInterval(updateAIRecommendations, 7000);
 
 }
 
@@ -180,7 +187,75 @@ function animateCards() {
     });
 
 }
+/* =====================================================
+   LIVE ALERT SYSTEM
+===================================================== */
 
+const disasterAlerts = [
+
+    "🔴 Flood Warning — Assam",
+    "🟠 Cyclone Watch — Odisha",
+    "🟡 Wildfire Risk — Uttarakhand",
+    "🔵 Heavy Rain — Kerala",
+    "🔥 Forest Fire — Himachal Pradesh",
+    "🌍 Earthquake Watch — Gujarat"
+
+];
+
+const aiSuggestions = [
+
+    "✅ Deploy Rescue Team Alpha",
+    "📢 Issue Early Warning Notification",
+    "🛰 Increase Satellite Monitoring",
+    "🏥 Prepare Emergency Shelters",
+    "🚁 Dispatch Medical Helicopter",
+    "📡 Activate Emergency Communication"
+
+];
+
+function updateAlerts() {
+
+    const alertsList = document.getElementById("alertsList");
+
+    if (!alertsList) return;
+
+    alertsList.innerHTML = "";
+
+    const shuffled = [...disasterAlerts].sort(() => 0.5 - Math.random());
+
+    shuffled.slice(0,4).forEach(alert => {
+
+        const li = document.createElement("li");
+
+        li.textContent = alert;
+
+        alertsList.appendChild(li);
+
+    });
+
+}
+
+function updateAIRecommendations() {
+
+    const aiList = document.getElementById("aiRecommendations");
+
+    if (!aiList) return;
+
+    aiList.innerHTML = "";
+
+    const shuffled = [...aiSuggestions].sort(() => 0.5 - Math.random());
+
+    shuffled.slice(0,4).forEach(item => {
+
+        const li = document.createElement("li");
+
+        li.textContent = item;
+
+        aiList.appendChild(li);
+
+    });
+
+}
 /* =====================================================
    APPLICATION START
 ===================================================== */
