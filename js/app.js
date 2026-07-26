@@ -12,22 +12,20 @@ const map = L.map("map").setView([22.9734, 78.6569], 5);
 /* =====================================================
    DASHBOARD INITIALIZATION
 ===================================================== */
+function initializeDashboard(){
 
-function initializeDashboard() {
-
-    // Initialize all dashboard modules
     initializeMap();
     initializeClock();
     animateCards();
     animateCounters();
 
-    // Load data immediately
+    initializeCharts();
+
     updateAlerts();
     updateAIRecommendations();
 
-    // Auto Refresh
-    setInterval(updateAlerts, 5000);
-    setInterval(updateAIRecommendations, 7000);
+    setInterval(updateAlerts,5000);
+    setInterval(updateAIRecommendations,7000);
 
 }
 /* =====================================================
@@ -266,7 +264,82 @@ function updateAIRecommendations() {
     updateList("aiRecommendations", aiSuggestions);
 
 }
+/* =====================================================
+   ANALYTICS CHARTS
+===================================================== */
 
+function initializeCharts(){
+
+    const trendCanvas = document.getElementById("trendChart");
+
+    if(!trendCanvas) return;
+
+    new Chart(trendCanvas,{
+
+        type:"line",
+
+        data:{
+
+            labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+
+            datasets:[{
+
+                label:"Disasters",
+                data:[12,18,15,21,17,24,20],
+
+                borderColor:"#00d4ff",
+                backgroundColor:"rgba(0,212,255,0.15)",
+
+                fill:true,
+                tension:0.4
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+                    labels:{
+                        color:"#ffffff"
+                    }
+                }
+
+            },
+
+            scales:{
+
+                x:{
+                    ticks:{
+                        color:"#ffffff"
+                    },
+                    grid:{
+                        color:"rgba(255,255,255,0.08)"
+                    }
+                },
+
+                y:{
+                    ticks:{
+                        color:"#ffffff"
+                    },
+                    grid:{
+                        color:"rgba(255,255,255,0.08)"
+                    }
+                }
+
+            }
+
+        }
+
+    });
+
+}
 /* =====================================================
    APPLICATION START
 ===================================================== */
