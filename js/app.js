@@ -470,7 +470,7 @@ function initializeCharts(){
 
     }
 
-}
+
     /* -----------------------------
        AI Risk Score
     ------------------------------ */
@@ -506,7 +506,7 @@ function initializeCharts(){
                 }]
 
             },
-
+        
             options:{
 
                 responsive:true,
@@ -546,6 +546,7 @@ function initializeCharts(){
         });
 
     }
+}
 /* =====================================================
    APPLICATION START
 ===================================================== */
