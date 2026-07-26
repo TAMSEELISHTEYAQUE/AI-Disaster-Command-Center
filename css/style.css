@@ -1225,3 +1225,77 @@ transform: translateY(0);
     }
 
 }
+/* =====================================================
+   ANALYTICS SECTION
+===================================================== */
+
+.analytics-section{
+
+    margin-top:30px;
+
+}
+
+.section-header{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+
+}
+
+.section-header h2{
+
+    color:#fff;
+    font-size:1.5rem;
+    font-weight:600;
+
+}
+
+.analytics-grid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:20px;
+
+}
+
+.chart-card{
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:16px;
+
+    padding:20px;
+
+    min-height:320px;
+
+    transition:0.3s ease;
+
+}
+
+.chart-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 12px 28px rgba(0,0,0,0.35);
+
+}
+
+.chart-card h3{
+
+    margin-bottom:18px;
+    color:#ffffff;
+    font-size:1rem;
+    font-weight:600;
+
+}
+
+.chart-card canvas{
+
+    width:100% !important;
+    height:240px !important;
+
+}
