@@ -30,7 +30,7 @@ function initializeDashboard() {
 
     setInterval(updateAIRecommendations, 7000);
 
-    setInterval(updateDashboardData, 5000);
+    /*setInterval(updateDashboardData, 5000);*/
 
 }
 
