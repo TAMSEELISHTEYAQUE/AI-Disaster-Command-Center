@@ -49,16 +49,55 @@ function initializeMap() {
     }).addTo(map);
 
     /* ---------- Headquarters Marker ---------- */
+/* ---------- Disaster Monitoring Locations ---------- */
 
-    L.marker([28.6139, 77.2090])
+const disasterLocations = [
 
+    {
+        name: "New Delhi",
+        coords: [28.6139, 77.2090],
+        info: "🛰 National Disaster Control Centre"
+    },
+
+    {
+        name: "Assam",
+        coords: [26.2006, 92.9376],
+        info: "🌊 Flood Warning"
+    },
+
+    {
+        name: "Odisha",
+        coords: [20.9517, 85.0985],
+        info: "🌀 Cyclone Watch"
+    },
+
+    {
+        name: "Uttarakhand",
+        coords: [30.0668, 79.0193],
+        info: "🔥 Wildfire Risk"
+    },
+
+    {
+        name: "Kerala",
+        coords: [10.8505, 76.2711],
+        info: "🌧 Heavy Rain Alert"
+    },
+
+    {
+        name: "Hyderabad",
+        coords: [17.3850, 78.4867],
+        info: "🤖 AI Monitoring Centre"
+    }
+
+];
+
+disasterLocations.forEach(location => {
+
+    L.marker(location.coords)
         .addTo(map)
+        .bindPopup(`<b>${location.name}</b><br>${location.info}`);
 
-        .bindPopup("<b>New Delhi</b><br>National Disaster Control Centre")
-
-        .openPopup();
-
-}
+});
 
 /* =====================================================
    LIVE CLOCK
