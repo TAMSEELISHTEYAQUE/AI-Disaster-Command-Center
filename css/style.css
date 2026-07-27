@@ -1265,8 +1265,7 @@ transform: translateY(0);
     position:relative;
     overflow:hidden;
 
-    display:flex;
-    flex-direction:column;
+    
 
     background:rgba(20,32,52,0.55);
     backdrop-filter:blur(18px);

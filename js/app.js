@@ -278,7 +278,11 @@ function initializeCharts(){
 
     if(trendCanvas){
 
-        new Chart(trendCanvas,{
+        if (Chart.getChart(trendCanvas)) {
+    Chart.getChart(trendCanvas).destroy();
+}
+
+new Chart(trendCanvas,{
 
             type:"line",
 
@@ -332,7 +336,11 @@ function initializeCharts(){
 
     if(distributionCanvas){
 
-        new Chart(distributionCanvas,{
+       if (Chart.getChart(distributionCanvas)) {
+    Chart.getChart(distributionCanvas).destroy();
+}
+
+    new Chart(distributionCanvas,{
 
             type:"pie",
 
@@ -393,7 +401,11 @@ function initializeCharts(){
 
     if(stateCanvas){
 
-        new Chart(stateCanvas,{
+       if (Chart.getChart(stateCanvas)) {
+    Chart.getChart(stateCanvas).destroy();
+}
+
+new Chart(stateCanvas,{
 
             type:"bar",
 
@@ -479,7 +491,11 @@ function initializeCharts(){
 
     if(riskCanvas){
 
-        new Chart(riskCanvas,{
+        if (Chart.getChart(riskCanvas)) {
+    Chart.getChart(riskCanvas).destroy();
+}
+
+new Chart(riskCanvas,{
 
             type:"doughnut",
 
