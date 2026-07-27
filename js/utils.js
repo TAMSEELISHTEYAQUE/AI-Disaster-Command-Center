@@ -65,3 +65,74 @@ function initializeClock() {
     setInterval(updateClock, 1000);
 
 }
+
+/* =====================================================
+   KPI COUNTER ANIMATION
+===================================================== */
+
+function animateValue(elementId, start, end, duration, suffix = "") {
+
+    const element = document.getElementById(elementId);
+
+    if (!element) return;
+
+    const increment = end >= start ? 1 : -1;
+
+    const range = Math.abs(end - start);
+
+    const stepTime = Math.max(Math.floor(duration / (range || 1)), 20);
+
+    let current = start;
+
+    element.textContent = current + suffix;
+
+    const timer = setInterval(() => {
+
+        current += increment;
+
+        element.textContent = current + suffix;
+
+        if (current === end) {
+
+            clearInterval(timer);
+
+        }
+
+    }, stepTime);
+
+}
+
+function animateCounters() {
+
+    const dashboard = IncidentDatabase.dashboard;
+
+    animateValue(
+        "satelliteCount",
+        0,
+        dashboard.satellites,
+        1200
+    );
+
+    animateValue(
+        "floodCount",
+        0,
+        dashboard.floodAlerts,
+        1400
+    );
+
+    animateValue(
+        "fireCount",
+        0,
+        dashboard.wildfireAlerts,
+        1000
+    );
+
+    animateValue(
+        "accuracyCount",
+        0,
+        Math.round(dashboard.aiAccuracy),
+        1500,
+        "%"
+    );
+
+}
