@@ -1255,42 +1255,36 @@ transform: translateY(0);
 .analytics-grid{
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    grid-template-columns:repeat(2,1fr);
+
     gap:20px;
+
+    align-items:stretch;
 
 }
 
 .chart-card{
 
-    position:relative;
+    background:#111c30;
+
+    border:1px solid rgba(0,212,255,.25);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    height:320px;
+
+    display:flex;
+
+    flex-direction:column;
+
     overflow:hidden;
 
-    
-
-    background:rgba(20,32,52,0.55);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    border:1px solid rgba(0,212,255,0.15);
-    border-radius:22px;
-
-    padding:16px;
-
-    min-height:270px;
-
-    transform-style:preserve-3d;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        border-color .35s ease;
-
-    box-shadow:
-        0 18px 40px rgba(0,0,0,.40),
-        inset 0 1px 0 rgba(255,255,255,.05);
+    transition:.3s;
 
 }
-
 .chart-card::before{
 
     content:"";
@@ -1392,7 +1386,7 @@ transform: translateY(0);
 
 }
 .chart-card canvas{
-    width: 100% !important;
-    max-height: 180px !important;
-    height: 180px !important;
+    width:100%!important;
+    max-height:180px!important;
+    height:180px!important;
 }
