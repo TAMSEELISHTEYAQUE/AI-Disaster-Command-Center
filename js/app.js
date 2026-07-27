@@ -7,7 +7,7 @@
    GLOBAL VARIABLES
 ===================================================== */
 
-const map = L.map("map").setView([22.9734, 78.6569], 5);
+
 
 /* =====================================================
    DASHBOARD INITIALIZATION
@@ -32,83 +32,7 @@ setInterval(updateAISummary,6000);
     setInterval(updateAIRecommendations,7000);
 
 }
-/* =====================================================
-   MAP SYSTEM
-===================================================== */
 
-function initializeMap() {
-
-    /* ---------- Map Tiles ---------- */
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-        maxZoom: 18
-    }).addTo(map);
-
-    /* ---------- Disaster Monitoring Locations ---------- */
-
-    const disasterLocations = [
-
-        {
-            name: "New Delhi",
-            coords: [28.6139, 77.2090],
-            info: "🛰 National Disaster Control Centre"
-        },
-
-        {
-            name: "Assam",
-            coords: [26.2006, 92.9376],
-            info: "🌊 Flood Warning"
-        },
-
-        {
-            name: "Odisha",
-            coords: [20.9517, 85.0985],
-            info: "🌀 Cyclone Watch"
-        },
-
-        {
-            name: "Uttarakhand",
-            coords: [30.0668, 79.0193],
-            info: "🔥 Wildfire Risk"
-        },
-
-        {
-            name: "Kerala",
-            coords: [10.8505, 76.2711],
-            info: "🌧 Heavy Rain Alert"
-        },
-
-        {
-            name: "Hyderabad",
-            coords: [17.3850, 78.4867],
-            info: "🤖 AI Monitoring Centre"
-        }
-
-    ];
-
-    const markers = [];
-
-    disasterLocations.forEach(location => {
-
-        const marker = L.marker(location.coords)
-            .addTo(map)
-            .bindPopup(`
-                <b>${location.name}</b><br>
-                ${location.info}
-            `);
-
-        markers.push(marker);
-
-    });
-
-    const group = L.featureGroup(markers);
-
-    map.fitBounds(group.getBounds(), {
-        padding: [40, 40]
-    });
-
-}
 
 
 /* =====================================================
