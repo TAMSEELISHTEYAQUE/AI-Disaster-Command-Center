@@ -124,7 +124,7 @@ function updateAlerts() {
 function updateAIRecommendations() {
 
     updateList("aiRecommendations", aiSuggestions);
-
+}
 
 /* =====================================================
    APPLICATION START
