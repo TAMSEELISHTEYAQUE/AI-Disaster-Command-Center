@@ -290,24 +290,42 @@ new Chart(trendCanvas,{
                 labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
 
                 datasets:[{
-                    label:"Disasters",
-                    data:[12,18,15,21,17,24,20],
-                    borderColor:"#00d4ff",
-                    backgroundColor:"rgba(0,212,255,0.15)",
-                    fill:true,
-                    tension:0.4
-                }]
+    label:"Disasters",
+    data:[12,18,15,21,17,24,20],
+
+    borderColor:"#00D4FF",
+    backgroundColor:"rgba(0,212,255,0.12)",
+
+    borderWidth:3,
+
+    pointRadius:5,
+    pointHoverRadius:8,
+
+    pointBackgroundColor:"#00D4FF",
+    pointBorderColor:"#ffffff",
+    pointBorderWidth:2,
+
+    fill:true,
+
+    tension:0.45
+}]
             },
 
             options:{
-                responsive:true,
-                maintainAspectRatio:false,
+    responsive:true,
+    maintainAspectRatio:false,
 
-                plugins:{
-                    legend:{
-                        labels:{
-                            color:"#ffffff"
-                        }
+    animation:{
+        duration:1500,
+        easing:"easeOutQuart"
+    },
+
+    plugins:{
+        legend:{
+            labels:{
+                color:"#ffffff"
+            }
+            
                     }
                 },
 
