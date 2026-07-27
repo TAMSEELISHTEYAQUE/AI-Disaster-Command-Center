@@ -45,7 +45,7 @@ body{
 =========================== */
 .navbar{
 
-    grid-area: navbar;
+    
 
     grid-column: 1 / 3;
 
