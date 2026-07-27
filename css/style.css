@@ -1094,7 +1094,7 @@ transform: translateY(0);
 
         align-items:flex-start;
 
-        gap:20px;
+        gap:16px;
 
         padding:20px;
 
@@ -1214,13 +1214,13 @@ transform: translateY(0);
 
     .card{
 
-        padding:22px;
+        padding:18px;
 
     }
 
     .panel{
 
-        padding:20px;
+        padding:18px;
 
     }
 
@@ -1275,9 +1275,9 @@ transform: translateY(0);
     border:1px solid rgba(0,212,255,0.15);
     border-radius:22px;
 
-    padding:22px;
+    padding:16px;
 
-    min-height:340px;
+    min-height:270px;
 
     transform-style:preserve-3d;
 
