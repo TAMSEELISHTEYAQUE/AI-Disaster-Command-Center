@@ -120,24 +120,51 @@ body{
 /* ===========================
    NAVBAR RIGHT
 =========================== */
-
 .navbar-right{
-
-    flex:1;
 
     display:flex;
 
-    flex-wrap:wrap;
+    flex-direction:column;
 
-    justify-content:flex-end;
+    align-items:flex-end;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex:1;
+
+}
+.top-row{
+
+    display:flex;
 
     align-items:center;
 
+    justify-content:flex-end;
+
     gap:15px;
 
-    min-width:0;
+    width:100%;
 
 }
+
+.bottom-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    width:100%;
+
+    flex-wrap:wrap;
+
+}
+
 /* ===========================
    SEARCH BOX
 =========================== */
