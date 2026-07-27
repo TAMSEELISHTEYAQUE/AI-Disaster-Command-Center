@@ -216,21 +216,35 @@ function animateCards() {
 ===================================================== */
 
 const disasterAlerts = [
-    "🔴 Flood Warning — Assam",
-    "🟠 Cyclone Watch — Odisha",
-    "🟡 Wildfire Risk — Uttarakhand",
-    "🔵 Heavy Rain — Kerala",
-    "🔥 Forest Fire — Himachal Pradesh",
-    "🌍 Earthquake Watch — Gujarat"
+
+    "🔴 HIGH | Assam | Flood Warning | 2 min ago",
+
+    "🟠 MEDIUM | Odisha | Cyclone Watch | 5 min ago",
+
+    "🟡 MEDIUM | Uttarakhand | Wildfire Risk | 8 min ago",
+
+    "🔵 LOW | Kerala | Heavy Rain | 12 min ago",
+
+    "🔥 HIGH | Himachal | Forest Fire | 16 min ago",
+
+    "🌍 LOW | Gujarat | Earthquake Watch | 20 min ago"
+
 ];
 
 const aiSuggestions = [
-    "✅ Deploy Rescue Team Alpha",
-    "📢 Issue Early Warning Notification",
-    "🛰 Increase Satellite Monitoring",
-    "🏥 Prepare Emergency Shelters",
-    "🚁 Dispatch Medical Helicopter",
-    "📡 Activate Emergency Communication"
+
+    "🤖 Deploy Rescue Team Alpha | Confidence 98%",
+
+    "📡 Increase Satellite Monitoring | Confidence 96%",
+
+    "🏥 Prepare Emergency Shelters | Confidence 94%",
+
+    "🚁 Dispatch Medical Helicopter | Confidence 97%",
+
+    "📢 Issue Public Warning | Confidence 95%",
+
+    "📍 Activate Emergency Command | Confidence 99%"
+
 ];
 
 function updateList(listId, items, displayCount = 4) {
@@ -325,7 +339,7 @@ new Chart(trendCanvas,{
             labels:{
                 color:"#ffffff"
             }
-            
+
                     }
                 },
 
