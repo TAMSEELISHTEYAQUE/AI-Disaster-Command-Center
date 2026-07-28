@@ -15,33 +15,24 @@
 function initializeDashboard(){
 
     initializeMap();
+
     initializeClock();
+
     animateCards();
+
     animateCounters();
 
     initializeCharts();
 
-    updateAlerts();
-    updateAIRecommendations();
+    initializeAlerts();
 
-    updateAISummary();
-
-setInterval(updateAISummary,6000);
-
-    setInterval(updateAlerts,5000);
-    setInterval(updateAIRecommendations,7000);
+    initializeAI();
 
 }
-
-
-
-
 
 /* =====================================================
    APPLICATION START
 ===================================================== */
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
 

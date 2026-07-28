@@ -27,3 +27,15 @@ function updateAlerts() {
     updateList("alertsList", disasterAlerts);
 
 }
+
+/* =====================================================
+   INITIALIZE ALERTS
+===================================================== */
+
+function initializeAlerts() {
+
+    updateAlerts();
+
+    setInterval(updateAlerts, 5000);
+
+}

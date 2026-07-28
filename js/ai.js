@@ -63,3 +63,19 @@ function updateAISummary() {
     summary.innerHTML = `<p>${random.replace(/\n/g,"<br>")}</p>`;
 
 }
+
+/* =====================================================
+   INITIALIZE AI
+===================================================== */
+
+function initializeAI() {
+
+    updateAIRecommendations();
+
+    updateAISummary();
+
+    setInterval(updateAIRecommendations, 7000);
+
+    setInterval(updateAISummary, 6000);
+
+}
