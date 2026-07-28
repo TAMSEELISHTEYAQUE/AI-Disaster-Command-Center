@@ -1,32 +1,31 @@
 /* =====================================================
    AI DISASTER COMMAND CENTER
-   APP.JS - VERSION 4
+   APP.JS - VERSION 5
 ===================================================== */
-
-/* =====================================================
-   GLOBAL VARIABLES
-===================================================== */
-
-
 
 /* =====================================================
    DASHBOARD INITIALIZATION
 ===================================================== */
-function initializeDashboard(){
 
+function initializeDashboard() {
+
+    console.log("🚀 Initializing AI Disaster Command Center...");
+
+    // Core Modules
     initializeMap();
-
     initializeClock();
+    initializeAPI();
 
+    // UI Animations
     animateCards();
-
     animateCounters();
 
+    // Dashboard Modules
     initializeCharts();
-
     initializeAlerts();
-
     initializeAI();
+
+    console.log("✅ Dashboard initialized successfully.");
 
 }
 
@@ -37,8 +36,6 @@ function initializeDashboard(){
 document.addEventListener("DOMContentLoaded", () => {
 
     initializeDashboard();
-
     initializeReport();
 
 });
-
