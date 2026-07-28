@@ -15,8 +15,6 @@ const API = {
 
 };
 
-};
-
 /* =====================================================
    API STATUS
 ===================================================== */
@@ -24,5 +22,19 @@ const API = {
 function initializeAPI() {
 
     console.log("✅ API module loaded successfully");
+
+}
+/* =====================================================
+   FETCH WEATHER DATA
+===================================================== */
+
+async function fetchWeatherData() {
+
+   const city = "Barpeta";
+
+const url =
+    `${API.WEATHER_BASE_URL}/weather?q=${city},IN&appid=${API.WEATHER_API_KEY}&units=metric`;
+
+console.log(url);
 
 }
