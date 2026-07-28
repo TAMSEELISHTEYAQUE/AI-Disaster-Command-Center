@@ -3,6 +3,65 @@
    AI.JS
 ===================================================== */
 
+const supportedDisasterCatalog = [
+    "Flood",
+    "Flash Flood",
+    "Cyclone",
+    "Hurricane",
+    "Tornado",
+    "Heavy Rain",
+    "Heatwave",
+    "Wildfire",
+    "Forest Fire",
+    "Earthquake",
+    "Landslide",
+    "Tsunami",
+    "Volcanic Activity",
+    "Air Pollution",
+    "Drought",
+    "Disease Outbreak",
+    "Chemical Leak",
+    "Nuclear Accident",
+    "Oil Spill",
+    "Building Collapse"
+];
+
+function getSupportedDisasters() {
+    return supportedDisasterCatalog;
+}
+
+function getDisasterMeta(type) {
+
+    const disasterType = String(type || "Flood").toLowerCase();
+
+    if (disasterType.includes("cyclone") || disasterType.includes("hurricane")) {
+        return { icon: "🌀", color: "#8B5CF6", response: "Deploy evacuation boats" };
+    }
+
+    if (disasterType.includes("wildfire") || disasterType.includes("forest")) {
+        return { icon: "🔥", color: "#EF4444", response: "Deploy fire suppression units" };
+    }
+
+    if (disasterType.includes("earthquake") || disasterType.includes("tsunami") || disasterType.includes("volcanic")) {
+        return { icon: "🌋", color: "#F59E0B", response: "Deploy drone survey" };
+    }
+
+    if (disasterType.includes("flood") || disasterType.includes("rain")) {
+        return { icon: "🌊", color: "#3B82F6", response: "Dispatch rescue boats" };
+    }
+
+    if (disasterType.includes("heat") || disasterType.includes("drought")) {
+        return { icon: "☀️", color: "#F97316", response: "Open cooling centres" };
+    }
+
+    if (disasterType.includes("disease") || disasterType.includes("chemical") || disasterType.includes("nuclear") || disasterType.includes("oil") || disasterType.includes("collapse") || disasterType.includes("pollution")) {
+        return { icon: "⚠️", color: "#10B981", response: "Activate containment and public health response" };
+    }
+
+    return { icon: "🚨", color: "#00D4FF", response: "Dispatch response teams" };
+
+}
+
 function getSeverityScore(severityValue) {
 
     if (!severityValue) return 1;
@@ -31,39 +90,57 @@ function getWeatherFactor() {
 
 }
 
-function calculateRisk() {
+function calculateRiskForDisaster(disaster) {
 
-    const incident = IncidentDatabase.currentIncident || {};
-    const severityScore = getSeverityScore(incident.severity);
+    const severityScore = getSeverityScore(disaster && disaster.severity);
     const weatherFactor = getWeatherFactor();
+    const disasterType = String(disaster && disaster.type || "Flood").toLowerCase();
+    const populationFactor = Math.min(1, (disaster && disaster.populationAffected || 0) / 2000000);
+
+    let disasterFactor = 10;
+
+    if (disasterType.includes("cyclone") || disasterType.includes("hurricane")) disasterFactor = 16;
+    else if (disasterType.includes("wildfire") || disasterType.includes("forest")) disasterFactor = 17;
+    else if (disasterType.includes("earthquake") || disasterType.includes("tsunami") || disasterType.includes("volcanic")) disasterFactor = 18;
+    else if (disasterType.includes("flood") || disasterType.includes("rain")) disasterFactor = 14;
+    else if (disasterType.includes("heat") || disasterType.includes("drought")) disasterFactor = 11;
+    else if (disasterType.includes("disease") || disasterType.includes("chemical") || disasterType.includes("nuclear") || disasterType.includes("oil") || disasterType.includes("collapse") || disasterType.includes("pollution")) disasterFactor = 15;
+
     const earthquakeMagnitude = IncidentDatabase.earthquakes && typeof IncidentDatabase.earthquakes.magnitude === "number"
         ? IncidentDatabase.earthquakes.magnitude
         : 0;
-    const populationFactor = Math.min(1, (incident.populationAffected || 0) / 2000000);
 
     const score = Math.round(
-        Math.min(100, severityScore * 14 + weatherFactor * 8 + Math.min(20, earthquakeMagnitude * 4) + populationFactor * 10)
+        Math.min(100, severityScore * 12 + weatherFactor * 8 + disasterFactor + Math.min(20, earthquakeMagnitude * 4) + populationFactor * 10)
     );
 
     return score;
 
 }
 
+function calculateRisk() {
+
+    return calculateRiskForDisaster(IncidentDatabase.currentIncident || {});
+
+}
+
 function getResourceDeployment() {
 
-    const incident = IncidentDatabase.currentIncident || {};
-    const severityScore = getSeverityScore(incident.severity);
-    const weatherFactor = getWeatherFactor();
-    const damageFactor = Math.max(1, Math.round(calculateRisk() / 20));
+    const incidents = IncidentDatabase.disasters || [];
+    const activeCount = Math.max(1, incidents.length);
+    const topRisk = Math.max(0, ...incidents.map((item) => calculateRiskForDisaster(item)));
+    const severityScore = Math.max(1, Math.round(topRisk / 20));
 
     return [
-        { name: "NDRF", count: 4 + severityScore + Math.round(weatherFactor) },
-        { name: "Police", count: 8 + severityScore * 2 },
-        { name: "Fire", count: 3 + severityScore },
-        { name: "Ambulance", count: 6 + severityScore * 2 },
-        { name: "Medical Teams", count: 5 + severityScore + damageFactor },
-        { name: "Helicopters", count: 2 + Math.round(severityScore / 2) },
-        { name: "Relief Camps", count: 4 + severityScore + Math.round(populationFactor() * 2) }
+        { name: "NDRF", count: 6 + activeCount + severityScore },
+        { name: "Army", count: 4 + Math.round(activeCount / 2) },
+        { name: "Police", count: 8 + activeCount * 2 },
+        { name: "Fire", count: 4 + activeCount },
+        { name: "Medical", count: 6 + activeCount + severityScore },
+        { name: "Helicopters", count: 2 + Math.round(activeCount / 2) },
+        { name: "Boats", count: activeCount > 2 ? 4 + Math.round(activeCount / 2) : 2 },
+        { name: "Drones", count: 4 + activeCount },
+        { name: "Relief Camps", count: 5 + activeCount + severityScore }
     ];
 
 }
@@ -75,9 +152,9 @@ function populationFactor() {
 
 }
 
-function calculatePriority() {
+function calculatePriorityForDisaster(disaster) {
 
-    const risk = calculateRisk();
+    const risk = calculateRiskForDisaster(disaster);
 
     if (risk >= 85) return "Critical";
     if (risk >= 65) return "High";
@@ -87,19 +164,31 @@ function calculatePriority() {
 
 }
 
-function estimateDamage() {
+function calculatePriority() {
 
-    const risk = calculateRisk();
-    const severityScore = getSeverityScore(IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.severity);
+    return calculatePriorityForDisaster(IncidentDatabase.currentIncident || {});
+
+}
+
+function estimateDamageForDisaster(disaster) {
+
+    const risk = calculateRiskForDisaster(disaster);
+    const severityScore = getSeverityScore(disaster && disaster.severity);
     const damage = Math.round(Math.min(95, risk * 0.75 + severityScore * 4));
 
     return `${damage}%`;
 
 }
 
-function estimatePopulationImpact() {
+function estimateDamage() {
 
-    const population = IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.populationAffected;
+    return estimateDamageForDisaster(IncidentDatabase.currentIncident || {});
+
+}
+
+function estimatePopulationImpactForDisaster(disaster) {
+
+    const population = disaster && disaster.populationAffected;
 
     if (typeof population === "number" && population > 0) {
         return `${population.toLocaleString()} people`;
@@ -109,30 +198,37 @@ function estimatePopulationImpact() {
 
 }
 
-function generateRecommendations() {
+function estimatePopulationImpact() {
 
-    const incident = IncidentDatabase.currentIncident || {};
+    return estimatePopulationImpactForDisaster(IncidentDatabase.currentIncident || {});
+
+}
+
+function generateRecommendationForDisaster(disaster) {
+
+    const incident = disaster || {};
     const severityScore = getSeverityScore(incident.severity);
     const weather = IncidentDatabase.weather || {};
     const earthquakeMagnitude = IncidentDatabase.earthquakes && typeof IncidentDatabase.earthquakes.magnitude === "number"
         ? IncidentDatabase.earthquakes.magnitude
         : 0;
     const population = incident.populationAffected || 0;
-    const damage = estimateDamage();
+    const damage = estimateDamageForDisaster(incident);
     const recommendations = [];
+    const meta = getDisasterMeta(incident.type);
 
-    recommendations.push(`Dispatch NDRF Team Alpha to ${incident.location && incident.location.state ? incident.location.state : "the affected zone"}`);
+    recommendations.push(`${meta.response || "Dispatch response teams"} for ${incident.location || "the affected zone"}`);
 
     if (severityScore >= 4) {
         recommendations.push("Issue Red Alert and evacuate vulnerable districts");
     }
 
-    if (earthquakeMagnitude > 0) {
+    if (earthquakeMagnitude > 0 || String(incident.type || "").toLowerCase().includes("earthquake") || String(incident.type || "").toLowerCase().includes("tsunami")) {
         recommendations.push("Deploy Drone Survey for structural assessment");
     }
 
-    if (weather.condition && weather.condition.toLowerCase().includes("rain")) {
-        recommendations.push("Open Relief Camp and activate water supply units");
+    if (weather.condition && weather.condition.toLowerCase().includes("rain") || String(incident.type || "").toLowerCase().includes("flood") || String(incident.type || "").toLowerCase().includes("cyclone")) {
+        recommendations.push("Open Relief Camp and activate rescue boats");
     }
 
     if (population > 500000) {
@@ -155,6 +251,12 @@ function generateRecommendations() {
     }
 
     return recommendations;
+
+}
+
+function generateRecommendations() {
+
+    return generateRecommendationForDisaster(IncidentDatabase.currentIncident || {});
 
 }
 
@@ -191,6 +293,45 @@ function updateResourceAllocation() {
         li.textContent = `${resource.name}: ${resource.count} units`;
         list.appendChild(li);
     });
+
+}
+
+function analyzeDisasters() {
+
+    const disasters = IncidentDatabase.disasters || [];
+
+    return disasters.map((disaster) => {
+        const riskScore = calculateRiskForDisaster(disaster);
+        const priority = calculatePriorityForDisaster(disaster);
+        const expectedDamage = estimateDamageForDisaster(disaster);
+        const affectedPopulation = estimatePopulationImpactForDisaster(disaster);
+        const recoveryTime = `${Math.max(6, Math.round(14 - riskScore / 12))} hrs`;
+        const recommendation = generateRecommendationForDisaster(disaster)[0] || "Monitor";
+
+        return {
+            ...disaster,
+            riskScore,
+            priority,
+            expectedDamage,
+            affectedPopulation,
+            recoveryTime,
+            recommendation
+        };
+    });
+
+}
+
+function getNationalThreatLevel() {
+
+    const analyses = analyzeDisasters();
+    const highestRisk = analyses.length ? analyses.reduce((a, b) => a.riskScore > b.riskScore ? a : b) : null;
+
+    if (!highestRisk) return "Stable";
+    if (highestRisk.riskScore >= 85) return "Critical";
+    if (highestRisk.riskScore >= 65) return "High";
+    if (highestRisk.riskScore >= 45) return "Moderate";
+
+    return "Low";
 
 }
 

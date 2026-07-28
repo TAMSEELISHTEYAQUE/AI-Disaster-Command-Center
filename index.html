@@ -137,7 +137,7 @@
 
         <main class="main-content">
 
-            <h2>🛰 Disaster Monitoring Dashboard</h2>
+            <h2>🛰 Multi-Hazard AI Command Center</h2>
 
             <div class="cards">
 
@@ -171,15 +171,71 @@
 
             </div>
 
+            <section class="national-overview">
+                <div class="section-header">
+                    <h2><i class="fas fa-shield-alt"></i> National Situation Overview</h2>
+                </div>
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <small>Number of Active Disasters</small>
+                        <strong id="nationalActiveDisasters">0</strong>
+                    </div>
+                    <div class="overview-card">
+                        <small>Highest Risk Disaster</small>
+                        <strong id="nationalHighestRiskDisaster">No Data</strong>
+                    </div>
+                    <div class="overview-card">
+                        <small>Most Affected State</small>
+                        <strong id="nationalMostAffectedState">No Data</strong>
+                    </div>
+                    <div class="overview-card">
+                        <small>Population at Risk</small>
+                        <strong id="nationalPopulationAtRisk">0</strong>
+                    </div>
+                    <div class="overview-card">
+                        <small>Resources Deployed</small>
+                        <strong id="nationalResourcesDeployed">0</strong>
+                    </div>
+                    <div class="overview-card">
+                        <small>AI National Threat Level</small>
+                        <strong id="nationalThreatLevel">No Data</strong>
+                    </div>
+                </div>
+            </section>
+
             <div class="map-section">
                 <div class="section-header">
                     <h2><i class="fas fa-map-marked-alt"></i> Live Disaster Map</h2>
                     <div class="map-status"><span class="live-dot"></span> Live monitoring stream</div>
                 </div>
+                <div id="mapLayerToggles" class="map-controls"></div>
                 <div class="map-box">
                     <div id="map"></div>
                 </div>
             </div>
+
+            <section class="monitor-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-table-list"></i> Live Disaster Table</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="disaster-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Severity</th>
+                                <th>Risk Level</th>
+                                <th>Population</th>
+                                <th>Status</th>
+                                <th>AI Recommendation</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="disasterMonitorBody"></tbody>
+                    </table>
+                </div>
+            </section>
 
             <section class="analytics-section">
                 <div class="section-header">
@@ -357,6 +413,11 @@
                     <ul id="aiRecommendations">
                         <li>No recommendations available</li>
                     </ul>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fas fa-users-gear"></i> Mission Control</h2>
+                    <div id="missionControlList"></div>
                 </div>
 
                 <div class="panel">

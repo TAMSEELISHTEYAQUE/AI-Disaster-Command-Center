@@ -1534,6 +1534,126 @@ transform: translateY(0);
     height:200px!important;
 }
 
+.national-overview,
+.monitor-section{
+    margin:30px 0;
+}
+
+.overview-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:16px;
+}
+
+.overview-card{
+    padding:18px;
+    border-radius:16px;
+    background:linear-gradient(145deg, #162338, #203552);
+    border:1px solid rgba(0, 212, 255, 0.22);
+    min-height:110px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.overview-card small{
+    color:#8fb4d6;
+    text-transform:uppercase;
+    letter-spacing:0.7px;
+    font-size:12px;
+}
+
+.overview-card strong{
+    color:#ffffff;
+    font-size:24px;
+    line-height:1.2;
+}
+
+.map-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.map-controls label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.06);
+    color:#ffffff;
+    font-size:13px;
+}
+
+.table-wrapper{
+    overflow-x:auto;
+    border-radius:16px;
+    border:1px solid rgba(0, 212, 255, 0.16);
+}
+
+.disaster-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#132036;
+}
+
+.disaster-table th,
+.disaster-table td{
+    padding:12px 14px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    text-align:left;
+    color:#ffffff;
+    font-size:13px;
+}
+
+.disaster-table th{
+    color:#7ddcff;
+    background:#1a2940;
+}
+
+.hazard-marker-wrapper{
+    background:transparent;
+    border:none;
+}
+
+.hazard-marker{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,0.85);
+    box-shadow:0 0 12px rgba(0,0,0,0.3);
+    animation:pulse 1.6s ease-in-out infinite;
+    font-size:16px;
+}
+
+#missionControlList{
+    display:grid;
+    gap:10px;
+}
+
+.mission-card{
+    padding:12px 14px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    border-left:3px solid #00D4FF;
+}
+
+.mission-card strong{
+    display:block;
+    color:#ffffff;
+    margin-bottom:4px;
+}
+
+.mission-card span{
+    color:#8fb4d6;
+    font-size:12px;
+}
+
 .report-section{
 
     margin-top:30px;
