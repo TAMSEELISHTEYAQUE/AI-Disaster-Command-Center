@@ -139,230 +139,230 @@
 
             <h2>🛰 Disaster Monitoring Dashboard</h2>
 
-            
-<!-- ===========================
-     KPI STATISTICS CARDS
-=========================== -->
-
-<div class="cards">
-
-    <!-- Satellite Card -->
-    <div class="card">
-
-        <h3>🛰 Satellites Online</h3>
-
-        <p id="satelliteCount">12</p>
-
-        <span class="card-status online">🟢 Operational</span>
-
-        <small>+2 Today</small>
-
-    </div>
-
-    <!-- Flood Alert Card -->
-    <div class="card">
-
-        <h3>🌊 Flood Alerts</h3>
-
-        <p id="floodCount">28</p>
-
-        <span class="card-status warning">🟡 Moderate Risk</span>
-
-        <small>+5 Today</small>
-
-    </div>
-
-    <!-- Wildfire Alert Card -->
-    <div class="card">
-
-        <h3>🔥 Wildfire Alerts</h3>
-
-        <p id="fireCount">9</p>
-
-        <span class="card-status danger">🔴 High Risk</span>
-
-        <small>+1 Today</small>
-
-    </div>
-
-    <!-- AI Accuracy Card -->
-    <div class="card">
-
-        <h3>🤖 AI Accuracy</h3>
-
-        <p id="accuracyCount">98.4%</p>
-
-        <span class="card-status success">🟢 Excellent</span>
-
-        <small>Updated 2 mins ago</small>
-
-    </div>
-
-</div>
-
-<div class="assessment-card card">
-
-    <h3>🧠 AI Situation Assessment</h3>
-
-    <div class="assessment-grid">
-
-        <div class="metric">
-            <small>Overall Risk Level</small>
-            <strong id="riskLevelValue">Calculating...</strong>
-        </div>
-
-        <div class="metric">
-            <small>Disaster Severity</small>
-            <strong id="disasterSeverityValue">Calculating...</strong>
-        </div>
-
-        <div class="metric">
-            <small>Population Impact</small>
-            <strong id="populationImpactValue">Calculating...</strong>
-        </div>
-
-        <div class="metric">
-            <small>Infrastructure Damage</small>
-            <strong id="infrastructureDamageValue">Calculating...</strong>
-        </div>
-
-        <div class="metric">
-            <small>Response Priority</small>
-            <strong id="responsePriorityValue">Calculating...</strong>
-        </div>
-
-        <div class="metric">
-            <small>Confidence</small>
-            <strong id="confidenceValue">--%</strong>
-        </div>
-
-    </div>
-
-</div>
-
-<div class="stat-cards">
-
-    <div class="card stat-card">
-        <h3>🚨 Active Incidents</h3>
-        <p id="activeIncidentsCount">0</p>
-        <small>Tracked in command center</small>
-    </div>
-
-    <div class="card stat-card">
-        <h3>👥 Population at Risk</h3>
-        <p id="populationAtRiskCount">0</p>
-        <small>People under threat</small>
-    </div>
-
-    <div class="card stat-card">
-        <h3>⚙️ Resources Deployed</h3>
-        <p id="resourcesDeployedCount">0</p>
-        <small>Units committed</small>
-    </div>
-
-    <div class="card stat-card">
-        <h3>⏱ Response Time</h3>
-        <p id="responseTimeCount">0 min</p>
-        <small>Average mobilization</small>
-    </div>
-
-    <div class="card stat-card">
-        <h3>✅ Success Rate</h3>
-        <p id="successRateCount">0%</p>
-        <small>Modelled mission outcome</small>
-    </div>
-
-</div>
-
-        </div>
-
-        <div class="chart-card">
-            <h3>AI Risk Score</h3>
-            <canvas id="riskChart"></canvas>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= BOTTOM PANELS ================= -->
-
-<div class="bottom-panels">
-
-    <!-- Active Alerts -->
-    <div class="panel">
-
-        <h2>
-            <i class="fas fa-triangle-exclamation"></i>
-            Active Alerts
-        </h2>
-
-        <ul id="alertsList">
-            <li>Loading alerts...</li>
-        </ul>
-
-    </div>
-
-    <!-- Resource Allocation -->
-    <div class="panel">
-
-        <h2>
-            <i class="fas fa-boxes-stacked"></i>
-            Resource Allocation
-        </h2>
-
-        <ul id="resourceAllocation">
-            <li>Loading resource availability...</li>
-        </ul>
-
-    </div>
-
-    <!-- AI Recommendations -->
-    <div class="panel">
-
-        <h2>
-            <i class="fas fa-robot"></i>
-            AI Recommendations
-        </h2>
-
-        <ul id="aiRecommendations">
-            <li>Loading AI recommendations...</li>
-        </ul>
-
-    </div>
-
-    <!-- AI Situation Summary -->
-    <div class="panel">
-
-        <h2>
-            <i class="fas fa-brain"></i>
-            AI Situation Summary
-        </h2>
-
-        <div id="aiSummary">
-            <p>Analyzing live disaster data...</p>
-        </div>
-
-    </div>
-
-    <!-- Mission Status -->
-    <div class="panel">
-
-        <h2>
-            <i class="fas fa-crosshairs"></i>
-            Mission Status
-        </h2>
-
-        <div id="missionStatus">
-            <p>Scanning live incidents...</p>
-        </div>
-
-    </div>
-
-</div>
-
-</main>
+            <div class="cards">
+
+                <div class="card">
+                    <h3>🛰 Satellites Online</h3>
+                    <p id="satelliteCount">0</p>
+                    <span class="card-status online">🟢 Operational</span>
+                    <small>Live monitoring feed</small>
+                </div>
+
+                <div class="card">
+                    <h3>🌊 Flood Alerts</h3>
+                    <p id="floodCount">0</p>
+                    <span class="card-status warning">🟡 Moderate Risk</span>
+                    <small>Updated in real time</small>
+                </div>
+
+                <div class="card">
+                    <h3>🔥 Wildfire Alerts</h3>
+                    <p id="fireCount">0</p>
+                    <span class="card-status danger">🔴 High Risk</span>
+                    <small>Regional watch status</small>
+                </div>
+
+                <div class="card">
+                    <h3>🤖 AI Accuracy</h3>
+                    <p id="accuracyCount">0%</p>
+                    <span class="card-status success">🟢 Excellent</span>
+                    <small>Model confidence update</small>
+                </div>
+
+            </div>
+
+            <div class="map-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-map-marked-alt"></i> Live Disaster Map</h2>
+                    <div class="map-status"><span class="live-dot"></span> Live monitoring stream</div>
+                </div>
+                <div class="map-box">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <section class="analytics-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-line"></i> Analytics & Forecasts</h2>
+                </div>
+                <div class="analytics-grid">
+                    <div class="chart-card">
+                        <h3>Disaster Trend</h3>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Distribution</h3>
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>State Alert Load</h3>
+                        <canvas id="stateChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>AI Risk Score</h3>
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard-panel-grid">
+                <div class="panel">
+                    <h2><i class="fas fa-cloud-sun"></i> Weather Intelligence</h2>
+                    <div class="weather-detail-grid" id="weatherPanel">
+                        <div class="weather-tile">
+                            <small>City</small>
+                            <strong id="weatherCityValue">No Data</strong>
+                        </div>
+                        <div class="weather-tile">
+                            <small>Temperature</small>
+                            <strong id="weatherTempValue">No Data</strong>
+                        </div>
+                        <div class="weather-tile">
+                            <small>Condition</small>
+                            <strong id="weatherConditionValue">No Data</strong>
+                        </div>
+                        <div class="weather-tile">
+                            <small>Humidity</small>
+                            <strong id="weatherHumidityValue">No Data</strong>
+                        </div>
+                        <div class="weather-tile">
+                            <small>Wind</small>
+                            <strong id="weatherWindValue">No Data</strong>
+                        </div>
+                        <div class="weather-tile">
+                            <small>Pressure</small>
+                            <strong id="weatherPressureValue">No Data</strong>
+                        </div>
+                        <div class="weather-tile wide">
+                            <small>Rainfall</small>
+                            <strong id="weatherRainfallValue">No Data</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fas fa-globe"></i> Earthquake Watch</h2>
+                    <div class="earthquake-card">
+                        <div class="earthquake-metric">
+                            <small>Magnitude</small>
+                            <strong id="earthquakeMagnitudeValue">No Data</strong>
+                        </div>
+                        <div class="earthquake-metric">
+                            <small>Depth</small>
+                            <strong id="earthquakeDepthValue">No Data</strong>
+                        </div>
+                        <div class="earthquake-metric">
+                            <small>Location</small>
+                            <strong id="earthquakeLocationValue">No Data</strong>
+                        </div>
+                        <div class="earthquake-metric">
+                            <small>Status</small>
+                            <strong id="earthquakeStatusValue">No Data</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-cards">
+                <div class="card stat-card">
+                    <h3>🚨 Active Incidents</h3>
+                    <p id="activeIncidentsCount">0</p>
+                    <small>Tracked in command center</small>
+                </div>
+                <div class="card stat-card">
+                    <h3>👥 Population at Risk</h3>
+                    <p id="populationAtRiskCount">0</p>
+                    <small>People under threat</small>
+                </div>
+                <div class="card stat-card">
+                    <h3>⚙️ Resources Deployed</h3>
+                    <p id="resourcesDeployedCount">0</p>
+                    <small>Units committed</small>
+                </div>
+                <div class="card stat-card">
+                    <h3>⏱ Response Time</h3>
+                    <p id="responseTimeCount">0 min</p>
+                    <small>Average mobilization</small>
+                </div>
+                <div class="card stat-card">
+                    <h3>✅ Success Rate</h3>
+                    <p id="successRateCount">0%</p>
+                    <small>Modelled mission outcome</small>
+                </div>
+                <div class="card stat-card">
+                    <h3>🤖 AI Accuracy</h3>
+                    <p id="aiAccuracyCount">0%</p>
+                    <small>Model reliability</small>
+                </div>
+            </div>
+
+            <div class="bottom-panels">
+                <div class="panel">
+                    <h2><i class="fas fa-crosshairs"></i> Mission Status</h2>
+                    <div id="missionStatus"><p>No mission data</p></div>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fas fa-triangle-exclamation"></i> Active Alerts</h2>
+                    <ul id="alertsList">
+                        <li>No active alerts</li>
+                    </ul>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fas fa-brain"></i> AI Situation Assessment</h2>
+                    <div class="ai-panel-grid">
+                        <div class="ai-metric-card">
+                            <small>Overall Risk Level</small>
+                            <strong id="riskLevelValue">No Data</strong>
+                        </div>
+                        <div class="ai-metric-card">
+                            <small>Disaster Severity</small>
+                            <strong id="disasterSeverityValue">No Data</strong>
+                        </div>
+                        <div class="ai-metric-card">
+                            <small>Population Impact</small>
+                            <strong id="populationImpactValue">No Data</strong>
+                        </div>
+                        <div class="ai-metric-card">
+                            <small>Infrastructure Damage</small>
+                            <strong id="infrastructureDamageValue">No Data</strong>
+                        </div>
+                        <div class="ai-metric-card">
+                            <small>Response Priority</small>
+                            <strong id="responsePriorityValue">No Data</strong>
+                        </div>
+                        <div class="ai-metric-card">
+                            <small>Confidence</small>
+                            <strong id="confidenceValue">No Data</strong>
+                        </div>
+                    </div>
+                    <div id="aiSummary"></div>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fas fa-robot"></i> AI Recommendations</h2>
+                    <ul id="aiRecommendations">
+                        <li>No recommendations available</li>
+                    </ul>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fas fa-boxes-stacked"></i> Resource Allocation</h2>
+                    <ul id="resourceAllocation">
+                        <li>No resources available</li>
+                    </ul>
+                </div>
+            </div>
+
+            <section class="report-section">
+                <button id="generateReport" class="report-btn">
+                    <i class="fas fa-file-pdf"></i>
+                    Generate AI Incident Report
+                </button>
+            </section>
+
+        </main>
 
 </div>
 
