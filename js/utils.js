@@ -160,3 +160,28 @@ function animateCards() {
     });
 
 }
+/* =====================================================
+   SHARED LIST RENDERER
+===================================================== */
+
+function updateList(listId, items, displayCount = 4) {
+
+    const list = document.getElementById(listId);
+
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    const shuffled = [...items].sort(() => Math.random() - 0.5);
+
+    shuffled.slice(0, displayCount).forEach(item => {
+
+        const li = document.createElement("li");
+
+        li.textContent = item;
+
+        list.appendChild(li);
+
+    });
+
+}
