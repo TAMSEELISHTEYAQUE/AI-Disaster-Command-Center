@@ -10,3 +10,13 @@
 const API = {
 
 };
+
+/* =====================================================
+   API STATUS
+===================================================== */
+
+function initializeAPI() {
+
+    console.log("✅ API module loaded successfully");
+
+}
