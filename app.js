@@ -18,6 +18,8 @@ function initializeDashboard(){
 
     initializeClock();
 
+    initializeAPI();
+
     animateCards();
 
     animateCounters();
