@@ -25,6 +25,7 @@ function initializeDashboard() {
     initializeAlerts();
     initializeAI();
     initializeLiveData();
+    updateMissionStatus();
 
     console.log("✅ Dashboard initialized successfully.");
 
