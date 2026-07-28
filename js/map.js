@@ -23,6 +23,11 @@ function initializeMap() {
         attribution: "&copy; OpenStreetMap contributors",
         maxZoom: 18
     }).addTo(window.map);
+    Object.values(MapLayers).forEach(layer => {
+
+    layer.addTo(window.map);
+
+});
 
     /* ---------- Disaster Monitoring Locations ---------- */
 
@@ -70,6 +75,31 @@ function initializeMap() {
 
     disasterLocations.unshift({
 
+        /* ---------- Live Earthquake ---------- */
+
+if (IncidentDatabase.earthquakes.magnitude > 0) {
+
+    disasterLocations.push({
+
+        name: "Live Earthquake",
+
+        coords: [
+
+            IncidentDatabase.earthquakes.latitude,
+
+            IncidentDatabase.earthquakes.longitude
+
+        ],
+
+        info: `
+        🌍 Magnitude: ${IncidentDatabase.earthquakes.magnitude}<br>
+        📏 Depth: ${IncidentDatabase.earthquakes.depth} km
+        `
+
+    });
+
+}
+
         name: IncidentDatabase.currentIncident.location.state,
 
         coords: [
@@ -105,5 +135,21 @@ function initializeMap() {
     window.map.fitBounds(group.getBounds(), {
         padding: [40, 40]
     });
+L.control.layers(
+
+    {},
+
+    {
+        "🌍 Earthquakes": MapLayers.earthquakes,
+        "🌊 Floods": MapLayers.floods,
+        "🌀 Cyclones": MapLayers.cyclones,
+        "🔥 Wildfires": MapLayers.wildfires,
+        "🏥 Hospitals": MapLayers.hospitals,
+        "🏫 Shelters": MapLayers.shelters,
+        "🌦 Weather": MapLayers.weather,
+        "🚦 Traffic": MapLayers.traffic
+    }
+
+).addTo(window.map);
 
 }
