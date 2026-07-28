@@ -200,62 +200,80 @@
 
 </div>
 
+<div class="assessment-card card">
 
-  <!-- ================= LIVE MAP ================= -->
+    <h3>🧠 AI Situation Assessment</h3>
 
-<section class="map-section">
+    <div class="assessment-grid">
 
-    <div class="section-header">
+        <div class="metric">
+            <small>Overall Risk Level</small>
+            <strong id="riskLevelValue">Calculating...</strong>
+        </div>
 
-        <h2>
-            <i class="fas fa-globe-asia"></i>
-            Live Satellite Monitoring
-        </h2>
+        <div class="metric">
+            <small>Disaster Severity</small>
+            <strong id="disasterSeverityValue">Calculating...</strong>
+        </div>
 
-        <div class="map-status">
-            <span class="live-dot"></span>
-            Live Data
+        <div class="metric">
+            <small>Population Impact</small>
+            <strong id="populationImpactValue">Calculating...</strong>
+        </div>
+
+        <div class="metric">
+            <small>Infrastructure Damage</small>
+            <strong id="infrastructureDamageValue">Calculating...</strong>
+        </div>
+
+        <div class="metric">
+            <small>Response Priority</small>
+            <strong id="responsePriorityValue">Calculating...</strong>
+        </div>
+
+        <div class="metric">
+            <small>Confidence</small>
+            <strong id="confidenceValue">--%</strong>
         </div>
 
     </div>
 
-    <div class="map-box">
+</div>
 
-        <div id="map"></div>
+<div class="stat-cards">
 
+    <div class="card stat-card">
+        <h3>🚨 Active Incidents</h3>
+        <p id="activeIncidentsCount">0</p>
+        <small>Tracked in command center</small>
     </div>
 
-</section>
-
-
-<!-- ================= DISASTER ANALYTICS ================= -->
-
-<section class="analytics-section">
-
-    <div class="section-header">
-
-        <h2>
-            <i class="fas fa-chart-line"></i>
-            Disaster Analytics
-        </h2>
-
+    <div class="card stat-card">
+        <h3>👥 Population at Risk</h3>
+        <p id="populationAtRiskCount">0</p>
+        <small>People under threat</small>
     </div>
 
-    <div class="analytics-grid">
+    <div class="card stat-card">
+        <h3>⚙️ Resources Deployed</h3>
+        <p id="resourcesDeployedCount">0</p>
+        <small>Units committed</small>
+    </div>
 
-        <div class="chart-card">
-            <h3>Disaster Trend</h3>
-            <canvas id="trendChart"></canvas>
-        </div>
+    <div class="card stat-card">
+        <h3>⏱ Response Time</h3>
+        <p id="responseTimeCount">0 min</p>
+        <small>Average mobilization</small>
+    </div>
 
-        <div class="chart-card">
-            <h3>Disaster Distribution</h3>
-            <canvas id="distributionChart"></canvas>
-        </div>
+    <div class="card stat-card">
+        <h3>✅ Success Rate</h3>
+        <p id="successRateCount">0%</p>
+        <small>Modelled mission outcome</small>
+    </div>
 
-        <div class="chart-card">
-            <h3>State-wise Alerts</h3>
-            <canvas id="stateChart"></canvas>
+</div>
+
         </div>
 
         <div class="chart-card">
@@ -286,6 +304,20 @@
 
     </div>
 
+    <!-- Resource Allocation -->
+    <div class="panel">
+
+        <h2>
+            <i class="fas fa-boxes-stacked"></i>
+            Resource Allocation
+        </h2>
+
+        <ul id="resourceAllocation">
+            <li>Loading resource availability...</li>
+        </ul>
+
+    </div>
+
     <!-- AI Recommendations -->
     <div class="panel">
 
@@ -299,35 +331,35 @@
         </ul>
 
     </div>
-<div class="panel">
 
-    <h2>
-        <i class="fas fa-brain"></i>
-        AI Situation Summary
-    </h2>
-
-    <div id="aiSummary">
-
-        <p>Analyzing live disaster data...</p>
-
-    </div>
-
+    <!-- AI Situation Summary -->
     <div class="panel">
 
-    <h2>
-        <i class="fas fa-crosshairs"></i>
-        Mission Status
-    </h2>
+        <h2>
+            <i class="fas fa-brain"></i>
+            AI Situation Summary
+        </h2>
 
-    <div id="missionStatus">
-
-        <p>Scanning live incidents...</p>
+        <div id="aiSummary">
+            <p>Analyzing live disaster data...</p>
+        </div>
 
     </div>
 
-</div>
+    <!-- Mission Status -->
+    <div class="panel">
 
-</div>
+        <h2>
+            <i class="fas fa-crosshairs"></i>
+            Mission Status
+        </h2>
+
+        <div id="missionStatus">
+            <p>Scanning live incidents...</p>
+        </div>
+
+    </div>
+
 </div>
 
 </main>
