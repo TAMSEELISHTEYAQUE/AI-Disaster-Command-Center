@@ -61,20 +61,58 @@ const IncidentDatabase = {
    WEATHER
 ===================================================== */
 
-    weather: {
+weather: {
 
-        temperature: 31,
+    temperature: 31,
 
-        humidity: 92,
+    humidity: 92,
 
-        rainfall: 210,
+    rainfall: 210,
 
-        windSpeed: 58,
+    windSpeed: 58,
 
-        condition: "Heavy Rain"
+    condition: "Heavy Rain"
 
-    },
+},
 
+/* =====================================================
+   SATELLITE DATA
+===================================================== */
+
+satellite: {
+
+    source: "Simulation",
+
+    lastUpdated: "--",
+
+    floodArea: 0,
+
+    wildfireArea: 0,
+
+    cloudCoverage: 0
+
+},
+/* =====================================================
+   EARTHQUAKE DATA
+===================================================== */
+
+earthquakes: {
+
+    magnitude: 0,
+
+    depth: 0,
+
+    latitude: 0,
+
+    longitude: 0,
+
+    lastUpdated: "--"
+
+},
+
+/* =====================================================
+   RESOURCES
+===================================================== */
 /* =====================================================
    RESOURCES
 ===================================================== */
