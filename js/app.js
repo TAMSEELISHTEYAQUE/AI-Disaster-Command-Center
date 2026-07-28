@@ -24,6 +24,7 @@ function initializeDashboard() {
     initializeCharts();
     initializeAlerts();
     initializeAI();
+    initializeLiveData();
 
     console.log("✅ Dashboard initialized successfully.");
 
