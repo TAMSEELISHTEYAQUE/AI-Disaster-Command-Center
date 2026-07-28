@@ -49,6 +49,32 @@ function calculateRisk() {
 
 }
 
+function getResourceDeployment() {
+
+    const incident = IncidentDatabase.currentIncident || {};
+    const severityScore = getSeverityScore(incident.severity);
+    const weatherFactor = getWeatherFactor();
+    const damageFactor = Math.max(1, Math.round(calculateRisk() / 20));
+
+    return [
+        { name: "NDRF", count: 4 + severityScore + Math.round(weatherFactor) },
+        { name: "Police", count: 8 + severityScore * 2 },
+        { name: "Fire", count: 3 + severityScore },
+        { name: "Ambulance", count: 6 + severityScore * 2 },
+        { name: "Medical Teams", count: 5 + severityScore + damageFactor },
+        { name: "Helicopters", count: 2 + Math.round(severityScore / 2) },
+        { name: "Relief Camps", count: 4 + severityScore + Math.round(populationFactor() * 2) }
+    ];
+
+}
+
+function populationFactor() {
+
+    const incident = IncidentDatabase.currentIncident || {};
+    return Math.min(4, Math.round((incident.populationAffected || 0) / 300000));
+
+}
+
 function calculatePriority() {
 
     const risk = calculateRisk();
@@ -92,28 +118,33 @@ function generateRecommendations() {
         ? IncidentDatabase.earthquakes.magnitude
         : 0;
     const population = incident.populationAffected || 0;
+    const damage = estimateDamage();
     const recommendations = [];
 
     recommendations.push(`Dispatch NDRF Team Alpha to ${incident.location && incident.location.state ? incident.location.state : "the affected zone"}`);
 
     if (severityScore >= 4) {
-        recommendations.push("Evacuate Zone B and secure access routes");
-    }
-
-    if (weather.condition && weather.condition.toLowerCase().includes("rain")) {
-        recommendations.push("Activate mobile water supply units");
-    }
-
-    if (population > 500000) {
-        recommendations.push("Open relief camps at staging points near the impact zone");
-    }
-
-    if (severityScore >= 3) {
-        recommendations.push("Close National Highway access corridors for safety");
+        recommendations.push("Issue Red Alert and evacuate vulnerable districts");
     }
 
     if (earthquakeMagnitude > 0) {
-        recommendations.push("Deploy drone survey for structural assessment");
+        recommendations.push("Deploy Drone Survey for structural assessment");
+    }
+
+    if (weather.condition && weather.condition.toLowerCase().includes("rain")) {
+        recommendations.push("Open Relief Camp and activate water supply units");
+    }
+
+    if (population > 500000) {
+        recommendations.push("Open Relief Camp at staging points near the impact zone");
+    }
+
+    if (severityScore >= 3) {
+        recommendations.push("Close Highway access corridors for safety");
+    }
+
+    if (damage !== "No Data") {
+        recommendations.push(`Airlift Medical Teams for ${damage} infrastructure impact`);
     }
 
     recommendations.push("Activate mobile hospital support for triage operations");
@@ -140,6 +171,24 @@ function updateAIRecommendations() {
     recommendations.forEach((item) => {
         const li = document.createElement("li");
         li.textContent = item;
+        list.appendChild(li);
+    });
+
+}
+
+function updateResourceAllocation() {
+
+    const list = document.getElementById("resourceAllocation");
+
+    if (!list) return;
+
+    const resources = getResourceDeployment();
+
+    list.innerHTML = "";
+
+    resources.forEach((resource) => {
+        const li = document.createElement("li");
+        li.textContent = `${resource.name}: ${resource.count} units`;
         list.appendChild(li);
     });
 
@@ -200,9 +249,11 @@ function initializeAI() {
     updateAssessmentPanel();
     updateAIRecommendations();
     updateAISummary();
+    updateResourceAllocation();
 
     setInterval(updateAssessmentPanel, 8000);
     setInterval(updateAIRecommendations, 8000);
     setInterval(updateAISummary, 8000);
+    setInterval(updateResourceAllocation, 8000);
 
 }

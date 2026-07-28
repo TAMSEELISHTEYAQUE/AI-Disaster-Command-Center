@@ -71,7 +71,7 @@
     <i class="fas fa-cloud-sun" id="weatherIcon"></i>
 
     <span id="weatherText">
-        Loading Weather...
+        No Data
     </span>
 
 </div>
@@ -201,6 +201,18 @@
                     <div class="chart-card">
                         <h3>AI Risk Score</h3>
                         <canvas id="riskChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Risk Trend</h3>
+                        <canvas id="riskTrendChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Resource Usage</h3>
+                        <canvas id="resourceUsageChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Incident Frequency</h3>
+                        <canvas id="incidentFrequencyChart"></canvas>
                     </div>
                 </div>
             </section>
@@ -355,6 +367,13 @@
                 </div>
             </div>
 
+            <div class="panel timeline-panel">
+                <h2><i class="fas fa-history"></i> Recent Incident Timeline</h2>
+                <ul id="incidentTimeline">
+                    <li>No incident timeline available</li>
+                </ul>
+            </div>
+
             <section class="report-section">
                 <button id="generateReport" class="report-btn">
                     <i class="fas fa-file-pdf"></i>
@@ -365,18 +384,6 @@
         </main>
 
 </div>
-
-<section class="report-section">
-
-    <button id="generateReport" class="report-btn">
-
-        <i class="fas fa-file-pdf"></i>
-
-        Generate AI Incident Report
-
-    </button>
-
-</section>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

@@ -18,6 +18,9 @@ function initializeCharts() {
     createDistributionChart();
     createStateChart();
     createRiskChart();
+    createRiskTrendChart();
+    createResourceUsageChart();
+    createIncidentFrequencyChart();
 
 }
 
@@ -246,6 +249,8 @@ function createRiskChart() {
         window.Chart.getChart(riskCanvas).destroy();
     }
 
+    const riskValue = typeof calculateRisk === "function" ? calculateRisk() : 82;
+
     new window.Chart(riskCanvas, {
 
         type: "doughnut",
@@ -255,7 +260,7 @@ function createRiskChart() {
             labels: ["High Risk","Remaining"],
 
             datasets: [{
-                data: [82,18],
+                data: [riskValue, 100 - riskValue],
                 backgroundColor: [
                     "#EF4444",
                     "#374151"
@@ -287,6 +292,109 @@ function createRiskChart() {
             }
         }
 
+    });
+
+}
+
+function createRiskTrendChart() {
+
+    if (typeof window.Chart === "undefined") return;
+
+    const canvas = document.getElementById("riskTrendChart");
+
+    if (!canvas) return;
+
+    if (window.Chart.getChart(canvas)) {
+        window.Chart.getChart(canvas).destroy();
+    }
+
+    const riskValue = typeof calculateRisk === "function" ? calculateRisk() : 82;
+
+    new window.Chart(canvas, {
+        type: "line",
+        data: {
+            labels: ["06:00","08:00","10:00","12:00","14:00","16:00"],
+            datasets: [{
+                label: "Risk Trend",
+                data: [riskValue - 8, riskValue - 4, riskValue - 2, riskValue + 2, riskValue + 4, riskValue],
+                borderColor: "#00D4FF",
+                backgroundColor: "rgba(0,212,255,0.18)",
+                fill: true,
+                tension: 0.25
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: "#ffffff" } } },
+            scales: { x: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } }, y: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } } }
+        }
+    });
+
+}
+
+function createResourceUsageChart() {
+
+    if (typeof window.Chart === "undefined") return;
+
+    const canvas = document.getElementById("resourceUsageChart");
+
+    if (!canvas) return;
+
+    if (window.Chart.getChart(canvas)) {
+        window.Chart.getChart(canvas).destroy();
+    }
+
+    const severityScore = typeof getSeverityScore === "function" ? getSeverityScore(IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.severity) : 3;
+
+    new window.Chart(canvas, {
+        type: "bar",
+        data: {
+            labels: ["NDRF","Police","Fire","Medical","Heli"],
+            datasets: [{
+                label: "Deployment",
+                data: [4 + severityScore, 6 + severityScore, 3 + severityScore, 5 + severityScore, 2 + severityScore],
+                backgroundColor: ["#3B82F6", "#F59E0B", "#EF4444", "#10B981", "#8B5CF6"]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: "#ffffff" } } },
+            scales: { x: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } }, y: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } } }
+        }
+    });
+
+}
+
+function createIncidentFrequencyChart() {
+
+    if (typeof window.Chart === "undefined") return;
+
+    const canvas = document.getElementById("incidentFrequencyChart");
+
+    if (!canvas) return;
+
+    if (window.Chart.getChart(canvas)) {
+        window.Chart.getChart(canvas).destroy();
+    }
+
+    const severityScore = typeof getSeverityScore === "function" ? getSeverityScore(IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.severity) : 3;
+
+    new window.Chart(canvas, {
+        type: "pie",
+        data: {
+            labels: ["Flood","Cyclone","Earthquake","Fire"],
+            datasets: [{
+                data: [22 + severityScore, 14 + severityScore, 8 + severityScore, 6 + severityScore],
+                backgroundColor: ["#3B82F6", "#F59E0B", "#10B981", "#EF4444"]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: "bottom", labels: { color: "#ffffff" } } }
+        }
     });
 
 }

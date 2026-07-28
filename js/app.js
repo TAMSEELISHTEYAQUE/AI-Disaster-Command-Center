@@ -109,6 +109,32 @@ function updateCommandStatistics() {
 
 }
 
+function updateIncidentTimeline() {
+
+    const timeline = document.getElementById("incidentTimeline");
+
+    if (!timeline) return;
+
+    const incident = IncidentDatabase.currentIncident || {};
+    const severity = incident.severity || "Unknown";
+    const risk = typeof calculateRisk === "function" ? calculateRisk() : 0;
+    const priority = typeof calculatePriority === "function" ? calculatePriority() : "Moderate";
+    const items = [
+        `${incident.disasterType || "Incident"} declared in ${incident.location && incident.location.state ? incident.location.state : "the affected region"}`,
+        `Severity escalated to ${severity} with ${risk}/100 AI risk score`,
+        `Response priority set to ${priority}`,
+        `Command center resources aligned to the current threat level`
+    ];
+
+    timeline.innerHTML = "";
+    items.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        timeline.appendChild(li);
+    });
+
+}
+
 function initializeDashboard() {
 
     console.log("🚀 Initializing AI Disaster Command Center...");
@@ -142,6 +168,7 @@ function initializeDashboard() {
     initializeSafe("updateWeatherPanel", updateWeatherPanel);
     initializeSafe("updateEarthquakeWidget", updateEarthquakeWidget);
     initializeSafe("updateCommandStatistics", updateCommandStatistics);
+    initializeSafe("updateIncidentTimeline", updateIncidentTimeline);
 
     console.log("✅ Dashboard initialized successfully.");
 

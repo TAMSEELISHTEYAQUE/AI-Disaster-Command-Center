@@ -1396,7 +1396,7 @@ transform: translateY(0);
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 
     gap:20px;
 
@@ -1530,8 +1530,8 @@ transform: translateY(0);
 }
 .chart-card canvas{
     width:100%!important;
-    max-height:180px!important;
-    height:180px!important;
+    max-height:200px!important;
+    height:200px!important;
 }
 
 .report-section{
@@ -1696,7 +1696,8 @@ transform: translateY(0);
 #missionStatus li,
 #resourceAllocation li,
 #aiRecommendations li,
-#alertsList li{
+#alertsList li,
+#incidentTimeline li{
     background:rgba(255,255,255,0.05);
     border-left:3px solid #00D4FF;
     border-radius:12px;
