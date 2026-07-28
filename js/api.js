@@ -22,6 +22,7 @@ const API = {
 function initializeAPI() {
 
     console.log("✅ API module loaded successfully");
+    fetchWeatherData();
 
 }
 /* =====================================================
