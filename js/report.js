@@ -9,6 +9,11 @@
 
 function generateIncidentReport() {
 
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+        console.warn("⚠ Report generation is unavailable.");
+        return;
+    }
+
     const { jsPDF } = window.jspdf;
 
     const doc = new jsPDF();

@@ -170,9 +170,13 @@ function updateList(listId, items, displayCount = 4) {
 
     if (!list) return;
 
+    const safeItems = Array.isArray(items) ? items : [];
+
     list.innerHTML = "";
 
-    const shuffled = [...items].sort(() => Math.random() - 0.5);
+    if (!safeItems.length) return;
+
+    const shuffled = [...safeItems].sort(() => Math.random() - 0.5);
 
     shuffled.slice(0, displayCount).forEach(item => {
 

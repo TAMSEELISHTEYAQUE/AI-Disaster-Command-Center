@@ -19,9 +19,21 @@ function initializeAPI() {
 
     console.log("✅ API Module Loaded");
 
-    fetchWeatherData();
+    if (typeof IncidentDatabase === "undefined") {
+        console.warn("⚠ Incident database not available.");
+        return;
+    }
 
-    fetchEarthquakeData();
+    if (typeof fetchWeatherData === "function") {
+        fetchWeatherData();
+    }
+    else {
+        console.warn("⚠ Weather data handler is unavailable.");
+    }
+
+    if (typeof fetchEarthquakeData === "function") {
+        fetchEarthquakeData();
+    }
 
 }
 
@@ -35,6 +47,10 @@ async function fetchEarthquakeData() {
 
     try {
 
+        if (typeof IncidentDatabase === "undefined") {
+            throw new Error("Incident database is unavailable.");
+        }
+
         const response = await fetch(
             "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
         );
@@ -44,23 +60,17 @@ async function fetchEarthquakeData() {
         }
 
         const data = await response.json();
+        const latest = data.features && data.features[0];
 
-        const latest = data.features[0];
+        if (!latest || !latest.properties || !latest.geometry || !latest.geometry.coordinates) {
+            throw new Error("Earthquake data is incomplete.");
+        }
 
-        IncidentDatabase.earthquakes.magnitude =
-            latest.properties.mag;
-
-        IncidentDatabase.earthquakes.latitude =
-            latest.geometry.coordinates[1];
-
-        IncidentDatabase.earthquakes.longitude =
-            latest.geometry.coordinates[0];
-
-        IncidentDatabase.earthquakes.depth =
-            latest.geometry.coordinates[2];
-
-        IncidentDatabase.earthquakes.lastUpdated =
-            formatDateTime();
+        IncidentDatabase.earthquakes.magnitude = latest.properties.mag || 0;
+        IncidentDatabase.earthquakes.latitude = latest.geometry.coordinates[1] || 0;
+        IncidentDatabase.earthquakes.longitude = latest.geometry.coordinates[0] || 0;
+        IncidentDatabase.earthquakes.depth = latest.geometry.coordinates[2] || 0;
+        IncidentDatabase.earthquakes.lastUpdated = formatDateTime();
 
         console.log("🌍 Earthquake Updated", IncidentDatabase.earthquakes);
 
@@ -82,9 +92,13 @@ function updateWeatherWidget() {
 
     const weatherText = document.getElementById("weatherText");
 
-    if (!weatherText) return;
+    if (!weatherText || typeof IncidentDatabase === "undefined") return;
 
-    weatherText.textContent =
-        `${Math.round(IncidentDatabase.weather.temperature)}°C ${IncidentDatabase.weather.city}`;
+    const safeTemperature = Number.isFinite(IncidentDatabase.weather.temperature)
+        ? Math.round(IncidentDatabase.weather.temperature)
+        : "--";
+    const safeCity = IncidentDatabase.weather.city || "Unknown";
+
+    weatherText.textContent = `${safeTemperature}°C ${safeCity}`;
 
 }

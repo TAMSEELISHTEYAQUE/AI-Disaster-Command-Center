@@ -9,6 +9,11 @@
 
 function initializeCharts() {
 
+    if (typeof window.Chart === "undefined") {
+        console.warn("⚠ Chart.js is unavailable.");
+        return;
+    }
+
     createTrendChart();
     createDistributionChart();
     createStateChart();
@@ -22,15 +27,20 @@ function initializeCharts() {
 
 function createTrendChart() {
 
+    if (typeof window.Chart === "undefined") {
+        console.warn("⚠ Chart.js is unavailable.");
+        return;
+    }
+
     const trendCanvas = document.getElementById("trendChart");
 
     if (!trendCanvas) return;
 
-    if (Chart.getChart(trendCanvas)) {
-        Chart.getChart(trendCanvas).destroy();
+    if (window.Chart.getChart(trendCanvas)) {
+        window.Chart.getChart(trendCanvas).destroy();
     }
 
-    new Chart(trendCanvas, {
+    new window.Chart(trendCanvas, {
 
         type: "line",
 
@@ -91,15 +101,20 @@ function createTrendChart() {
 
 function createDistributionChart() {
 
+    if (typeof window.Chart === "undefined") {
+        console.warn("⚠ Chart.js is unavailable.");
+        return;
+    }
+
     const distributionCanvas = document.getElementById("distributionChart");
 
     if (!distributionCanvas) return;
 
-    if (Chart.getChart(distributionCanvas)) {
-        Chart.getChart(distributionCanvas).destroy();
+    if (window.Chart.getChart(distributionCanvas)) {
+        window.Chart.getChart(distributionCanvas).destroy();
     }
 
-    new Chart(distributionCanvas, {
+    new window.Chart(distributionCanvas, {
 
         type: "pie",
 
@@ -142,15 +157,20 @@ function createDistributionChart() {
 
 function createStateChart() {
 
+    if (typeof window.Chart === "undefined") {
+        console.warn("⚠ Chart.js is unavailable.");
+        return;
+    }
+
     const stateCanvas = document.getElementById("stateChart");
 
     if (!stateCanvas) return;
 
-    if (Chart.getChart(stateCanvas)) {
-        Chart.getChart(stateCanvas).destroy();
+    if (window.Chart.getChart(stateCanvas)) {
+        window.Chart.getChart(stateCanvas).destroy();
     }
 
-    new Chart(stateCanvas, {
+    new window.Chart(stateCanvas, {
 
         type: "bar",
 
@@ -213,15 +233,20 @@ function createStateChart() {
 
 function createRiskChart() {
 
+    if (typeof window.Chart === "undefined") {
+        console.warn("⚠ Chart.js is unavailable.");
+        return;
+    }
+
     const riskCanvas = document.getElementById("riskChart");
 
     if (!riskCanvas) return;
 
-    if (Chart.getChart(riskCanvas)) {
-        Chart.getChart(riskCanvas).destroy();
+    if (window.Chart.getChart(riskCanvas)) {
+        window.Chart.getChart(riskCanvas).destroy();
     }
 
-    new Chart(riskCanvas, {
+    new window.Chart(riskCanvas, {
 
         type: "doughnut",
 

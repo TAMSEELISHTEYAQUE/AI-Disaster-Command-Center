@@ -9,17 +9,24 @@
 
 function initializeMap() {
 
+    const mapContainer = document.getElementById("map");
+
+    if (!window.L || !mapContainer) {
+        console.warn("⚠ Leaflet map is unavailable.");
+        return;
+    }
+
     /* ---------- Current Incident Location ---------- */
 
     const { latitude, longitude } = IncidentDatabase.currentIncident.location;
 
     /* ---------- Create Map ---------- */
 
-    window.map = L.map("map").setView([latitude, longitude], 5);
+    window.map = window.L.map(mapContainer).setView([latitude, longitude], 5);
 
     /* ---------- OpenStreetMap Tiles ---------- */
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
         maxZoom: 18
     }).addTo(window.map);
@@ -112,7 +119,7 @@ function initializeMap() {
 
     disasterLocations.forEach(location => {
 
-        const marker = L.marker(location.coords)
+        const marker = window.L.marker(location.coords)
             .addTo(window.map)
             .bindPopup(`
                 <b>${location.name}</b><br>
@@ -125,10 +132,15 @@ function initializeMap() {
 
     /* ---------- Auto Zoom ---------- */
 
-    const group = L.featureGroup(markers);
+    if (markers.length > 0) {
+        const group = window.L.featureGroup(markers);
 
-    window.map.fitBounds(group.getBounds(), {
-        padding: [40, 40]
-    });
+        window.map.fitBounds(group.getBounds(), {
+            padding: [40, 40]
+        });
+    }
+    else {
+        window.map.setView([latitude, longitude], 5);
+    }
 
 }

@@ -11,21 +11,32 @@ function initializeDashboard() {
 
     console.log("🚀 Initializing AI Disaster Command Center...");
 
-    // Core Modules
-    initializeMap();
-    initializeClock();
-    initializeAPI();
+    const initializeSafe = (name, fn) => {
 
-    // UI Animations
-    animateCards();
-    animateCounters();
+        if (typeof fn !== "function") {
+            console.warn(`⚠ ${name} is unavailable.`);
+            return;
+        }
 
-    // Dashboard Modules
-    initializeCharts();
-    initializeAlerts();
-    initializeAI();
-    initializeLiveData();
-    updateMissionStatus();
+        try {
+            fn();
+        }
+        catch (error) {
+            console.error(`❌ ${name} failed:`, error);
+        }
+
+    };
+
+    initializeSafe("initializeMap", initializeMap);
+    initializeSafe("initializeClock", initializeClock);
+    initializeSafe("initializeAPI", initializeAPI);
+    initializeSafe("animateCards", animateCards);
+    initializeSafe("animateCounters", animateCounters);
+    initializeSafe("initializeCharts", initializeCharts);
+    initializeSafe("initializeAlerts", initializeAlerts);
+    initializeSafe("initializeAI", initializeAI);
+    initializeSafe("initializeLiveData", initializeLiveData);
+    initializeSafe("updateMissionStatus", updateMissionStatus);
 
     console.log("✅ Dashboard initialized successfully.");
 
@@ -38,6 +49,14 @@ function initializeDashboard() {
 document.addEventListener("DOMContentLoaded", () => {
 
     initializeDashboard();
-    initializeReport();
+
+    if (typeof initializeReport === "function") {
+        try {
+            initializeReport();
+        }
+        catch (error) {
+            console.error("❌ Report initialization failed:", error);
+        }
+    }
 
 });
