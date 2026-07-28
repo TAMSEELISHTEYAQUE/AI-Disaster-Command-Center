@@ -45,10 +45,15 @@ async function fetchWeatherData() {
 
         console.log("🌦 Weather Data:", data);
 
+        IncidentDatabase.weather.city = data.name;
         IncidentDatabase.weather.temperature = data.main.temp;
+        IncidentDatabase.weather.feelsLike = data.main.feels_like;
         IncidentDatabase.weather.humidity = data.main.humidity;
+        IncidentDatabase.weather.pressure = data.main.pressure;
         IncidentDatabase.weather.windSpeed = data.wind.speed;
+        IncidentDatabase.weather.visibility = data.visibility;
         IncidentDatabase.weather.condition = data.weather[0].main;
+        IncidentDatabase.weather.icon = data.weather[0].icon;
         IncidentDatabase.weather.lastUpdated = formatDateTime();
 
         console.log("✅ Weather database updated.");
