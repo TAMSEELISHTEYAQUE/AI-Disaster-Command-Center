@@ -55,7 +55,7 @@ async function fetchWeatherData() {
         IncidentDatabase.weather.condition = data.weather[0].main;
         IncidentDatabase.weather.icon = data.weather[0].icon;
         IncidentDatabase.weather.lastUpdated = formatDateTime();
-
+        updateWeatherWidget();
         console.log("✅ Weather database updated.");
 
     } catch (error) {
@@ -63,5 +63,19 @@ async function fetchWeatherData() {
         console.error("❌ Weather API Failed:", error);
 
     }
+
+}
+/* =====================================================
+   UPDATE WEATHER WIDGET
+===================================================== */
+
+function updateWeatherWidget() {
+
+    const weatherText = document.getElementById("weatherText");
+
+    if (!weatherText) return;
+
+    weatherText.textContent =
+        `${Math.round(IncidentDatabase.weather.temperature)}°C ${IncidentDatabase.weather.city}`;
 
 }
