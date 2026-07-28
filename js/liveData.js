@@ -8,7 +8,7 @@ function refreshDashboard() {
     updateWeatherWidget();
 
     // Future
-    // updateEarthquakeWidget();
+    updateEarthquakeWidget();
     // updateFloodWidget();
     // updateFireWidget();
     // updateRiskWidget();
