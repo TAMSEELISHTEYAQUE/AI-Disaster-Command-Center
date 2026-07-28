@@ -67,3 +67,16 @@ function generateIncidentReport() {
     doc.save("AI_Disaster_Report.pdf");
 
 }
+/* =====================================================
+   INITIALIZE REPORT
+===================================================== */
+
+function initializeReport() {
+
+    const button = document.getElementById("generateReport");
+
+    if (!button) return;
+
+    button.addEventListener("click", generateIncidentReport);
+
+}

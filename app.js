@@ -38,7 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initializeDashboard();
 
-    initializeReport();
+    document
+        .getElementById("generateReport")
+        .addEventListener("click", generateIncidentReport);
 
 });
-
