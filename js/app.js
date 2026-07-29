@@ -313,9 +313,93 @@ function updateIncidentTimeline() {
 
 }
 
+function bindDashboardInteractions() {
+
+    const navItems = document.querySelectorAll("#navLinks li");
+    navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            navItems.forEach((entry) => entry.classList.remove("active"));
+            item.classList.add("active");
+            const target = item.getAttribute("data-target");
+            if (target) {
+                const targetElement = document.getElementById(target);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                    history.replaceState(null, "", `#${target}`);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll(".interactive-card").forEach((card) => {
+        card.addEventListener("click", () => {
+            const filter = card.getAttribute("data-filter");
+            IncidentDatabase.dashboard.activeFilter = filter;
+            document.querySelectorAll(".interactive-card").forEach((entry) => entry.classList.toggle("active", entry === card));
+            applyDashboardFilter(filter);
+        });
+    });
+
+    document.querySelectorAll(".filter-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            document.querySelectorAll(".filter-btn").forEach((entry) => entry.classList.remove("active"));
+            button.classList.add("active");
+            IncidentDatabase.dashboard.activeFilter = button.getAttribute("data-range") || "today";
+            if (typeof initializeCharts === "function") {
+                initializeCharts();
+            }
+        });
+    });
+
+}
+
+function applyDashboardFilter(filter) {
+
+    const disasters = IncidentDatabase.disasters || [];
+    const matched = disasters.filter((disaster) => !filter || filter === "AI" || disaster.type === filter || disaster.type.toLowerCase().includes(filter.toLowerCase()));
+
+    if (typeof updateDisasterMonitorTable === "function") {
+        const tableBody = document.getElementById("disasterMonitorBody");
+        if (tableBody) {
+            tableBody.innerHTML = "";
+            matched.forEach((disaster) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${disaster.type || "Unknown"}</td>
+                    <td>${disaster.location || "No Data"}</td>
+                    <td>${disaster.severity || "No Data"}</td>
+                    <td>${disaster.riskLevel || "No Data"}</td>
+                    <td>${(disaster.populationAffected || 0).toLocaleString()}</td>
+                    <td>${disaster.status || "Monitor"}</td>
+                    <td>${disaster.recommendation || "Monitor"}</td>
+                    <td>${disaster.lastUpdated || "No Data"}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    }
+
+    if (typeof updateAlerts === "function") {
+        const alerts = matched.length ? matched.map((disaster) => `${disaster.severity.toUpperCase()} | ${disaster.state || disaster.location} | ${disaster.type} | ${disaster.lastUpdated || "Just now"}`) : ["No matching incidents" ];
+        IncidentDatabase.dashboard.alerts = alerts;
+        updateAlerts();
+    }
+
+    if (typeof updateMapView === "function") {
+        updateMapView(matched);
+    }
+
+}
+
 function initializeDashboard() {
 
     console.log("🚀 Initializing AI Disaster Command Center...");
+
+    IncidentDatabase.dashboard = IncidentDatabase.dashboard || {};
+    IncidentDatabase.dashboard.activeFilter = "today";
+    IncidentDatabase.dashboard.selectedHazard = null;
+
+    bindDashboardInteractions();
 
     const initializeSafe = (name, fn) => {
 

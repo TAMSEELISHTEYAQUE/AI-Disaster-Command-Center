@@ -14,13 +14,14 @@ function initializeCharts() {
         return;
     }
 
-    createTrendChart();
-    createDistributionChart();
-    createStateChart();
-    createRiskChart();
-    createRiskTrendChart();
-    createResourceUsageChart();
-    createIncidentFrequencyChart();
+    const range = (IncidentDatabase.dashboard && IncidentDatabase.dashboard.activeFilter) || "today";
+    createTrendChart(range);
+    createDistributionChart(range);
+    createStateChart(range);
+    createRiskChart(range);
+    createRiskTrendChart(range);
+    createResourceUsageChart(range);
+    createIncidentFrequencyChart(range);
 
 }
 
@@ -28,7 +29,7 @@ function initializeCharts() {
    DISASTER TREND CHART
 ===================================================== */
 
-function createTrendChart() {
+function createTrendChart(range = "today") {
 
     if (typeof window.Chart === "undefined") {
         console.warn("⚠ Chart.js is unavailable.");
@@ -43,15 +44,25 @@ function createTrendChart() {
         window.Chart.getChart(trendCanvas).destroy();
     }
 
+    const config = {
+        today: { labels: ["06:00","09:00","12:00","15:00","18:00","21:00"], data: [3,5,6,7,10,8] },
+        "24h": { labels: ["00:00","04:00","08:00","12:00","16:00","20:00"], data: [2,4,7,6,9,11] },
+        "7d": { labels: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], data: [12,18,15,21,17,24,20] },
+        "30d": { labels: ["W1","W2","W3","W4"], data: [28,36,41,45] },
+        all: { labels: ["Jan","Feb","Mar","Apr","May","Jun"], data: [21,27,35,39,44,50] }
+    };
+
+    const values = config[range] || config.today;
+
     new window.Chart(trendCanvas, {
 
         type: "line",
 
         data: {
-            labels: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+            labels: values.labels,
             datasets: [{
                 label: "Disasters",
-                data: [12,18,15,21,17,24,20],
+                data: values.data,
                 borderColor: "#00D4FF",
                 backgroundColor: "rgba(0,212,255,0.12)",
                 borderWidth: 3,
@@ -102,7 +113,7 @@ function createTrendChart() {
    DISASTER DISTRIBUTION CHART
 ===================================================== */
 
-function createDistributionChart() {
+function createDistributionChart(range = "today") {
 
     if (typeof window.Chart === "undefined") {
         console.warn("⚠ Chart.js is unavailable.");
@@ -117,6 +128,17 @@ function createDistributionChart() {
         window.Chart.getChart(distributionCanvas).destroy();
     }
 
+    const scale = range === "30d" ? 1.25 : range === "7d" ? 1.1 : 1;
+    const counts = {
+        today: [6,4,3,2],
+        "24h": [7,5,4,3],
+        "7d": [35,25,20,20],
+        "30d": [42,31,24,26],
+        all: [58,41,30,34]
+    };
+
+    const values = counts[range] || counts.today;
+
     new window.Chart(distributionCanvas, {
 
         type: "pie",
@@ -124,7 +146,7 @@ function createDistributionChart() {
         data: {
             labels: ["Flood","Cyclone","Wildfire","Earthquake"],
             datasets: [{
-                data: [35,25,20,20],
+                data: values.map((value) => Math.round(value * scale)),
                 backgroundColor: [
                     "#3B82F6",
                     "#F59E0B",
@@ -158,7 +180,7 @@ function createDistributionChart() {
    STATE ALERT CHART
 ===================================================== */
 
-function createStateChart() {
+function createStateChart(range = "today") {
 
     if (typeof window.Chart === "undefined") {
         console.warn("⚠ Chart.js is unavailable.");
@@ -172,6 +194,16 @@ function createStateChart() {
     if (window.Chart.getChart(stateCanvas)) {
         window.Chart.getChart(stateCanvas).destroy();
     }
+
+    const counts = {
+        today: [8,6,4,3,2],
+        "24h": [10,8,5,4,3],
+        "7d": [18,14,10,8,6],
+        "30d": [24,19,14,12,8],
+        all: [30,24,18,16,11]
+    };
+
+    const values = counts[range] || counts.today;
 
     new window.Chart(stateCanvas, {
 
@@ -188,7 +220,7 @@ function createStateChart() {
 
             datasets: [{
                 label: "Active Alerts",
-                data: [18,14,10,8,6],
+                data: values,
 
                 backgroundColor: [
                     "#2563EB",
@@ -234,7 +266,7 @@ function createStateChart() {
    AI RISK CHART
 ===================================================== */
 
-function createRiskChart() {
+function createRiskChart(range = "today") {
 
     if (typeof window.Chart === "undefined") {
         console.warn("⚠ Chart.js is unavailable.");
@@ -250,6 +282,8 @@ function createRiskChart() {
     }
 
     const riskValue = typeof calculateRisk === "function" ? calculateRisk() : 82;
+    const modifier = range === "30d" ? 4 : range === "7d" ? 2 : range === "24h" ? 1 : 0;
+    const adjustedRisk = Math.min(96, riskValue + modifier);
 
     new window.Chart(riskCanvas, {
 
@@ -260,7 +294,7 @@ function createRiskChart() {
             labels: ["High Risk","Remaining"],
 
             datasets: [{
-                data: [riskValue, 100 - riskValue],
+                data: [adjustedRisk, 100 - adjustedRisk],
                 backgroundColor: [
                     "#EF4444",
                     "#374151"
@@ -296,7 +330,7 @@ function createRiskChart() {
 
 }
 
-function createRiskTrendChart() {
+function createRiskTrendChart(range = "today") {
 
     if (typeof window.Chart === "undefined") return;
 
@@ -309,6 +343,7 @@ function createRiskTrendChart() {
     }
 
     const riskValue = typeof calculateRisk === "function" ? calculateRisk() : 82;
+    const offset = range === "30d" ? 3 : range === "7d" ? 2 : range === "24h" ? 1 : 0;
 
     new window.Chart(canvas, {
         type: "line",
@@ -316,7 +351,7 @@ function createRiskTrendChart() {
             labels: ["06:00","08:00","10:00","12:00","14:00","16:00"],
             datasets: [{
                 label: "Risk Trend",
-                data: [riskValue - 8, riskValue - 4, riskValue - 2, riskValue + 2, riskValue + 4, riskValue],
+                data: [riskValue - 8 + offset, riskValue - 4 + offset, riskValue - 2 + offset, riskValue + 2 + offset, riskValue + 4 + offset, riskValue + offset],
                 borderColor: "#00D4FF",
                 backgroundColor: "rgba(0,212,255,0.18)",
                 fill: true,
@@ -333,7 +368,7 @@ function createRiskTrendChart() {
 
 }
 
-function createResourceUsageChart() {
+function createResourceUsageChart(range = "today") {
 
     if (typeof window.Chart === "undefined") return;
 
@@ -346,6 +381,7 @@ function createResourceUsageChart() {
     }
 
     const severityScore = typeof getSeverityScore === "function" ? getSeverityScore(IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.severity) : 3;
+    const multiplier = range === "30d" ? 1.2 : range === "7d" ? 1.1 : 1;
 
     new window.Chart(canvas, {
         type: "bar",
@@ -353,7 +389,7 @@ function createResourceUsageChart() {
             labels: ["NDRF","Police","Fire","Medical","Heli"],
             datasets: [{
                 label: "Deployment",
-                data: [4 + severityScore, 6 + severityScore, 3 + severityScore, 5 + severityScore, 2 + severityScore],
+                data: [4 + severityScore, 6 + severityScore, 3 + severityScore, 5 + severityScore, 2 + severityScore].map((value) => Math.round(value * multiplier)),
                 backgroundColor: ["#3B82F6", "#F59E0B", "#EF4444", "#10B981", "#8B5CF6"]
             }]
         },
@@ -367,7 +403,7 @@ function createResourceUsageChart() {
 
 }
 
-function createIncidentFrequencyChart() {
+function createIncidentFrequencyChart(range = "today") {
 
     if (typeof window.Chart === "undefined") return;
 
@@ -380,13 +416,14 @@ function createIncidentFrequencyChart() {
     }
 
     const severityScore = typeof getSeverityScore === "function" ? getSeverityScore(IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.severity) : 3;
+    const scale = range === "30d" ? 1.35 : range === "7d" ? 1.18 : 1;
 
     new window.Chart(canvas, {
         type: "pie",
         data: {
             labels: ["Flood","Cyclone","Earthquake","Fire"],
             datasets: [{
-                data: [22 + severityScore, 14 + severityScore, 8 + severityScore, 6 + severityScore],
+                data: [22 + severityScore, 14 + severityScore, 8 + severityScore, 6 + severityScore].map((value) => Math.round(value * scale)),
                 backgroundColor: ["#3B82F6", "#F59E0B", "#10B981", "#EF4444"]
             }]
         },

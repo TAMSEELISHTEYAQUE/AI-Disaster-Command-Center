@@ -840,6 +840,36 @@ transform: translateY(0);
 
 /* KPI STATUS BADGES */
 
+.card.interactive-card{ cursor:pointer; }
+
+.card.interactive-card.active{
+    border-color:#4FC3F7;
+    box-shadow:0 0 0 1px rgba(79,195,247,0.35), 0 18px 35px rgba(0,191,255,0.20);
+    transform:translateY(-6px);
+}
+
+.filter-group{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.filter-btn{
+    border:none;
+    border-radius:999px;
+    padding:8px 14px;
+    background:#1f2937;
+    color:#cbd5e1;
+    cursor:pointer;
+    transition:all 0.2s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+    background:#1E88E5;
+    color:#fff;
+}
+
 .card-status{
 
     display:inline-flex;
@@ -1199,6 +1229,26 @@ transform: translateY(0);
     border-left-color:#4FC3F7;
 
 }
+
+.panel li.alert-item{
+    cursor:pointer;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+}
+
+.panel li.alert-item .alert-meta{
+    color:#9ad8ff;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+}
+
+.panel li.alert-item.is-expanded{
+    border-left-color:#ff9f1c;
+    background:#3a567c;
+}
+
 .panel ul::-webkit-scrollbar{
 
     width:6px;

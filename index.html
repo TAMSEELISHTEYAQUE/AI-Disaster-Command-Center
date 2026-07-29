@@ -112,22 +112,19 @@
 
             <h3>🌍 Navigation</h3>
 
-            <ul>
+            <ul id="navLinks">
 
-    <li class="active">
-    <i class="fas fa-chart-line"></i>
-    Dashboard
-</li>
+    <li class="active" data-target="overview"><i class="fas fa-chart-line"></i> Dashboard</li>
 
-    <li><i class="fas fa-satellite"></i> Satellite Map</li>
+    <li data-target="mapSection"><i class="fas fa-satellite"></i> Satellite Map</li>
 
-    <li><i class="fas fa-brain"></i> AI Analysis</li>
+    <li data-target="aiSection"><i class="fas fa-brain"></i> AI Analysis</li>
 
-    <li><i class="fas fa-triangle-exclamation"></i> Disaster Alerts</li>
+    <li data-target="alertsSection"><i class="fas fa-triangle-exclamation"></i> Disaster Alerts</li>
 
-    <li><i class="fas fa-truck-medical"></i> Rescue Resources</li>
+    <li data-target="resourcesSection"><i class="fas fa-truck-medical"></i> Rescue Resources</li>
 
-    <li><i class="fas fa-gear"></i> Settings</li>
+    <li data-target="reportSection"><i class="fas fa-gear"></i> Settings</li>
 
 </ul>
 
@@ -141,28 +138,28 @@
 
             <div class="cards">
 
-                <div class="card">
+                <div class="card interactive-card" data-filter="satellite">
                     <h3>🛰 Satellites Online</h3>
                     <p id="satelliteCount">0</p>
                     <span class="card-status online">🟢 Operational</span>
                     <small>Live monitoring feed</small>
                 </div>
 
-                <div class="card">
+                <div class="card interactive-card" data-filter="Flood">
                     <h3>🌊 Flood Alerts</h3>
                     <p id="floodCount">0</p>
                     <span class="card-status warning">🟡 Moderate Risk</span>
                     <small>Updated in real time</small>
                 </div>
 
-                <div class="card">
+                <div class="card interactive-card" data-filter="Wildfire">
                     <h3>🔥 Wildfire Alerts</h3>
                     <p id="fireCount">0</p>
                     <span class="card-status danger">🔴 High Risk</span>
                     <small>Regional watch status</small>
                 </div>
 
-                <div class="card">
+                <div class="card interactive-card" data-filter="AI">
                     <h3>🤖 AI Accuracy</h3>
                     <p id="accuracyCount">0%</p>
                     <span class="card-status success">🟢 Excellent</span>
@@ -240,6 +237,13 @@
             <section class="analytics-section">
                 <div class="section-header">
                     <h2><i class="fas fa-chart-line"></i> Analytics & Forecasts</h2>
+                    <div class="filter-group" id="chartFilters">
+                        <button class="filter-btn active" data-range="today">Today</button>
+                        <button class="filter-btn" data-range="24h">24 Hours</button>
+                        <button class="filter-btn" data-range="7d">7 Days</button>
+                        <button class="filter-btn" data-range="30d">30 Days</button>
+                        <button class="filter-btn" data-range="all">All</button>
+                    </div>
                 </div>
                 <div class="analytics-grid">
                     <div class="chart-card">
@@ -365,19 +369,19 @@
             </div>
 
             <div class="bottom-panels">
-                <div class="panel">
+                <div class="panel" id="missionSection">
                     <h2><i class="fas fa-crosshairs"></i> Mission Status</h2>
                     <div id="missionStatus"><p>No mission data</p></div>
                 </div>
 
-                <div class="panel">
+                <div class="panel" id="alertsSection">
                     <h2><i class="fas fa-triangle-exclamation"></i> Active Alerts</h2>
                     <ul id="alertsList">
                         <li>No active alerts</li>
                     </ul>
                 </div>
 
-                <div class="panel">
+                <div class="panel" id="aiSection">
                     <h2><i class="fas fa-brain"></i> AI Situation Assessment</h2>
                     <div class="ai-panel-grid">
                         <div class="ai-metric-card">
@@ -420,7 +424,7 @@
                     <div id="missionControlList"></div>
                 </div>
 
-                <div class="panel">
+                <div class="panel" id="resourcesSection">
                     <h2><i class="fas fa-boxes-stacked"></i> Resource Allocation</h2>
                     <ul id="resourceAllocation">
                         <li>No resources available</li>
@@ -435,7 +439,7 @@
                 </ul>
             </div>
 
-            <section class="report-section">
+            <section class="report-section" id="reportSection">
                 <button id="generateReport" class="report-btn">
                     <i class="fas fa-file-pdf"></i>
                     Generate AI Incident Report
