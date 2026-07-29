@@ -1,20 +1,3 @@
-/*
-===========================================================
-AI Disaster Command Center
-Landing Page JavaScript
-===========================================================
-*/
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    initStickyHeader();
-    initSmoothScroll();
-    initScrollReveal();
-    initActiveNavigation();
-    initHeroButtons();
-
-});
-
 /* ==========================================================
 STICKY HEADER
 ========================================================== */
@@ -25,20 +8,33 @@ function initStickyHeader() {
 
     if (!header) return;
 
+    let headerTicking = false;
+
     window.addEventListener("scroll", () => {
 
-        if (window.scrollY > 60) {
+        if (headerTicking) return;
 
-            header.style.background = "rgba(5,13,24,.96)";
-            header.style.backdropFilter = "blur(22px)";
-            header.style.boxShadow = "0 12px 35px rgba(0,0,0,.35)";
+        requestAnimationFrame(() => {
 
-        } else {
+            if (window.scrollY > 60) {
 
-            header.style.background = "rgba(7,17,31,.75)";
-            header.style.boxShadow = "none";
+                header.style.background = "rgba(5,13,24,.96)";
+                header.style.backdropFilter = "blur(22px)";
+                header.style.boxShadow = "0 12px 35px rgba(0,0,0,.35)";
 
-        }
+            } else {
+
+                header.style.background = "rgba(7,17,31,.75)";
+                header.style.backdropFilter = "blur(18px)";
+                header.style.boxShadow = "none";
+
+            }
+
+            headerTicking = false;
+
+        });
+
+        headerTicking = true;
 
     });
 
@@ -139,6 +135,47 @@ function initHeroButtons() {
         button.addEventListener("mouseleave", () => {
 
             button.style.transform = "";
+
+        });
+
+    });
+
+}
+/* ==========================================================
+BUTTON RIPPLE
+========================================================== */
+
+function initRippleButtons(){
+
+    const buttons =
+        document.querySelectorAll(".adc-btn");
+
+    buttons.forEach(button=>{
+
+        button.addEventListener("click",e=>{
+
+            const ripple =
+                document.createElement("span");
+
+            ripple.className =
+                "adc-ripple";
+
+            const rect =
+                button.getBoundingClientRect();
+
+            ripple.style.left =
+                (e.clientX-rect.left)+"px";
+
+            ripple.style.top =
+                (e.clientY-rect.top)+"px";
+
+            button.appendChild(ripple);
+
+            setTimeout(()=>{
+
+                ripple.remove();
+
+            },600);
 
         });
 
@@ -302,19 +339,6 @@ function initCardHoverEffects() {
 }
 
 /* ==========================================================
-INITIALISE EXTRA FEATURES
-========================================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    initMetricCounters();
-
-    initDashboardAnimation();
-
-    initCardHoverEffects();
-
-});
-/* ==========================================================
 BACK TO TOP BUTTON
 ========================================================== */
 
@@ -449,12 +473,72 @@ function initResizeHandler() {
     });
 
 }
-
 /* ==========================================================
-INITIALISE FINAL MODULES
+SCROLL PROGRESS BAR
+========================================================== */
+
+function initScrollProgress(){
+
+    const progress =
+        document.querySelector(".adc-scroll-progress-bar");
+
+    if(!progress) return;
+
+    let ticking = false;
+
+    function update(){
+
+        const scrollTop =
+            window.pageYOffset;
+
+        const documentHeight =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+        const percentage =
+            (scrollTop / documentHeight) * 100;
+
+        progress.style.width =
+            percentage + "%";
+
+        ticking = false;
+
+    }
+
+    window.addEventListener("scroll",()=>{
+
+        if(!ticking){
+
+            requestAnimationFrame(update);
+
+            ticking = true;
+
+        }
+
+    });
+
+}
+/* ==========================================================
+INITIALISE APPLICATION
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    initStickyHeader();
+
+    initSmoothScroll();
+
+    initScrollReveal();
+
+    initActiveNavigation();
+
+    initHeroButtons();
+
+    initMetricCounters();
+
+    initDashboardAnimation();
+
+    initCardHoverEffects();
 
     initBackToTop();
 
@@ -466,8 +550,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initResizeHandler();
 
-});
+    initScrollProgress();
 
+    initRippleButtons();
+
+});
 /* ==========================================================
 END OF FILE
 ========================================================== */

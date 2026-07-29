@@ -1975,3 +1975,33 @@ opacity .5s ease,
 transform .5s ease;
 
 }
+.adc-ripple{
+
+position:absolute;
+
+width:12px;
+height:12px;
+
+background:rgba(255,255,255,.45);
+
+border-radius:50%;
+
+transform:translate(-50%,-50%) scale(0);
+
+animation:adcRipple .6s ease-out;
+
+pointer-events:none;
+
+}
+
+@keyframes adcRipple{
+
+to{
+
+transform:translate(-50%,-50%) scale(20);
+
+opacity:0;
+
+}
+
+}
