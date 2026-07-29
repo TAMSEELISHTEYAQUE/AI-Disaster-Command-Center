@@ -228,3 +228,258 @@ Authenticate to access the National Disaster Dashboard
 </p>
 
 </div>
+<!-- =========================================================
+LOGIN FORM
+========================================================= -->
+
+<form id="loginForm"
+      class="adc-login-form"
+      autocomplete="off">
+
+<div class="adc-input-group">
+
+<label for="username">
+
+Operator ID
+
+</label>
+
+<div class="adc-input">
+
+<i class="fas fa-user"></i>
+
+<input
+type="text"
+id="username"
+name="username"
+placeholder="Enter Operator ID"
+required>
+
+</div>
+
+<small class="adc-error"
+       id="usernameError">
+
+</small>
+
+</div>
+
+<div class="adc-input-group">
+
+<label for="password">
+
+Password
+
+</label>
+
+<div class="adc-input">
+
+<i class="fas fa-lock"></i>
+
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button
+type="button"
+id="togglePassword"
+class="adc-password-toggle"
+aria-label="Show Password">
+
+<i class="fas fa-eye"></i>
+
+</button>
+
+</div>
+
+<small class="adc-error"
+id="passwordError">
+
+</small>
+
+</div>
+
+<div class="adc-login-options">
+
+<label class="adc-checkbox">
+
+<input
+type="checkbox"
+id="rememberMe">
+
+<span>
+
+Remember Me
+
+</span>
+
+</label>
+
+<a href="#"
+class="adc-forgot-password">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+<button
+type="submit"
+class="adc-login-btn">
+
+<span>
+
+Access Command Center
+
+</span>
+
+<i class="fas fa-arrow-right"></i>
+
+</button>
+
+<div class="adc-login-divider">
+
+<span>
+
+Secure Authentication
+
+</span>
+
+</div>
+
+<div class="adc-security-panel">
+
+<div class="adc-security-item">
+
+<i class="fas fa-shield-alt"></i>
+
+<span>
+
+256-bit Encryption
+
+</span>
+
+</div>
+
+<div class="adc-security-item">
+
+<i class="fas fa-user-check"></i>
+
+<span>
+
+Operator Verified
+
+</span>
+
+</div>
+
+<div class="adc-security-item">
+
+<i class="fas fa-lock"></i>
+
+<span>
+
+Secure Session
+
+</span>
+
+</div>
+
+</div>
+
+</form>
+<!-- =========================================================
+SYSTEM FOOTER
+========================================================= -->
+
+<div class="adc-login-footer">
+
+    <div class="adc-footer-item">
+
+        <i class="fas fa-satellite"></i>
+
+        <span>ISRO Satellite Network</span>
+
+    </div>
+
+    <div class="adc-footer-item">
+
+        <i class="fas fa-cloud"></i>
+
+        <span>Real-Time Weather Intelligence</span>
+
+    </div>
+
+    <div class="adc-footer-item">
+
+        <i class="fas fa-database"></i>
+
+        <span>Incident Database Connected</span>
+
+    </div>
+
+</div>
+
+<div class="adc-version">
+
+    <span>Version 2.0.0</span>
+
+    <span>•</span>
+
+    <span>AI Disaster Command Center</span>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+<!-- =========================================================
+LOADING OVERLAY
+========================================================= -->
+
+<div class="adc-login-loading" id="loginLoading">
+
+    <div class="adc-loader-card">
+
+        <div class="adc-loader">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <h3>
+
+            Authenticating Operator...
+
+        </h3>
+
+        <p>
+
+            Establishing secure connection with National Disaster Command Center
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+SCRIPTS
+========================================================= -->
+
+<script src="js/login.js"></script>
+
+</body>
+
+</html>
