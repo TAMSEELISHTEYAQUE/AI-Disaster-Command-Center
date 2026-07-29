@@ -2005,3 +2005,130 @@ opacity:0;
 }
 
 }
+/* ===========================================================
+GPU ACCELERATION
+=========================================================== */
+
+.adc-overview-card,
+.adc-feature-card,
+.adc-step,
+.adc-tech-card,
+.adc-preview-card,
+.adc-dashboard-preview,
+.adc-btn{
+
+will-change:transform;
+
+transform:translateZ(0);
+
+backface-visibility:hidden;
+
+}
+
+/* ===========================================================
+PREMIUM SHADOWS
+=========================================================== */
+
+.adc-feature-card:hover,
+.adc-overview-card:hover,
+.adc-step:hover,
+.adc-tech-card:hover{
+
+box-shadow:
+
+0 25px 60px rgba(0,0,0,.45),
+
+0 0 40px rgba(56,189,248,.12);
+
+}
+
+/* ===========================================================
+HERO TEXT IMPROVEMENT
+=========================================================== */
+
+.adc-hero h1{
+
+text-wrap:balance;
+
+letter-spacing:-1px;
+
+}
+
+.adc-hero p{
+
+text-wrap:pretty;
+
+}
+
+/* ===========================================================
+IMAGE QUALITY
+=========================================================== */
+
+img{
+
+image-rendering:auto;
+
+}
+
+/* ===========================================================
+REDUCED MOTION
+=========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+
+animation:none !important;
+
+transition:none !important;
+
+scroll-behavior:auto !important;
+
+}
+
+}
+
+/* ===========================================================
+PRINT
+=========================================================== */
+
+@media print{
+
+.adc-header,
+.adc-back-to-top,
+.adc-scroll-progress,
+.adc-bg-animation{
+
+display:none;
+
+}
+
+body{
+
+background:#fff;
+
+color:#000;
+
+}
+
+}
+
+/* ===========================================================
+FINAL POLISH
+=========================================================== */
+
+::selection{
+
+background:#38BDF8;
+
+color:#08111F;
+
+}
+
+html{
+
+text-size-adjust:100%;
+
+-webkit-text-size-adjust:100%;
+
+}

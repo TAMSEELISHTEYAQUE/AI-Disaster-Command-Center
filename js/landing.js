@@ -281,27 +281,32 @@ function initMetricCounters() {
     counters.forEach(counter => observer.observe(counter));
 
 }
-
 /* ==========================================================
-DASHBOARD PREVIEW FLOAT EFFECT
+PREMIUM DASHBOARD ANIMATION
 ========================================================== */
 
 function initDashboardAnimation() {
 
-    const dashboard = document.querySelector(".adc-dashboard-preview");
+    const dashboard =
+        document.querySelector(".adc-dashboard-preview");
 
     if (!dashboard) return;
 
-    let direction = 1;
+    let angle = 0;
 
-    setInterval(() => {
+    function animate() {
+
+        angle += 0.015;
 
         dashboard.style.transform =
-            `translateY(${direction * 8}px)`;
+            `translateY(${Math.sin(angle) * 8}px)
+             rotate(${Math.sin(angle) * 0.35}deg)`;
 
-        direction *= -1;
+        requestAnimationFrame(animate);
 
-    }, 1800);
+    }
+
+    animate();
 
 }
 
@@ -337,7 +342,48 @@ function initCardHoverEffects() {
     });
 
 }
+/* ==========================================================
+GLOW EFFECT
+========================================================== */
 
+function initGlowCards(){
+
+    const cards=document.querySelectorAll(
+
+        ".adc-overview-card,\
+.adc-feature-card,\
+.adc-tech-card,\
+.adc-step"
+
+    );
+
+    cards.forEach(card=>{
+
+        card.addEventListener("mousemove",e=>{
+
+            const rect=card.getBoundingClientRect();
+
+            const x=e.clientX-rect.left;
+
+            const y=e.clientY-rect.top;
+
+            card.style.background=
+
+`radial-gradient(circle at ${x}px ${y}px,
+rgba(56,189,248,.14),
+#112137 65%)`;
+
+        });
+
+        card.addEventListener("mouseleave",()=>{
+
+            card.style.background="";
+
+        });
+
+    });
+
+}
 /* ==========================================================
 BACK TO TOP BUTTON
 ========================================================== */
@@ -451,7 +497,31 @@ function initHeroParallax() {
     });
 
 }
+/* ==========================================================
+MOUSE PARALLAX
+========================================================== */
 
+function initMouseParallax(){
+
+    const hero =
+        document.querySelector(".adc-hero");
+
+    if(!hero) return;
+
+    hero.addEventListener("mousemove",e=>{
+
+        const x =
+            (e.clientX/window.innerWidth-.5)*20;
+
+        const y =
+            (e.clientY/window.innerHeight-.5)*20;
+
+        hero.style.backgroundPosition=
+            `${50+x}% ${50+y}%`;
+
+    });
+
+}
 /* ==========================================================
 WINDOW RESIZE HANDLER
 ========================================================== */
@@ -548,6 +618,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initHeroParallax();
 
+    initMouseParallax();
+
+    initGlowCards();
     initResizeHandler();
 
     initScrollProgress();
