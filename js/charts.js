@@ -3,6 +3,24 @@
    CHARTS.JS
 ===================================================== */
 
+const chartRegistry = {};
+
+function getChartInstance(canvasId) {
+    return chartRegistry[canvasId] || null;
+}
+
+function storeChartInstance(canvasId, chartInstance) {
+    chartRegistry[canvasId] = chartInstance;
+}
+
+function destroyChart(canvasId) {
+    const chartInstance = getChartInstance(canvasId);
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartRegistry[canvasId] = null;
+    }
+}
+
 /* =====================================================
    ANALYTICS CHARTS
 ===================================================== */
@@ -40,9 +58,7 @@ function createTrendChart(range = "today") {
 
     if (!trendCanvas) return;
 
-    if (window.Chart.getChart(trendCanvas)) {
-        window.Chart.getChart(trendCanvas).destroy();
-    }
+    destroyChart("trendChart");
 
     const config = {
         today: { labels: ["06:00","09:00","12:00","15:00","18:00","21:00"], data: [3,5,6,7,10,8] },
@@ -54,7 +70,7 @@ function createTrendChart(range = "today") {
 
     const values = config[range] || config.today;
 
-    new window.Chart(trendCanvas, {
+    const chartInstance = new window.Chart(trendCanvas, {
 
         type: "line",
 
@@ -79,17 +95,23 @@ function createTrendChart(range = "today") {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-
             animation: {
-                duration: 1500,
+                duration: 1200,
                 easing: "easeOutQuart"
             },
-
+            interaction: { mode: "index", intersect: false },
             plugins: {
                 legend: {
                     labels: {
                         color: "#ffffff"
                     }
+                },
+                tooltip: {
+                    backgroundColor: "#0f172a",
+                    titleColor: "#00D4FF",
+                    bodyColor: "#ffffff",
+                    borderColor: "rgba(0,212,255,0.3)",
+                    borderWidth: 1
                 }
             },
 
@@ -106,6 +128,8 @@ function createTrendChart(range = "today") {
         }
 
     });
+
+    storeChartInstance("trendChart", chartInstance);
 
 }
 
@@ -124,9 +148,7 @@ function createDistributionChart(range = "today") {
 
     if (!distributionCanvas) return;
 
-    if (window.Chart.getChart(distributionCanvas)) {
-        window.Chart.getChart(distributionCanvas).destroy();
-    }
+    destroyChart("distributionChart");
 
     const scale = range === "30d" ? 1.25 : range === "7d" ? 1.1 : 1;
     const counts = {
@@ -139,7 +161,7 @@ function createDistributionChart(range = "today") {
 
     const values = counts[range] || counts.today;
 
-    new window.Chart(distributionCanvas, {
+    const chartInstance = new window.Chart(distributionCanvas, {
 
         type: "pie",
 
@@ -162,17 +184,24 @@ function createDistributionChart(range = "today") {
             responsive: true,
             maintainAspectRatio: false,
 
+            animation: { duration: 1200, easing: "easeOutQuart" },
             plugins: {
                 legend: {
                     position: "bottom",
                     labels: {
                         color: "#ffffff"
                     }
+                },
+                tooltip: {
+                    backgroundColor: "#0f172a",
+                    bodyColor: "#ffffff"
                 }
             }
         }
 
     });
+
+    storeChartInstance("distributionChart", chartInstance);
 
 }
 
@@ -191,9 +220,7 @@ function createStateChart(range = "today") {
 
     if (!stateCanvas) return;
 
-    if (window.Chart.getChart(stateCanvas)) {
-        window.Chart.getChart(stateCanvas).destroy();
-    }
+    destroyChart("stateChart");
 
     const counts = {
         today: [8,6,4,3,2],
@@ -205,7 +232,7 @@ function createStateChart(range = "today") {
 
     const values = counts[range] || counts.today;
 
-    new window.Chart(stateCanvas, {
+    const chartInstance = new window.Chart(stateCanvas, {
 
         type: "bar",
 
@@ -260,6 +287,8 @@ function createStateChart(range = "today") {
 
     });
 
+    storeChartInstance("stateChart", chartInstance);
+
 }
 
 /* =====================================================
@@ -277,15 +306,13 @@ function createRiskChart(range = "today") {
 
     if (!riskCanvas) return;
 
-    if (window.Chart.getChart(riskCanvas)) {
-        window.Chart.getChart(riskCanvas).destroy();
-    }
+    destroyChart("riskChart");
 
     const riskValue = typeof calculateRisk === "function" ? calculateRisk() : 82;
     const modifier = range === "30d" ? 4 : range === "7d" ? 2 : range === "24h" ? 1 : 0;
     const adjustedRisk = Math.min(96, riskValue + modifier);
 
-    new window.Chart(riskCanvas, {
+    const chartInstance = new window.Chart(riskCanvas, {
 
         type: "doughnut",
 
@@ -308,6 +335,7 @@ function createRiskChart(range = "today") {
             responsive: true,
             maintainAspectRatio: false,
 
+            animation: { duration: 1200, easing: "easeOutQuart" },
             plugins: {
                 legend: {
                     position: "bottom",
@@ -317,9 +345,11 @@ function createRiskChart(range = "today") {
                 },
 
                 tooltip: {
+                    backgroundColor: "#0f172a",
+                    bodyColor: "#ffffff",
                     callbacks: {
                         label: function(context) {
-                            return context.raw + "%";
+                            return `${context.raw}%`;
                         }
                     }
                 }
@@ -327,6 +357,8 @@ function createRiskChart(range = "today") {
         }
 
     });
+
+    storeChartInstance("riskChart", chartInstance);
 
 }
 
@@ -338,14 +370,12 @@ function createRiskTrendChart(range = "today") {
 
     if (!canvas) return;
 
-    if (window.Chart.getChart(canvas)) {
-        window.Chart.getChart(canvas).destroy();
-    }
+    destroyChart("riskTrendChart");
 
     const riskValue = typeof calculateRisk === "function" ? calculateRisk() : 82;
     const offset = range === "30d" ? 3 : range === "7d" ? 2 : range === "24h" ? 1 : 0;
 
-    new window.Chart(canvas, {
+    const chartInstance = new window.Chart(canvas, {
         type: "line",
         data: {
             labels: ["06:00","08:00","10:00","12:00","14:00","16:00"],
@@ -361,10 +391,14 @@ function createRiskTrendChart(range = "today") {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { labels: { color: "#ffffff" } } },
+            animation: { duration: 1200, easing: "easeOutQuart" },
+            interaction: { mode: "index", intersect: false },
+            plugins: { legend: { labels: { color: "#ffffff" } }, tooltip: { backgroundColor: "#0f172a", bodyColor: "#ffffff" } },
             scales: { x: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } }, y: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } } }
         }
     });
+
+    storeChartInstance("riskTrendChart", chartInstance);
 
 }
 
@@ -376,14 +410,12 @@ function createResourceUsageChart(range = "today") {
 
     if (!canvas) return;
 
-    if (window.Chart.getChart(canvas)) {
-        window.Chart.getChart(canvas).destroy();
-    }
+    destroyChart("resourceUsageChart");
 
     const severityScore = typeof getSeverityScore === "function" ? getSeverityScore(IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.severity) : 3;
     const multiplier = range === "30d" ? 1.2 : range === "7d" ? 1.1 : 1;
 
-    new window.Chart(canvas, {
+    const chartInstance = new window.Chart(canvas, {
         type: "bar",
         data: {
             labels: ["NDRF","Police","Fire","Medical","Heli"],
@@ -396,10 +428,13 @@ function createResourceUsageChart(range = "today") {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { labels: { color: "#ffffff" } } },
+            animation: { duration: 1200, easing: "easeOutQuart" },
+            plugins: { legend: { labels: { color: "#ffffff" } }, tooltip: { backgroundColor: "#0f172a", bodyColor: "#ffffff" } },
             scales: { x: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } }, y: { ticks: { color: "#ffffff" }, grid: { color: "rgba(255,255,255,0.08)" } } }
         }
     });
+
+    storeChartInstance("resourceUsageChart", chartInstance);
 
 }
 
@@ -411,14 +446,12 @@ function createIncidentFrequencyChart(range = "today") {
 
     if (!canvas) return;
 
-    if (window.Chart.getChart(canvas)) {
-        window.Chart.getChart(canvas).destroy();
-    }
+    destroyChart("incidentFrequencyChart");
 
     const severityScore = typeof getSeverityScore === "function" ? getSeverityScore(IncidentDatabase.currentIncident && IncidentDatabase.currentIncident.severity) : 3;
     const scale = range === "30d" ? 1.35 : range === "7d" ? 1.18 : 1;
 
-    new window.Chart(canvas, {
+    const chartInstance = new window.Chart(canvas, {
         type: "pie",
         data: {
             labels: ["Flood","Cyclone","Earthquake","Fire"],
@@ -430,8 +463,11 @@ function createIncidentFrequencyChart(range = "today") {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: "bottom", labels: { color: "#ffffff" } } }
+            animation: { duration: 1200, easing: "easeOutQuart" },
+            plugins: { legend: { position: "bottom", labels: { color: "#ffffff" } }, tooltip: { backgroundColor: "#0f172a", bodyColor: "#ffffff" } }
         }
     });
+
+    storeChartInstance("incidentFrequencyChart", chartInstance);
 
 }

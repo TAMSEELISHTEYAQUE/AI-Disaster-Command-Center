@@ -22,22 +22,32 @@ async function fetchWeatherData() {
 
         console.log("🌦 Weather Data:", data);
 
-        IncidentDatabase.weather.city = data.name;
-        IncidentDatabase.weather.temperature = data.main.temp;
-        IncidentDatabase.weather.feelsLike = data.main.feels_like;
-        IncidentDatabase.weather.humidity = data.main.humidity;
-        IncidentDatabase.weather.pressure = data.main.pressure;
-        IncidentDatabase.weather.windSpeed = data.wind.speed;
-        IncidentDatabase.weather.visibility = data.visibility;
-        IncidentDatabase.weather.condition = data.weather[0].main;
-        IncidentDatabase.weather.icon = data.weather[0].icon;
+        IncidentDatabase.weather.city = data.name || IncidentDatabase.weather.city || "Barpeta";
+        IncidentDatabase.weather.temperature = typeof data.main.temp === "number" ? data.main.temp : IncidentDatabase.weather.temperature;
+        IncidentDatabase.weather.feelsLike = typeof data.main.feels_like === "number" ? data.main.feels_like : IncidentDatabase.weather.feelsLike;
+        IncidentDatabase.weather.humidity = typeof data.main.humidity === "number" ? data.main.humidity : IncidentDatabase.weather.humidity;
+        IncidentDatabase.weather.pressure = typeof data.main.pressure === "number" ? data.main.pressure : IncidentDatabase.weather.pressure;
+        IncidentDatabase.weather.windSpeed = typeof data.wind.speed === "number" ? data.wind.speed : IncidentDatabase.weather.windSpeed;
+        IncidentDatabase.weather.visibility = typeof data.visibility === "number" ? data.visibility : IncidentDatabase.weather.visibility;
+        IncidentDatabase.weather.condition = data.weather && data.weather[0] ? data.weather[0].main : IncidentDatabase.weather.condition;
+        IncidentDatabase.weather.icon = data.weather && data.weather[0] ? data.weather[0].icon : IncidentDatabase.weather.icon;
         IncidentDatabase.weather.lastUpdated = formatDateTime();
-        updateWeatherWidget();
+
+        if (typeof refreshDashboard === "function") {
+            refreshDashboard();
+        }
+        else {
+            updateWeatherWidget();
+        }
         console.log("✅ Weather database updated.");
 
     } catch (error) {
 
         console.error("❌ Weather API Failed:", error);
+
+        if (typeof refreshDashboard === "function") {
+            refreshDashboard();
+        }
 
     }
 
@@ -53,7 +63,11 @@ function updateWeatherWidget() {
 
     if (!weatherText) return;
 
-    weatherText.textContent =
-        `${Math.round(IncidentDatabase.weather.temperature)}°C ${IncidentDatabase.weather.city}`;
+    const temperature = typeof IncidentDatabase.weather.temperature === "number"
+        ? `${Math.round(IncidentDatabase.weather.temperature)}°C`
+        : "—";
+    const city = IncidentDatabase.weather.city || "Barpeta";
+
+    weatherText.textContent = `${temperature} • ${city}`;
 
 }

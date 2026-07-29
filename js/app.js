@@ -3,13 +3,147 @@
    APP.JS - VERSION 6
 ===================================================== */
 
+const dashboardState = {
+    domCache: {},
+    interactionsBound: false,
+    activeRange: "today"
+};
+
+function getDashboardElement(elementId) {
+
+    if (!dashboardState.domCache[elementId]) {
+        dashboardState.domCache[elementId] = document.getElementById(elementId);
+    }
+
+    return dashboardState.domCache[elementId];
+
+}
+
 function setDashboardText(elementId, value) {
 
-    const element = document.getElementById(elementId);
+    const element = getDashboardElement(elementId);
 
     if (!element) return;
 
-    element.textContent = value;
+    const displayValue = value === null || value === undefined || value === "" ? "—" : value;
+    element.textContent = displayValue;
+
+}
+
+function ensureDashboardDefaults() {
+
+    if (!IncidentDatabase) return;
+
+    IncidentDatabase.dashboard = IncidentDatabase.dashboard || {};
+    IncidentDatabase.dashboard.activeRange = IncidentDatabase.dashboard.activeRange || "today";
+    IncidentDatabase.dashboard.activeFilter = IncidentDatabase.dashboard.activeFilter || null;
+    IncidentDatabase.dashboard.alerts = IncidentDatabase.dashboard.alerts || [];
+
+    IncidentDatabase.weather = IncidentDatabase.weather || {};
+    IncidentDatabase.currentIncident = IncidentDatabase.currentIncident || {};
+    IncidentDatabase.currentIncident.location = IncidentDatabase.currentIncident.location || {};
+    IncidentDatabase.resources = IncidentDatabase.resources || {};
+    IncidentDatabase.disasters = IncidentDatabase.disasters || [];
+
+    if (!IncidentDatabase.currentIncident.location.state && IncidentDatabase.disasters[0]) {
+        const first = IncidentDatabase.disasters[0];
+        IncidentDatabase.currentIncident.location.state = first.state || first.location || "Assam";
+    }
+
+}
+
+function refreshDashboard() {
+
+    ensureDashboardDefaults();
+
+    if (typeof updateWeatherPanel === "function") {
+        updateWeatherPanel();
+    }
+
+    if (typeof updateEarthquakeWidget === "function") {
+        updateEarthquakeWidget();
+    }
+
+    if (typeof updateCommandStatistics === "function") {
+        updateCommandStatistics();
+    }
+
+    if (typeof updateIncidentTimeline === "function") {
+        updateIncidentTimeline();
+    }
+
+    if (typeof updateNationalOverview === "function") {
+        updateNationalOverview();
+    }
+
+    if (typeof updateDisasterMonitorTable === "function") {
+        updateDisasterMonitorTable();
+    }
+
+    if (typeof updateMissionStatus === "function") {
+        updateMissionStatus();
+    }
+
+    if (typeof updateMissionControl === "function") {
+        updateMissionControl();
+    }
+
+    if (typeof updateAlerts === "function") {
+        updateAlerts();
+    }
+
+    if (typeof renderDashboardCharts === "function") {
+        renderDashboardCharts();
+    }
+    else if (typeof initializeCharts === "function") {
+        initializeCharts();
+    }
+
+    if (typeof updateAssessmentPanel === "function") {
+        updateAssessmentPanel();
+    }
+
+    if (typeof updateAIRecommendations === "function") {
+        updateAIRecommendations();
+    }
+
+    if (typeof updateAISummary === "function") {
+        updateAISummary();
+    }
+
+    if (typeof updateResourceAllocation === "function") {
+        updateResourceAllocation();
+    }
+
+    if (typeof updateMapView === "function") {
+        updateMapView();
+    }
+
+}
+
+function setDashboardRange(range) {
+
+    const normalizedRange = ["today", "24h", "7d", "30d", "all"].includes(range) ? range : "today";
+    dashboardState.activeRange = normalizedRange;
+    if (IncidentDatabase && IncidentDatabase.dashboard) {
+        IncidentDatabase.dashboard.activeRange = normalizedRange;
+    }
+
+}
+
+function getFilteredDisasters() {
+
+    const disasters = IncidentDatabase.disasters || [];
+    const activeFilter = IncidentDatabase.dashboard && IncidentDatabase.dashboard.activeFilter;
+
+    if (!activeFilter || activeFilter === "AI") {
+        return disasters;
+    }
+
+    return disasters.filter((disaster) => {
+        const type = String(disaster.type || "");
+        return type === activeFilter || type.toLowerCase().includes(String(activeFilter).toLowerCase());
+    });
 
 }
 
@@ -194,38 +328,42 @@ function updateDisasterMonitorTable() {
 function updateWeatherPanel() {
 
     const weather = IncidentDatabase.weather || {};
-    const city = weather.city && weather.city !== "--" ? weather.city : "No Data";
-    const temperature = typeof weather.temperature === "number"
-        ? `${Math.round(weather.temperature)}°C`
-        : "No Data";
-    const condition = weather.condition && weather.condition !== "--"
-        ? weather.condition
-        : "No Data";
-    const humidity = typeof weather.humidity === "number"
-        ? `${weather.humidity}%`
-        : "No Data";
-    const wind = typeof weather.windSpeed === "number"
-        ? `${weather.windSpeed} m/s`
-        : "No Data";
-    const pressure = typeof weather.pressure === "number"
-        ? `${weather.pressure} hPa`
-        : "No Data";
-    const rainfall = typeof weather.rainfall === "number"
-        ? `${weather.rainfall} mm`
-        : "No Data";
 
-    setDashboardText("weatherCityValue", city);
+    const formatValue = (value, suffix = "") => {
+        if (value === null || value === undefined || value === "" || value === "--") {
+            return "—";
+        }
+        if (typeof value === "number") {
+            return `${Math.round(value)}${suffix}`;
+        }
+        return `${value}${suffix}`;
+    };
+
+    const temperature = formatValue(weather.temperature, "°C");
+    const humidity = formatValue(weather.humidity, "%");
+    const pressure = formatValue(weather.pressure, " hPa");
+    const wind = formatValue(weather.windSpeed, " m/s");
+    const condition = formatValue(weather.condition);
+    const visibility = formatValue(weather.visibility, " m");
+    const feelsLike = formatValue(weather.feelsLike, "°C");
+    const lastUpdated = formatValue(weather.lastUpdated);
+
+    setDashboardText("weatherCityValue", weather.city || "Barpeta");
     setDashboardText("weatherTempValue", temperature);
     setDashboardText("weatherConditionValue", condition);
     setDashboardText("weatherHumidityValue", humidity);
     setDashboardText("weatherWindValue", wind);
     setDashboardText("weatherPressureValue", pressure);
-    setDashboardText("weatherRainfallValue", rainfall);
+    setDashboardText("weatherRainfallValue", formatValue(weather.rainfall, " mm"));
+    setDashboardText("weatherVisibilityValue", visibility);
+    setDashboardText("weatherFeelsLikeValue", feelsLike);
+    setDashboardText("weatherLastUpdatedValue", lastUpdated);
 
     const weatherText = document.getElementById("weatherText");
 
     if (weatherText) {
-        weatherText.textContent = `${temperature} ${city}`;
+        const city = weather.city && weather.city !== "--" ? weather.city : "Barpeta";
+        weatherText.textContent = `${temperature} • ${city}`;
     }
 
 }
@@ -315,6 +453,8 @@ function updateIncidentTimeline() {
 
 function bindDashboardInteractions() {
 
+    if (dashboardState.interactionsBound) return;
+
     const navItems = document.querySelectorAll("#navLinks li");
     navItems.forEach((item) => {
         item.addEventListener("click", () => {
@@ -326,6 +466,8 @@ function bindDashboardInteractions() {
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
                     history.replaceState(null, "", `#${target}`);
+                    targetElement.setAttribute("tabindex", "-1");
+                    targetElement.focus({ preventScroll: true });
                 }
             }
         });
@@ -336,7 +478,7 @@ function bindDashboardInteractions() {
             const filter = card.getAttribute("data-filter");
             IncidentDatabase.dashboard.activeFilter = filter;
             document.querySelectorAll(".interactive-card").forEach((entry) => entry.classList.toggle("active", entry === card));
-            applyDashboardFilter(filter);
+            refreshDashboard();
         });
     });
 
@@ -344,50 +486,23 @@ function bindDashboardInteractions() {
         button.addEventListener("click", () => {
             document.querySelectorAll(".filter-btn").forEach((entry) => entry.classList.remove("active"));
             button.classList.add("active");
-            IncidentDatabase.dashboard.activeFilter = button.getAttribute("data-range") || "today";
-            if (typeof initializeCharts === "function") {
-                initializeCharts();
-            }
+            const range = button.getAttribute("data-range") || "today";
+            setDashboardRange(range);
+            refreshDashboard();
         });
     });
+
+    dashboardState.interactionsBound = true;
 
 }
 
 function applyDashboardFilter(filter) {
 
-    const disasters = IncidentDatabase.disasters || [];
-    const matched = disasters.filter((disaster) => !filter || filter === "AI" || disaster.type === filter || disaster.type.toLowerCase().includes(filter.toLowerCase()));
-
-    if (typeof updateDisasterMonitorTable === "function") {
-        const tableBody = document.getElementById("disasterMonitorBody");
-        if (tableBody) {
-            tableBody.innerHTML = "";
-            matched.forEach((disaster) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${disaster.type || "Unknown"}</td>
-                    <td>${disaster.location || "No Data"}</td>
-                    <td>${disaster.severity || "No Data"}</td>
-                    <td>${disaster.riskLevel || "No Data"}</td>
-                    <td>${(disaster.populationAffected || 0).toLocaleString()}</td>
-                    <td>${disaster.status || "Monitor"}</td>
-                    <td>${disaster.recommendation || "Monitor"}</td>
-                    <td>${disaster.lastUpdated || "No Data"}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
+    if (IncidentDatabase && IncidentDatabase.dashboard) {
+        IncidentDatabase.dashboard.activeFilter = filter || null;
     }
 
-    if (typeof updateAlerts === "function") {
-        const alerts = matched.length ? matched.map((disaster) => `${disaster.severity.toUpperCase()} | ${disaster.state || disaster.location} | ${disaster.type} | ${disaster.lastUpdated || "Just now"}`) : ["No matching incidents" ];
-        IncidentDatabase.dashboard.alerts = alerts;
-        updateAlerts();
-    }
-
-    if (typeof updateMapView === "function") {
-        updateMapView(matched);
-    }
+    refreshDashboard();
 
 }
 
