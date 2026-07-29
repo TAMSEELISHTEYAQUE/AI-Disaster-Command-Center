@@ -18,9 +18,33 @@ const disasterAlerts = [
 
 ];
 
+let alertsRefreshTimer = null;
+
 /* =====================================================
    ALERT FUNCTIONS
 ===================================================== */
+
+function formatAlertText(alert) {
+    if (typeof alert === "string") {
+        return alert;
+    }
+
+    return `${alert.severity || "Alert"} | ${alert.state || "Region"} | ${alert.type || "Incident"} | ${alert.time || "Just now"}`;
+}
+
+function createAlertItem(alert) {
+    const item = document.createElement("li");
+    const alertText = formatAlertText(alert);
+    const detailText = typeof alert === "string" ? "" : alert.detail || "";
+
+    item.className = "alert-item";
+    item.innerHTML = `<strong>${alertText}</strong>${detailText ? `<span class="alert-meta">${detailText}</span>` : ""}`;
+    item.addEventListener("click", () => {
+        item.classList.toggle("is-expanded");
+    });
+
+    return item;
+}
 
 function updateAlerts() {
 
@@ -28,22 +52,14 @@ function updateAlerts() {
 
     if (!list) return;
 
-    const alerts = Array.isArray(IncidentDatabase.dashboard && IncidentDatabase.dashboard.alerts)
+    const alerts = Array.isArray(IncidentDatabase && IncidentDatabase.dashboard && IncidentDatabase.dashboard.alerts)
         ? IncidentDatabase.dashboard.alerts
         : disasterAlerts;
 
     list.innerHTML = "";
 
-    alerts.forEach((alert, index) => {
-        const item = document.createElement("li");
-        const alertText = typeof alert === "string" ? alert : `${alert.severity || "Alert"} | ${alert.state || "Region"} | ${alert.type || "Incident"} | ${alert.time || "Just now"}`;
-        const detailText = typeof alert === "string" ? "" : alert.detail || "";
-        item.className = "alert-item";
-        item.innerHTML = `<strong>${alertText}</strong>${detailText ? `<span class="alert-meta">${detailText}</span>` : ""}`;
-        item.addEventListener("click", () => {
-            item.classList.toggle("is-expanded");
-        });
-        list.appendChild(item);
+    alerts.forEach((alert) => {
+        list.appendChild(createAlertItem(alert));
     });
 
 }
@@ -56,6 +72,10 @@ function initializeAlerts() {
 
     updateAlerts();
 
-    setInterval(updateAlerts, 5000);
+    if (alertsRefreshTimer) {
+        clearInterval(alertsRefreshTimer);
+    }
+
+    alertsRefreshTimer = setInterval(updateAlerts, 5000);
 
 }

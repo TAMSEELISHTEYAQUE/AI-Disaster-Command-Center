@@ -133,10 +133,10 @@ function setDashboardRange(range) {
 
 function getFilteredDisasters() {
 
-    const disasters = IncidentDatabase.disasters || [];
-    const activeFilter = IncidentDatabase.dashboard && IncidentDatabase.dashboard.activeFilter;
+    const disasters = Array.isArray(IncidentDatabase && IncidentDatabase.disasters) ? IncidentDatabase.disasters : [];
+    const activeFilter = IncidentDatabase && IncidentDatabase.dashboard && IncidentDatabase.dashboard.activeFilter;
 
-    if (!activeFilter || activeFilter === "AI") {
+    if (!activeFilter || activeFilter === "AI" || activeFilter === "satellite") {
         return disasters;
     }
 
@@ -511,7 +511,7 @@ function initializeDashboard() {
     console.log("🚀 Initializing AI Disaster Command Center...");
 
     IncidentDatabase.dashboard = IncidentDatabase.dashboard || {};
-    IncidentDatabase.dashboard.activeFilter = "today";
+    IncidentDatabase.dashboard.activeFilter = null;
     IncidentDatabase.dashboard.selectedHazard = null;
 
     bindDashboardInteractions();
