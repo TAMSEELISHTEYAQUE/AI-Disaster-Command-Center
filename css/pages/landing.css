@@ -1446,3 +1446,221 @@ transform:translateY(0);
 }
 
 }
+/* ===========================================================
+SCROLL PROGRESS BAR
+=========================================================== */
+
+.adc-scroll-progress{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:4px;
+
+z-index:5000;
+
+background:transparent;
+
+pointer-events:none;
+
+}
+
+.adc-scroll-progress-bar{
+
+width:0;
+
+height:100%;
+
+background:linear-gradient(
+90deg,
+#0EA5E9,
+#38BDF8,
+#60A5FA
+);
+
+box-shadow:0 0 18px rgba(56,189,248,.8);
+
+transition:width .08s linear;
+
+}
+
+/* ===========================================================
+CUSTOM SCROLLBAR
+=========================================================== */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#08111F;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#0EA5E9;
+
+border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#38BDF8;
+
+}
+
+/* ===========================================================
+ACTIVE NAVIGATION
+=========================================================== */
+
+.adc-nav a{
+
+position:relative;
+
+}
+
+.adc-nav a::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:-8px;
+
+width:0;
+
+height:2px;
+
+background:#38BDF8;
+
+transition:.35s;
+
+}
+
+.adc-nav a:hover::after,
+
+.adc-nav a.active::after{
+
+width:100%;
+
+}
+
+.adc-nav a.active{
+
+color:#ffffff;
+
+}
+
+/* ===========================================================
+FOCUS ACCESSIBILITY
+=========================================================== */
+
+a:focus-visible,
+button:focus-visible{
+
+outline:3px solid #38BDF8;
+
+outline-offset:4px;
+
+border-radius:10px;
+
+}
+
+/* ===========================================================
+BACK TO TOP BUTTON
+=========================================================== */
+
+.adc-back-to-top{
+
+position:fixed;
+
+right:30px;
+
+bottom:30px;
+
+width:56px;
+
+height:56px;
+
+border:none;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:linear-gradient(
+135deg,
+#0EA5E9,
+#2563EB
+);
+
+color:#fff;
+
+cursor:pointer;
+
+font-size:1rem;
+
+box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+opacity:0;
+
+visibility:hidden;
+
+transform:translateY(25px);
+
+transition:.35s;
+
+z-index:3000;
+
+}
+
+.adc-back-to-top.show{
+
+opacity:1;
+
+visibility:visible;
+
+transform:translateY(0);
+
+}
+
+.adc-back-to-top:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 20px 45px rgba(14,165,233,.45);
+
+}
+
+/* ===========================================================
+GLASS EFFECT
+=========================================================== */
+
+.adc-header,
+.adc-dashboard-preview,
+.adc-feature-card,
+.adc-overview-card,
+.adc-step,
+.adc-tech-card{
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+}
