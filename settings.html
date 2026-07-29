@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Disaster Command Center | Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/settings.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar glass-panel">
+        <a class="brand" href="landing.html">
+          <span class="brand-mark">◉</span>
+          <span>System Settings</span>
+        </a>
+        <nav class="topnav">
+          <a href="profile.html">Profile</a>
+          <a href="notifications.html">Notifications</a>
+          <a href="help.html">Help</a>
+          <a class="nav-cta" href="index.html">Open Dashboard</a>
+        </nav>
+      </header>
+
+      <main class="settings-grid">
+        <section class="glass-panel settings-card">
+          <h2>Operational preferences</h2>
+          <div class="setting-row">
+            <span>Auto-refresh dashboards</span>
+            <label class="switch"><input type="checkbox" checked /><span></span></label>
+          </div>
+          <div class="setting-row">
+            <span>Alert audio</span>
+            <label class="switch"><input type="checkbox" checked /><span></span></label>
+          </div>
+          <div class="setting-row">
+            <span>Incident summaries</span>
+            <label class="switch"><input type="checkbox" /><span></span></label>
+          </div>
+        </section>
+
+        <section class="glass-panel settings-card">
+          <h2>System status</h2>
+          <ul class="status-list">
+            <li>Secure network connection active</li>
+            <li>Data feeds synchronized</li>
+            <li>Backup node ready</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/settings.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Disaster Command Center | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="auth-shell">
+      <div class="glass-panel auth-card">
+        <div class="auth-brand">
+          <span class="brand-mark">◉</span>
+          <div>
+            <h1>Operator Access</h1>
+            <p>Secure login for mission-critical monitoring.</p>
+          </div>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+          <label>
+            <span>Operator ID</span>
+            <input type="text" placeholder="Enter your ID" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" placeholder="Enter your password" required />
+          </label>
+          <div class="form-row">
+            <label class="checkbox-row">
+              <input type="checkbox" checked />
+              <span>Keep session active</span>
+            </label>
+            <a href="help.html">Need help?</a>
+          </div>
+          <button type="submit" class="btn btn-primary">Continue to Loading</button>
+        </form>
+
+        <div class="auth-footer">
+          <p>New to the system? Request operator access from the mission desk.</p>
+          <a href="landing.html">Return home</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>
