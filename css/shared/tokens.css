@@ -1,0 +1,214 @@
+ :root {
+ 
+  /* =====================================================
+     1. COLOUR — BASE SURFACE (inherited)
+  ===================================================== */
+  --color-bg-base: #08111F;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #8DB8D8;
+  --color-text-muted: #B8C7D9;
+ 
+  /* =====================================================
+     2. COLOUR — PANEL SURFACE (inherited)
+     Panels use a diagonal gradient, not a flat fill.
+  ===================================================== */
+  --color-panel-gradient-start: #14233A;
+  --color-panel-gradient-end: #203552;
+  --color-panel-angle: 145deg;
+  --gradient-panel: linear-gradient(
+    var(--color-panel-angle),
+    var(--color-panel-gradient-start),
+    var(--color-panel-gradient-end)
+  );
+ 
+  /* =====================================================
+     3. COLOUR — ACCENT (inherited)
+  ===================================================== */
+  --color-accent-primary: #00BFFF;
+  --color-accent-secondary: #1E88E5;
+  --color-accent-bright: #4FC3F7;
+  --color-accent-deep: #00D4FF;
+  --gradient-accent: linear-gradient(
+    180deg,
+    var(--color-accent-primary),
+    var(--color-accent-secondary)
+  );
+ 
+  /* =====================================================
+     4. COLOUR — SEMANTIC / STATUS (inherited)
+     The only colours permitted to carry meaning.
+  ===================================================== */
+  --color-status-online: #1F8F4D;   /* operational / success */
+  --color-status-warning: #D6A100;  /* moderate risk / caution */
+  --color-status-danger: #C62828;   /* high risk / critical / error */
+  --color-status-info: #1565C0;     /* informational */
+  --color-pulse-live-start: rgba(0, 255, 102, 0.5);
+  --color-pulse-live-peak: rgba(0, 255, 102, 0.9);
+ 
+  /* =====================================================
+     5. COLOUR — NEW SURFACES (new, additive)
+     Needed for forms, overlays, and focus states that
+     did not previously exist in the dashboard.
+  ===================================================== */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-focus: var(--color-accent-bright);
+  --color-input-bg: rgba(255, 255, 255, 0.04);
+  --color-overlay-scrim: rgba(8, 17, 31, 0.72);
+  --color-disabled: rgba(255, 255, 255, 0.32);
+ 
+  /* =====================================================
+     6. COLOUR — SCROLLBAR (inherited)
+  ===================================================== */
+  --color-scrollbar-thumb-start: #00BFFF;
+  --color-scrollbar-thumb-end: #1E88E5;
+  --color-scrollbar-track: transparent;
+ 
+  /* =====================================================
+     7. TYPOGRAPHY (inherited)
+  ===================================================== */
+  --font-family-base: 'Poppins', sans-serif;
+ 
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+ 
+  --text-display: 36px;   /* Landing hero headline only */
+  --text-h1: 30px;        /* page-level heading */
+  --text-h2: 24px;        /* section heading */
+  --text-h3: 20px;        /* panel / card title */
+  --text-body: 16px;      /* default body copy */
+  --text-body-sm: 14px;   /* secondary body copy */
+  --text-label: 13px;     /* form labels, table headers, captions */
+  --text-micro: 12px;     /* timestamps, helper text, badges */
+ 
+  --line-height-heading: 1.2;
+  --line-height-body: 1.5;
+ 
+  --letter-spacing-normal: normal;
+  --letter-spacing-wide: 0.4px; /* uppercase micro-labels only */
+ 
+  /* =====================================================
+     8. SPACING SCALE (new — 4px base)
+  ===================================================== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+ 
+  /* =====================================================
+     9. BORDER RADIUS (inherited)
+  ===================================================== */
+  --radius-sm: 12px;   /* buttons, inputs, small cards */
+  --radius-md: 18px;   /* standard panels */
+  --radius-lg: 24px;   /* feature cards, hero panels */
+  --radius-pill: 999px; /* pills, toggles, badges, scrollbar */
+  --radius-circle: 50%; /* avatars, status dots */
+ 
+  /* =====================================================
+     10. BORDERS (new)
+  ===================================================== */
+  --border-width-hairline: 1px;
+  --border-width-focus: 2px;
+  --border-style-default: solid;
+ 
+  /* =====================================================
+     11. SHADOWS (inherited)
+     Always accent-tinted or neutral black — never a
+     shadow colour unrelated to the surface or accent.
+  ===================================================== */
+  --shadow-panel: 0 8px 18px rgba(0, 191, 255, 0.15);
+  --shadow-panel-hover: 0 18px 35px rgba(0, 191, 255, 0.30);
+  --shadow-navbar: 0 6px 20px rgba(0, 0, 0, 0.30);
+  --shadow-sidebar: 4px 0 20px rgba(0, 0, 0, 0.25);
+  --shadow-pulse-glow-start: 0 0 6px rgba(0, 255, 102, 0.5);
+  --shadow-pulse-glow-peak: 0 0 16px rgba(0, 255, 102, 0.9);
+ 
+  /* =====================================================
+     12. GLASS VARIABLES (inherited pattern, formalized)
+     Reserved for true overlays (modals/toasts) sitting
+     above page content. Standard panels use the gradient
+     + border + shadow recipe above, not blur.
+  ===================================================== */
+  --glass-blur: blur(14px);
+  --glass-blur-strong: blur(20px);
+  --glass-border: var(--border-width-hairline) var(--border-style-default) var(--color-border-subtle);
+  --glass-surface: rgba(255, 255, 255, 0.04);
+ 
+  /* =====================================================
+     13. OPACITY SCALE (new)
+  ===================================================== */
+  --opacity-disabled: 0.32;
+  --opacity-muted: 0.6;
+  --opacity-hover: 0.85;
+  --opacity-full: 1;
+ 
+  /* =====================================================
+     14. MOTION — DURATIONS (inherited baseline)
+  ===================================================== */
+  --motion-fast: 0.2s;
+  --motion-base: 0.3s;
+  --motion-slow: 0.35s;
+  --motion-pulse-duration: 1.5s;
+ 
+  /* =====================================================
+     15. MOTION — EASING (inherited)
+  ===================================================== */
+  --easing-standard: ease;
+  --easing-in-out: ease-in-out;
+ 
+  /* =====================================================
+     16. TRANSITIONS (new — composed from duration + easing)
+  ===================================================== */
+  --transition-fast: var(--motion-fast) var(--easing-standard);
+  --transition-base: var(--motion-base) var(--easing-standard);
+  --transition-slow: var(--motion-slow) var(--easing-in-out);
+  --transition-pulse: var(--motion-pulse-duration) var(--easing-in-out) infinite;
+ 
+  /* =====================================================
+     17. Z-INDEX SCALE (new)
+     Centralised stacking order to prevent ad-hoc z-index
+     values from colliding across shared components.
+  ===================================================== */
+  --z-index-base: 0;
+  --z-index-dropdown: 100;
+  --z-index-sticky: 200;
+  --z-index-shell-topbar: 300;
+  --z-index-overlay-scrim: 400;
+  --z-index-modal: 500;
+  --z-index-toast: 600;
+  --z-index-tooltip: 700;
+ 
+  /* =====================================================
+     18. BREAKPOINTS (inherited — reference values)
+     Custom properties cannot be used inside @media
+     conditions; these are documented here as the single
+     source of truth that every page's media queries must
+     match by value, so the platform reflows at the same
+     points the dashboard already established.
+  ===================================================== */
+  --breakpoint-tablet: 1000px;
+  --breakpoint-tablet-sm: 900px;
+  --breakpoint-mobile: 600px;
+ 
+  /* =====================================================
+     19. CONTAINER WIDTHS (new)
+  ===================================================== */
+  --container-max-width: 1440px;
+  --container-auth-width: 420px;
+  --container-gutter: var(--space-6);
+ 
+  /* =====================================================
+     20. FOCUS (new)
+  ===================================================== */
+  --focus-ring-color: var(--color-border-focus);
+  --focus-ring-width: var(--border-width-focus);
+  --focus-ring-offset: 2px;
+ 
+}

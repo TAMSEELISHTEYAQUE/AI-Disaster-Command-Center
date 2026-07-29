@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Disaster Command Center — AI-powered, multi-hazard disaster monitoring and decision support for government and emergency response agencies.">
+    <meta name="theme-color" content="#08111F">
+
+    <title>AI Disaster Command Center | Multi-Hazard AI Decision Support Platform</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Design Tokens (shared) -->
+    <link rel="stylesheet" href="css/shared/tokens.css">
+
+    <!-- Landing Page Styles (page-specific, implemented in a later sprint) -->
+    <link rel="stylesheet" href="css/pages/landing.css">
+
+</head>
+<body class="adc-landing">
+
+    <a class="adc-skip-link" href="#adc-main">Skip to main content</a>
+
+    <!-- ================= HEADER / NAVIGATION ================= -->
+
+    <header class="adc-landing-header" id="adc-landing-header">
+
+        <div class="adc-landing-header__inner">
+
+            <a class="adc-landing-logo" href="landing.html" aria-label="AI Disaster Command Center — home">
+                <i class="fas fa-satellite-dish" aria-hidden="true"></i>
+                <span class="adc-landing-logo__text">AI Disaster Command Center</span>
+            </a>
+
+            <nav class="adc-landing-nav" aria-label="Primary">
+                <ul class="adc-landing-nav__list">
+                    <li><a href="#adc-overview">Overview</a></li>
+                    <li><a href="#adc-capabilities">Capabilities</a></li>
+                    <li><a href="#adc-reliability">Reliability</a></li>
+                    <li><a href="#adc-workflow">Workflow</a></li>
+                </ul>
+            </nav>
+
+            <div class="adc-landing-header__actions">
+                <a class="adc-btn adc-btn--primary" href="login.html">Sign In</a>
+            </div>
+
+        </div>
+
+    </header>
+
+    <main id="adc-main">
+
+        <!-- ================= HERO ================= -->
+
+        <section class="adc-landing-hero" aria-labelledby="adc-hero-heading">
+
+            <div class="adc-landing-hero__content">
+
+                <p class="adc-eyebrow">Multi-Hazard AI Decision Support</p>
+
+                <h1 id="adc-hero-heading" class="adc-landing-hero__heading">
+                    One command center for every disaster your agency has to answer to.
+                </h1>
+
+                <p class="adc-landing-hero__subheading">
+                    AI Disaster Command Center brings live weather intelligence, seismic monitoring, GIS mapping, and AI-driven risk assessment into a single operational view — so response decisions are made on evidence, not delay.
+                </p>
+
+                <div class="adc-landing-hero__actions">
+                    <a class="adc-btn adc-btn--primary adc-btn--lg" href="login.html">
+                        Access Command Center
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="adc-landing-hero__visual" role="img" aria-label="Representative preview of the AI Disaster Command Center interface">
+                <div class="adc-landing-hero__visual-frame">
+                    <span class="adc-live-dot" aria-hidden="true"></span>
+                    <p class="adc-landing-hero__visual-label">Representative interface preview</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= TRUSTED FOR / USE-CONTEXT ================= -->
+
+        <section class="adc-landing-context" aria-labelledby="adc-context-heading">
+
+            <h2 id="adc-context-heading" class="adc-section-heading">Built for the hazards agencies actually respond to</h2>
+
+            <ul class="adc-context-grid">
+
+                <li class="adc-context-item">
+                    <i class="fas fa-water" aria-hidden="true"></i>
+                    <h3>Flood</h3>
+                    <p>Track rising water and affected populations to time evacuation and shelter decisions.</p>
+                </li>
+
+                <li class="adc-context-item">
+                    <i class="fas fa-fire" aria-hidden="true"></i>
+                    <h3>Wildfire</h3>
+                    <p>Monitor spread risk and regional watch status to prioritize suppression resources.</p>
+                </li>
+
+                <li class="adc-context-item">
+                    <i class="fas fa-globe" aria-hidden="true"></i>
+                    <h3>Earthquake</h3>
+                    <p>Surface magnitude, depth, and location the moment seismic activity is detected.</p>
+                </li>
+
+                <li class="adc-context-item">
+                    <i class="fas fa-wind" aria-hidden="true"></i>
+                    <h3>Cyclone</h3>
+                    <p>Follow storm severity and population exposure to stage shelters ahead of landfall.</p>
+                </li>
+
+            </ul>
+
+        </section>
+
+        <!-- ================= PLATFORM OVERVIEW ================= -->
+
+        <section class="adc-landing-overview" id="adc-overview" aria-labelledby="adc-overview-heading">
+
+            <h2 id="adc-overview-heading" class="adc-section-heading">How the platform operates</h2>
+
+            <p class="adc-landing-overview__lede">
+                AI-DCC runs one continuous operating model, from first signal to after-action report — so every capability below works together, not in isolation.
+            </p>
+
+            <ol class="adc-process-strip">
+                <li><span class="adc-process-strip__label">Monitor</span></li>
+                <li><span class="adc-process-strip__label">Analyze</span></li>
+                <li><span class="adc-process-strip__label">Respond</span></li>
+                <li><span class="adc-process-strip__label">Coordinate</span></li>
+            </ol>
+
+        </section>
+
+        <!-- ================= CORE CAPABILITIES ================= -->
+
+        <section class="adc-landing-capabilities" id="adc-capabilities" aria-labelledby="adc-capabilities-heading">
+
+            <h2 id="adc-capabilities-heading" class="adc-section-heading">Core capabilities</h2>
+
+            <div class="adc-capability-group">
+
+                <h3 class="adc-capability-group__title">Monitoring</h3>
+
+                <ul class="adc-capability-grid">
+                    <li class="adc-capability-card">
+                        <i class="fas fa-cloud-sun" aria-hidden="true"></i>
+                        <h4>Weather Intelligence</h4>
+                        <p>Live temperature, humidity, wind, and rainfall tracked by region.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-globe" aria-hidden="true"></i>
+                        <h4>Earthquake Monitoring</h4>
+                        <p>Real-time seismic magnitude, depth, and location data.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-water" aria-hidden="true"></i>
+                        <h4>Flood Monitoring</h4>
+                        <p>Water-level and affected-area tracking as conditions change.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-fire" aria-hidden="true"></i>
+                        <h4>Wildfire Detection</h4>
+                        <p>Regional watch status and spread-risk indicators.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-satellite" aria-hidden="true"></i>
+                        <h4>GIS Mapping</h4>
+                        <p>A live map layer for every hazard, in one operational view.</p>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="adc-capability-group">
+
+                <h3 class="adc-capability-group__title">AI &amp; Decision Support</h3>
+
+                <ul class="adc-capability-grid">
+                    <li class="adc-capability-card">
+                        <i class="fas fa-brain" aria-hidden="true"></i>
+                        <h4>AI Decision Support</h4>
+                        <p>Situation assessments and recommended actions generated from live conditions.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        <h4>Risk Assessment</h4>
+                        <p>Severity, population impact, and infrastructure risk scored per incident.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        <h4>Predictive Analytics</h4>
+                        <p>Trend and risk forecasting to anticipate escalation before it happens.</p>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="adc-capability-group">
+
+                <h3 class="adc-capability-group__title">Operations</h3>
+
+                <ul class="adc-capability-grid">
+                    <li class="adc-capability-card">
+                        <i class="fas fa-truck-medical" aria-hidden="true"></i>
+                        <h4>Resource Management</h4>
+                        <p>Rescue teams, ambulances, helicopters, and shelters, allocated and tracked.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-crosshairs" aria-hidden="true"></i>
+                        <h4>Incident Management</h4>
+                        <p>Every active incident tracked from declaration through resolution.</p>
+                    </li>
+                    <li class="adc-capability-card">
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                        <h4>Reporting &amp; Analytics</h4>
+                        <p>Incident timelines and trend charts, exportable for after-action review.</p>
+                    </li>
+                </ul>
+
+            </div>
+
+        </section>
+
+        <!-- ================= LIVE MONITORING OVERVIEW ================= -->
+
+        <section class="adc-landing-live" aria-labelledby="adc-live-heading">
+
+            <h2 id="adc-live-heading" class="adc-section-heading">Always watching</h2>
+
+            <p class="adc-landing-live__note">
+                Representative figures shown below. Live operational data is available to authenticated personnel only.
+            </p>
+
+            <ul class="adc-stat-strip">
+                <li class="adc-stat-strip__item">
+                    <strong>Continuous</strong>
+                    <span>Satellite &amp; sensor monitoring</span>
+                </li>
+                <li class="adc-stat-strip__item">
+                    <strong>Multi-region</strong>
+                    <span>Live weather coverage</span>
+                </li>
+                <li class="adc-stat-strip__item">
+                    <strong>Real-time</strong>
+                    <span>Seismic event detection</span>
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- ================= STATISTICS / IMPACT ================= -->
+
+        <section class="adc-landing-impact" aria-labelledby="adc-impact-heading">
+
+            <h2 id="adc-impact-heading" class="adc-section-heading">Built for operational scale</h2>
+
+            <ul class="adc-impact-grid">
+                <li class="adc-impact-card">
+                    <strong>4</strong>
+                    <span>Hazard types covered</span>
+                </li>
+                <li class="adc-impact-card">
+                    <strong>4</strong>
+                    <span>Stage response model</span>
+                </li>
+                <li class="adc-impact-card">
+                    <strong>1</strong>
+                    <span>Unified command view</span>
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- ================= RELIABILITY & DATA INTEGRITY ================= -->
+
+        <section class="adc-landing-reliability" id="adc-reliability" aria-labelledby="adc-reliability-heading">
+
+            <h2 id="adc-reliability-heading" class="adc-section-heading">Reliability &amp; data integrity</h2>
+
+            <ul class="adc-reliability-grid">
+                <li class="adc-reliability-item">
+                    <i class="fas fa-database" aria-hidden="true"></i>
+                    <h3>Recognized data sources</h3>
+                    <p>Weather and seismic readings are drawn from recognized meteorological and geological monitoring authorities.</p>
+                </li>
+                <li class="adc-reliability-item">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <h3>Continuous monitoring</h3>
+                    <p>The platform is built to observe conditions around the clock, not on a scheduled refresh.</p>
+                </li>
+                <li class="adc-reliability-item">
+                    <i class="fas fa-brain" aria-hidden="true"></i>
+                    <h3>Transparent AI confidence</h3>
+                    <p>Every AI-generated assessment carries a visible confidence score, never presented as unconditional fact.</p>
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- ================= WORKFLOW ================= -->
+
+        <section class="adc-landing-workflow" id="adc-workflow" aria-labelledby="adc-workflow-heading">
+
+            <h2 id="adc-workflow-heading" class="adc-section-heading">From first signal to after-action report</h2>
+
+            <ol class="adc-workflow-steps">
+                <li class="adc-workflow-step">
+                    <span class="adc-workflow-step__number">1</span>
+                    <h3>Monitor</h3>
+                    <p>Weather, seismic, and satellite feeds are watched continuously across every covered region.</p>
+                </li>
+                <li class="adc-workflow-step">
+                    <span class="adc-workflow-step__number">2</span>
+                    <h3>Detect</h3>
+                    <p>Conditions crossing a hazard threshold are flagged as an active incident automatically.</p>
+                </li>
+                <li class="adc-workflow-step">
+                    <span class="adc-workflow-step__number">3</span>
+                    <h3>Assess</h3>
+                    <p>AI scores severity, population impact, and response priority for the incident.</p>
+                </li>
+                <li class="adc-workflow-step">
+                    <span class="adc-workflow-step__number">4</span>
+                    <h3>Respond</h3>
+                    <p>Recommended actions and resource allocation are surfaced to the response team.</p>
+                </li>
+                <li class="adc-workflow-step">
+                    <span class="adc-workflow-step__number">5</span>
+                    <h3>Report</h3>
+                    <p>The full incident timeline is available for after-action review and reporting.</p>
+                </li>
+            </ol>
+
+        </section>
+
+        <!-- ================= CALL TO ACTION ================= -->
+
+        <section class="adc-landing-cta" aria-labelledby="adc-cta-heading">
+
+            <h2 id="adc-cta-heading" class="adc-landing-cta__heading">
+                Bring every hazard into one command view.
+            </h2>
+
+            <a class="adc-btn adc-btn--primary adc-btn--lg" href="login.html">Sign In</a>
+
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="adc-landing-footer">
+
+        <div class="adc-landing-footer__inner">
+
+            <div class="adc-landing-footer__brand">
+                <i class="fas fa-satellite-dish" aria-hidden="true"></i>
+                <span>AI Disaster Command Center</span>
+                <p>Multi-hazard AI decision support for emergency response agencies.</p>
+            </div>
+
+            <nav class="adc-landing-footer__links" aria-label="Footer">
+                <ul>
+                    <li><a href="#adc-overview">Overview</a></li>
+                    <li><a href="#adc-capabilities">Capabilities</a></li>
+                    <li><a href="login.html?redirect=help.html">Help Centre</a></li>
+                    <li><a href="login.html">Sign In</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+        <p class="adc-landing-footer__copyright">
+            &copy; 2026 AI Disaster Command Center. All rights reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
