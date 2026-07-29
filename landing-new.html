@@ -52,6 +52,21 @@ SCROLL PROGRESS
 HEADER
 ======================================================= -->
 
+<!-- =======================================================
+ANIMATED BACKGROUND
+======================================================= -->
+
+<div class="adc-bg-animation">
+
+    <span class="adc-particle p1"></span>
+    <span class="adc-particle p2"></span>
+    <span class="adc-particle p3"></span>
+    <span class="adc-particle p4"></span>
+    <span class="adc-particle p5"></span>
+    <span class="adc-particle p6"></span>
+
+</div>
+
 <header class="adc-header">
 
     <div class="adc-container">
@@ -66,7 +81,7 @@ HEADER
 
         </a>
 
-        <nav class="adc-nav">
+        <nav class="adc-nav" aria-label="Primary Navigation"></nav>
 
             <a href="#overview">Overview</a>
 
@@ -106,8 +121,7 @@ MAIN
 HERO
 ======================================================= -->
 
-<section class="adc-hero">
-
+<section class="adc-hero" aria-labelledby="heroTitle"></section>
     <div class="adc-container adc-hero-grid">
 
         <!-- LEFT -->
@@ -122,7 +136,7 @@ HERO
 
             </span>
 
-            <h1>
+            
 
                 One Intelligent Platform
 
@@ -147,7 +161,7 @@ HERO
 
             </p>
 
-            <div class="adc-hero-buttons">
+            <div class="adc-hero-buttons" role="group" aria-label="Hero Actions"></div>
 
                 <a href="login.html"
                     class="adc-btn adc-btn-primary adc-btn-large">
@@ -209,7 +223,8 @@ HERO
 
         <div class="adc-hero-visual">
 
-            <div class="adc-dashboard-preview">
+            <div class="adc-dashboard-preview"
+     aria-label="AI Dashboard Preview">
 
                 <div class="adc-preview-header">
 
@@ -694,11 +709,11 @@ TECHNOLOGY
 CALL TO ACTION
 ======================================================= -->
 
-<section class="adc-cta">
+<section class="adc-cta" aria-labelledby="ctaTitle"></section>
 
     <div class="adc-container">
 
-        <h2>
+        <h2 id="ctaTitle"></h2>
             Ready to Experience the AI Disaster Command Center?
         </h2>
 
