@@ -1097,7 +1097,6 @@ transform: translateY(0);
     background:linear-gradient(145deg,#18263d,#223654);
     padding:20px;
     min-height:360px;
-    max-height:420px;
     border:1px solid rgba(0,191,255,0.20);
     border-radius:18px;
     overflow:hidden;
@@ -1157,7 +1156,8 @@ transform: translateY(0);
     overflow-y:auto;
     overflow-x:hidden;
     scroll-behavior:smooth;
-    max-height:calc(100% - 64px);
+    padding-right:4px;
+    min-height:0;
     scrollbar-width:thin;
 
 }
@@ -1165,30 +1165,20 @@ transform: translateY(0);
 .panel li{
 
     display:flex;
-
     align-items:flex-start;
-
     gap:12px;
-
     padding:14px 16px;
-
     margin-bottom:12px;
-
     min-height:60px;
-
+    min-width:0;
     background:#243a5a;
-
     border-left:4px solid #00BFFF;
-
     border-radius:12px;
-
     color:#ffffff;
-
     line-height:1.5;
-
     transition:all .3s ease;
-
     word-break:break-word;
+    overflow-wrap:anywhere;
 
 }
 
@@ -1645,6 +1635,9 @@ transform: translateY(0);
 #missionControlList{
     display:grid;
     gap:10px;
+    min-height:0;
+    overflow-y:auto;
+    padding-right:4px;
 }
 
 .mission-card{
@@ -1652,6 +1645,8 @@ transform: translateY(0);
     border-radius:12px;
     background:rgba(255,255,255,0.05);
     border-left:3px solid #00D4FF;
+    min-width:0;
+    overflow-wrap:anywhere;
 }
 
 .mission-card strong{
@@ -1841,6 +1836,25 @@ transform: translateY(0);
 #aiRecommendations li,
 #alertsList li{
     margin-bottom:10px;
+}
+
+#resourceAllocation{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    min-height:0;
+    overflow-y:auto;
+    padding-right:4px;
+}
+
+#alertsList:empty::before{
+    content:"No active alerts";
+    display:block;
+    padding:14px 16px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    border:1px dashed rgba(255,255,255,0.16);
+    color:#8fb4d6;
 }
 
 .mission-status-list{
