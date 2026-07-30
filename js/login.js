@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      window.location.href = 'loading.html';
+      sessionStorage.setItem("loggedIn", "true");
+window.location.href = "loading.html";
     });
   }
 });
