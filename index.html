@@ -27,7 +27,11 @@
 
 </head>
 <body>
-
+<script>
+if (!sessionStorage.getItem("loggedIn")) {
+    window.location.replace("landing-new.html");
+}
+</script>
     <!-- ================= MAIN CONTAINER ================= -->
 
     <div class="container">
