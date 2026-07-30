@@ -1,29 +1,476 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Disaster Command Center | Loading</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/loading.css" />
-  </head>
-  <body>
-    <div class="loading-shell">
-      <div class="glass-panel loader-card">
-        <div class="loader-ring">
-          <div class="loader-progress"></div>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Initializing AI Disaster Command Center
+
+</title>
+
+<meta name="theme-color"
+      content="#07111F">
+
+<meta name="description"
+      content="Initializing AI Disaster Command Center">
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet"
+      href="css/shared/tokens.css">
+
+<link rel="stylesheet"
+      href="css/pages/loading.css">
+
+</head>
+
+<body class="adc-loading-body">
+
+<!--=========================================================
+BACKGROUND
+==========================================================-->
+
+<div class="adc-loading-background">
+
+<div class="grid"></div>
+
+<div class="glow glow1"></div>
+
+<div class="glow glow2"></div>
+
+<div class="glow glow3"></div>
+
+</div>
+
+<!--=========================================================
+MAIN
+==========================================================-->
+
+<main class="adc-loading-wrapper">
+
+<section class="adc-loading-card">
+
+<div class="adc-loading-logo">
+
+<div class="adc-logo-icon">
+
+<i class="fas fa-satellite-dish"></i>
+
+</div>
+
+<div>
+
+<h1>
+
+AI Disaster Command Center
+
+</h1>
+
+<p>
+
+National Emergency Intelligence Platform
+
+</p>
+
+</div>
+
+</div>
+
+<div class="adc-loading-title">
+
+<h2>
+
+Initializing Mission Systems
+
+</h2>
+
+<p>
+
+Preparing AI engines and connecting national monitoring services...
+
+</p>
+
+</div>
+
+<div class="adc-loading-circle">
+
+<div class="circle-ring"></div>
+
+<div class="circle-ring delay"></div>
+
+<div class="circle-core">
+
+<span id="loadingPercent">
+
+0%
+
+</span>
+
+</div>
+
+</div>
+
+<div class="adc-progress-container">
+
+<div class="adc-progress-track">
+
+<div
+id="progressBar"
+class="adc-progress-fill">
+
+</div>
+
+</div>
+
+<div class="adc-progress-label">
+
+<span>
+
+System Initialization
+
+</span>
+
+<span id="progressValue">
+
+0%
+
+</span>
+
+</div>
+
+</div>
+<!--=========================================================
+SYSTEM INITIALIZATION
+==========================================================-->
+
+<div class="adc-system-console">
+
+<div class="adc-console-header">
+
+<div class="adc-console-dot red"></div>
+
+<div class="adc-console-dot yellow"></div>
+
+<div class="adc-console-dot green"></div>
+
+<span>
+
+System Boot Log
+
+</span>
+
+</div>
+
+<div
+class="adc-console-body"
+id="systemConsole">
+
+<div class="console-line">
+
+<i class="fas fa-check-circle"></i>
+
+<span>
+
+Boot sequence initiated...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-satellite"></i>
+
+<span>
+
+Connecting to ISRO Satellite Network...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-cloud"></i>
+
+<span>
+
+Initializing Weather Intelligence Engine...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-house-crack"></i>
+
+<span>
+
+Loading Earthquake Monitoring Service...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-water"></i>
+
+<span>
+
+Synchronizing Flood Prediction Models...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-fire"></i>
+
+<span>
+
+Starting Wildfire Detection Network...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-map-location-dot"></i>
+
+<span>
+
+Loading GIS Mapping Services...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-brain"></i>
+
+<span>
+
+Starting AI Prediction Engine...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-database"></i>
+
+<span>
+
+Connecting Incident Database...
+
+</span>
+
+</div>
+
+<div class="console-line">
+
+<i class="fas fa-user-shield"></i>
+
+<span>
+
+Verifying Secure Operator Session...
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!--=========================================================
+LIVE STATUS
+==========================================================-->
+
+<div class="adc-loading-status">
+
+<div class="status-item">
+
+<span>
+
+AI Engine
+
+</span>
+
+<strong
+id="statusAI">
+
+Initializing...
+
+</strong>
+
+</div>
+
+<div class="status-item">
+
+<span>
+
+Satellite Feed
+
+</span>
+
+<strong
+id="statusSatellite">
+
+Connecting...
+
+</strong>
+
+</div>
+
+<div class="status-item">
+
+<span>
+
+Database
+
+</span>
+
+<strong
+id="statusDatabase">
+
+Loading...
+
+</strong>
+
+</div>
+
+<div class="status-item">
+
+<span>
+
+Mission Status
+
+</span>
+
+<strong
+id="statusMission">
+
+Preparing...
+
+</strong>
+
+</div>
+
+</div>
+<!--=========================================================
+SYSTEM METRICS
+==========================================================-->
+
+<div class="adc-system-metrics">
+
+    <div class="metric-card">
+
+        <i class="fas fa-microchip"></i>
+
+        <div>
+
+            <h4>AI Compute Nodes</h4>
+
+            <span id="computeNodes">128 Active</span>
+
         </div>
-        <h1>Initializing command layer</h1>
-        <p id="statusText">Loading mission data and secure channels...</p>
-        <div class="progress-bar">
-          <span id="progressFill"></span>
-        </div>
-        <small>Redirecting you to the dashboard shortly.</small>
-      </div>
+
     </div>
 
-    <script src="js/loading.js"></script>
-  </body>
+    <div class="metric-card">
+
+        <i class="fas fa-server"></i>
+
+        <div>
+
+            <h4>Server Cluster</h4>
+
+            <span id="clusterStatus">Online</span>
+
+        </div>
+
+    </div>
+
+    <div class="metric-card">
+
+        <i class="fas fa-globe"></i>
+
+        <div>
+
+            <h4>Monitoring Regions</h4>
+
+            <span id="regionStatus">All Regions</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--=========================================================
+FOOTER
+==========================================================-->
+
+<footer class="adc-loading-footer">
+
+    <p>
+
+        AI Disaster Command Center • Version 2.0.0
+
+    </p>
+
+    <p>
+
+        Secure National Emergency Intelligence Platform
+
+    </p>
+
+</footer>
+
+</section>
+
+</main>
+
+<!--=========================================================
+PARTICLE CONTAINER
+==========================================================-->
+
+<div
+id="particlesContainer"
+class="adc-particles">
+
+</div>
+
+<!--=========================================================
+SCRIPTS
+==========================================================-->
+
+<script src="js/loading.js"></script>
+
+</body>
+
 </html>
