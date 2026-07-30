@@ -1,51 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Disaster Command Center | Login</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/login.css" />
-  </head>
-  <body>
-    <div class="auth-shell">
-      <div class="glass-panel auth-card">
-        <div class="auth-brand">
-          <span class="brand-mark">◉</span>
-          <div>
-            <h1>Operator Access</h1>
-            <p>Secure login for mission-critical monitoring.</p>
-          </div>
-        </div>
 
-        <form id="loginForm" class="auth-form">
-          <label>
-            <span>Operator ID</span>
-            <input type="text" placeholder="Enter your ID" required />
-          </label>
-          <label>
-            <span>Password</span>
-            <input type="password" placeholder="Enter your password" required />
-          </label>
-          <div class="form-row">
-            <label class="checkbox-row">
-              <input type="checkbox" checked />
-              <span>Keep session active</span>
-            </label>
-            <a href="help.html">Need help?</a>
-          </div>
-          <button type="submit" class="btn btn-primary">Continue to Loading</button>
-        </form>
+<head>
 
-        <div class="auth-footer">
-          <p>New to the system? Request operator access from the mission desk.</p>
-          <a href="landing.html">Return home</a>
-        </div>
-      </div>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Secure Login | AI Disaster Command Center
+    </title>
+
+    <meta name="description"
+          content="Secure operator authentication for AI Disaster Command Center.">
+
+    <meta name="theme-color"
+          content="#07111F">
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Shared Tokens -->
+
+    <link rel="stylesheet"
+          href="css/shared/tokens.css">
+
+    <!-- Login CSS -->
+
+    <link rel="stylesheet"
+          href="css/pages/login.css">
+
+</head>
+
+<body class="adc-login-body">
+
+<!-- =========================================================
+BACKGROUND
+========================================================= -->
+
+<div class="adc-login-bg">
+
+    <span class="orb orb1"></span>
+    <span class="orb orb2"></span>
+    <span class="orb orb3"></span>
+
+</div>
+
+<!-- =========================================================
+MAIN
+========================================================= -->
+
+<main class="adc-login-wrapper">
+
+<div class="adc-login-container">
+
+<!-- =========================================================
+LEFT PANEL
+========================================================= -->
+
+<section class="adc-login-left">
+
+<div class="adc-brand">
+
+<div class="adc-brand-icon">
+
+<i class="fas fa-satellite-dish"></i>
+
+</div>
+
+<div>
+
+<h1>
+
+AI Disaster
+Command Center
+
+</h1>
+
+<p>
+
+National AI Powered Disaster Intelligence Platform
+
+</p>
+
+</div>
+
+</div>
+
+<span class="adc-login-badge">
+
+<i class="fas fa-shield-alt"></i>
+
+Secure Government Portal
+
+</span>
+
+<h2>
+
+Protecting Lives
+
+Through
+
+Artificial Intelligence
+
+</h2>
+
+<p class="adc-login-description">
+
+A unified command platform integrating
+weather intelligence,
+earthquake monitoring,
+wildfire detection,
+flood forecasting,
+GIS mapping,
+satellite analytics
+and AI-powered decision support.
+
+</p>
+
+<div class="adc-system-status">
+
+<div class="adc-status-card">
+
+<i class="fas fa-circle"></i>
+
+<div>
+
+<h3>
+
+System Status
+
+</h3>
+
+<p>
+
+ONLINE
+
+</p>
+
+</div>
+
+</div>
+
+<div class="adc-status-card">
+
+<i class="fas fa-satellite"></i>
+
+<div>
+
+<h3>
+
+Satellite Feed
+
+</h3>
+
+<p>
+
+CONNECTED
+
+</p>
+
+</div>
+
+</div>
+
+<div class="adc-status-card">
+
+<i class="fas fa-brain"></i>
+
+<div>
+
+<h3>
+
+AI Engine
+
+</h3>
+
+<p>
+
+READY
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+RIGHT PANEL
+========================================================= -->
+
+<section class="adc-login-right">
+
+<div class="adc-login-card">
+
+<div class="adc-card-header">
+
+<h2>
+
+Operator Login
+
+</h2>
+
+<p>
+
+Authenticate to access the National Disaster Dashboard
+
+</p>
+
+</div>
+<!-- =========================================================
+LOGIN FORM
+========================================================= -->
+
+<form id="loginForm"
+      class="adc-login-form"
+      autocomplete="off">
+
+<div class="adc-input-group">
+
+<label for="username">
+
+Operator ID
+
+</label>
+
+<div class="adc-input">
+
+<i class="fas fa-user"></i>
+
+<input
+type="text"
+id="username"
+name="username"
+placeholder="Enter Operator ID"
+required>
+
+</div>
+
+<small class="adc-error"
+       id="usernameError">
+
+</small>
+
+</div>
+
+<div class="adc-input-group">
+
+<label for="password">
+
+Password
+
+</label>
+
+<div class="adc-input">
+
+<i class="fas fa-lock"></i>
+
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button
+type="button"
+id="togglePassword"
+class="adc-password-toggle"
+aria-label="Show Password">
+
+<i class="fas fa-eye"></i>
+
+</button>
+
+</div>
+
+<small class="adc-error"
+id="passwordError">
+
+</small>
+
+</div>
+
+<div class="adc-login-options">
+
+<label class="adc-checkbox">
+
+<input
+type="checkbox"
+id="rememberMe">
+
+<span>
+
+Remember Me
+
+</span>
+
+</label>
+
+<a href="#"
+class="adc-forgot-password">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+<button
+type="submit"
+class="adc-login-btn">
+
+<span>
+
+Access Command Center
+
+</span>
+
+<i class="fas fa-arrow-right"></i>
+
+</button>
+
+<div class="adc-login-divider">
+
+<span>
+
+Secure Authentication
+
+</span>
+
+</div>
+
+<div class="adc-security-panel">
+
+<div class="adc-security-item">
+
+<i class="fas fa-shield-alt"></i>
+
+<span>
+
+256-bit Encryption
+
+</span>
+
+</div>
+
+<div class="adc-security-item">
+
+<i class="fas fa-user-check"></i>
+
+<span>
+
+Operator Verified
+
+</span>
+
+</div>
+
+<div class="adc-security-item">
+
+<i class="fas fa-lock"></i>
+
+<span>
+
+Secure Session
+
+</span>
+
+</div>
+
+</div>
+
+</form>
+<!-- =========================================================
+SYSTEM FOOTER
+========================================================= -->
+
+<div class="adc-login-footer">
+
+    <div class="adc-footer-item">
+
+        <i class="fas fa-satellite"></i>
+
+        <span>ISRO Satellite Network</span>
+
     </div>
 
-    <script src="js/login.js"></script>
-  </body>
+    <div class="adc-footer-item">
+
+        <i class="fas fa-cloud"></i>
+
+        <span>Real-Time Weather Intelligence</span>
+
+    </div>
+
+    <div class="adc-footer-item">
+
+        <i class="fas fa-database"></i>
+
+        <span>Incident Database Connected</span>
+
+    </div>
+
+</div>
+
+<div class="adc-version">
+
+    <span>Version 2.0.0</span>
+
+    <span>•</span>
+
+    <span>AI Disaster Command Center</span>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+<!-- =========================================================
+LOADING OVERLAY
+========================================================= -->
+
+<div class="adc-login-loading" id="loginLoading">
+
+    <div class="adc-loader-card">
+
+        <div class="adc-loader">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <h3>
+
+            Authenticating Operator...
+
+        </h3>
+
+        <p>
+
+            Establishing secure connection with National Disaster Command Center
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+SCRIPTS
+========================================================= -->
+
+<script src="js/login.js"></script>
+
+</body>
+
 </html>
