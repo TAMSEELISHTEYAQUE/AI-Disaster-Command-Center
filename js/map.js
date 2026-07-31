@@ -68,6 +68,10 @@ function initializeMap() {
     });
 
     const markers = [];
+const rescueMarkers = [];
+const hospitalMarkers = [];
+const shelterMarkers = [];
+const vehicleMarkers = [];
     const layerGroup = window.L.layerGroup();
     const toggleContainer = document.getElementById("mapLayerToggles");
 
@@ -76,6 +80,10 @@ function initializeMap() {
     }
 
     const disasterLayers = [];
+    const rescueLayers = [];
+const hospitalLayers = [];
+const shelterLayers = [];
+const vehicleLayers = [];
     const hazards = IncidentDatabase.disasters || [];
 
     hazards.forEach((disaster, index) => {
@@ -140,6 +148,70 @@ function initializeMap() {
     }
     else {
         window.map.setView([latitude, longitude], 5);
+    }
+
+}
+/* =====================================================
+   NAVIGATION CENTER
+===================================================== */
+
+function updateNavigationCenter() {
+
+    if (!window.map) return;
+
+    const navigation = IncidentDatabase.navigation;
+
+    const destination = document.getElementById("navigationDestination");
+    const distance = document.getElementById("navigationDistance");
+    const eta = document.getElementById("navigationETA");
+    const blocked = document.getElementById("blockedRoads");
+
+    if (destination) {
+        destination.textContent = navigation.destination || "--";
+    }
+
+    if (distance) {
+        distance.textContent = navigation.distance || "--";
+    }
+
+    if (eta) {
+        eta.textContent = navigation.eta || "--";
+    }
+
+    if (blocked) {
+        blocked.textContent = navigation.blockedRoads ?? "--";
+    }
+
+}
+/* =====================================================
+   NAVIGATION CENTER
+===================================================== */
+
+function updateNavigationCenter() {
+
+    if (!window.map) return;
+
+    const navigation = IncidentDatabase.navigation;
+
+    const destination = document.getElementById("navigationDestination");
+    const distance = document.getElementById("navigationDistance");
+    const eta = document.getElementById("navigationETA");
+    const blocked = document.getElementById("blockedRoads");
+
+    if (destination) {
+        destination.textContent = navigation.destination || "--";
+    }
+
+    if (distance) {
+        distance.textContent = navigation.distance || "--";
+    }
+
+    if (eta) {
+        eta.textContent = navigation.eta || "--";
+    }
+
+    if (blocked) {
+        blocked.textContent = navigation.blockedRoads ?? "--";
     }
 
 }
