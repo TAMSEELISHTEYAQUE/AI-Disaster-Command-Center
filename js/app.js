@@ -44,6 +44,13 @@ function ensureDashboardDefaults() {
     IncidentDatabase.currentIncident.location = IncidentDatabase.currentIncident.location || {};
     IncidentDatabase.resources = IncidentDatabase.resources || {};
     IncidentDatabase.disasters = IncidentDatabase.disasters || [];
+    IncidentDatabase.missions = IncidentDatabase.missions || [];
+
+IncidentDatabase.navigation = IncidentDatabase.navigation || {};
+
+IncidentDatabase.reports = IncidentDatabase.reports || {};
+
+IncidentDatabase.systemHealth = IncidentDatabase.systemHealth || {};
 
     if (!IncidentDatabase.currentIncident.location.state && IncidentDatabase.disasters[0]) {
         const first = IncidentDatabase.disasters[0];
@@ -118,7 +125,29 @@ function refreshDashboard() {
     if (typeof updateMapView === "function") {
         updateMapView();
     }
+/* =====================================================
+   ENTERPRISE MODULES
+===================================================== */
 
+if (typeof updateNavigationCenter === "function") {
+    updateNavigationCenter();
+}
+
+if (typeof updateCommunicationCenter === "function") {
+    updateCommunicationCenter();
+}
+
+if (typeof updateReportsDashboard === "function") {
+    updateReportsDashboard();
+}
+
+if (typeof updateOperatorProfile === "function") {
+    updateOperatorProfile();
+}
+
+if (typeof updateSystemHealth === "function") {
+    updateSystemHealth();
+}
 }
 
 function setDashboardRange(range) {
@@ -146,7 +175,19 @@ function getFilteredDisasters() {
     });
 
 }
+/* =====================================================
+   ACTIVE INCIDENT
+===================================================== */
 
+function getActiveIncident() {
+
+    const disasters = getFilteredDisasters();
+
+    return disasters.length
+        ? disasters[0]
+        : IncidentDatabase.currentIncident;
+
+}
 function initializeMultiHazardData() {
 
     if (IncidentDatabase.disasters && IncidentDatabase.disasters.length) {

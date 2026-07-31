@@ -24,13 +24,44 @@ function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 
 }
+function generateIncidentId(disasterType = "GEN") {
 
-function generateIncidentId() {
+    const year = new Date().getFullYear();
 
-    return "ADC-" + Date.now();
+    const typeMap = {
+        Flood: "FLD",
+        Earthquake: "EQK",
+        Cyclone: "CYC",
+        Tsunami: "TSU",
+        Wildfire: "WLF",
+        Landslide: "LND",
+        Avalanche: "AVL",
+        Heatwave: "HTW",
+        Drought: "DRT",
+        Industrial: "IND",
+        Chemical: "CHM",
+        Gas: "GAS",
+        Building: "BLD",
+        Fire: "FIR",
+        Road: "RDA",
+        Train: "TRN",
+        Aviation: "AIR",
+        Maritime: "MAR",
+        Disease: "DIS",
+        Terror: "TER",
+        Stampede: "STM",
+        Health: "HLT"
+    };
+
+    const prefix = typeMap[disasterType] || "GEN";
+
+    const serial = String(
+        Math.floor(Math.random() * 99999)
+    ).padStart(5, "0");
+
+    return `ADC-${year}-${prefix}-${serial}`;
 
 }
-
 /* =====================================================
    LIVE CLOCK
 ===================================================== */
@@ -187,5 +218,58 @@ function updateList(listId, items, displayCount = 4) {
         list.appendChild(li);
 
     });
+
+}
+/* =====================================================
+   DISASTER HELPERS
+===================================================== */
+
+function getSeverityColor(severity) {
+
+    switch ((severity || "").toLowerCase()) {
+
+        case "critical":
+            return "#C62828";
+
+        case "high":
+            return "#EF4444";
+
+        case "moderate":
+            return "#D6A100";
+
+        case "low":
+            return "#1F8F4D";
+
+        default:
+            return "#00BFFF";
+
+    }
+
+}
+
+function getDisasterMeta(type) {
+
+    const disasters = {
+
+        Flood:      { icon: "🌊", color: "#2196F3" },
+        Earthquake: { icon: "🌍", color: "#795548" },
+        Cyclone:    { icon: "🌀", color: "#8E24AA" },
+        Tsunami:    { icon: "🌊", color: "#1565C0" },
+        Wildfire:   { icon: "🔥", color: "#E53935" },
+        Landslide:  { icon: "⛰", color: "#8D6E63" },
+        Avalanche:  { icon: "❄", color: "#81D4FA" },
+        Heatwave:   { icon: "☀", color: "#FB8C00" },
+        Drought:    { icon: "🌾", color: "#A1887F" },
+        Industrial: { icon: "🏭", color: "#607D8B" },
+        Chemical:   { icon: "☣", color: "#9C27B0" },
+        Disease:    { icon: "🦠", color: "#43A047" },
+        Terror:     { icon: "🚨", color: "#D32F2F" }
+
+    };
+
+    return disasters[type] || {
+        icon: "⚠",
+        color: "#00BFFF"
+    };
 
 }
