@@ -278,7 +278,7 @@ function generateRecommendations() {
 
 function updateAIRecommendations() {
 
-    const list = document.getElementById("aiRecommendations");
+    const list = document.getElementById("dashboardAiRecommendations");
 
     if (!list) return;
 
@@ -296,7 +296,7 @@ function updateAIRecommendations() {
 
 function updateResourceAllocation() {
 
-    const list = document.getElementById("resourceAllocation");
+    const list = document.getElementById("dashboardResourceAllocation");
 
     if (!list) return;
 

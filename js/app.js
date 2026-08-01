@@ -9,13 +9,103 @@ const dashboardState = {
     activeRange: "today"
 };
 
+const UI_COMPONENTS = {
+    dashboardPage: "dashboardPage",
+    incidentPage: "incidentPage",
+    missionPage: "missionPage",
+    navigationPage: "navigationPage",
+    resourcePage: "resourcePage",
+    aiPage: "aiPage",
+    analyticsPage: "analyticsPage",
+    communicationPage: "communicationPage",
+    reportsPage: "reportsPage",
+    alertsPage: "alertsPage",
+    settingsPage: "settingsPage",
+    profilePage: "profilePage",
+    navLinks: "navLinks",
+    weatherWidget: "weatherWidget",
+    weatherText: "weatherText",
+    weatherIcon: "weatherIcon",
+    clock: "clock",
+    map: "map",
+    mapLayerToggles: "mapLayerToggles",
+    disasterMonitorBody: "disasterMonitorBody",
+    chartFilters: "chartFilters",
+    trendChart: "trendChart",
+    distributionChart: "distributionChart",
+    stateChart: "stateChart",
+    riskChart: "riskChart",
+    riskTrendChart: "riskTrendChart",
+    resourceUsageChart: "resourceUsageChart",
+    incidentFrequencyChart: "incidentFrequencyChart",
+    weatherPanel: "weatherPanel",
+    weatherCityValue: "weatherCityValue",
+    weatherTempValue: "weatherTempValue",
+    weatherConditionValue: "weatherConditionValue",
+    weatherHumidityValue: "weatherHumidityValue",
+    weatherWindValue: "weatherWindValue",
+    weatherPressureValue: "weatherPressureValue",
+    weatherRainfallValue: "weatherRainfallValue",
+    weatherVisibilityValue: "weatherVisibilityValue",
+    weatherFeelsLikeValue: "weatherFeelsLikeValue",
+    weatherLastUpdatedValue: "weatherLastUpdatedValue",
+    earthquakeMagnitudeValue: "earthquakeMagnitudeValue",
+    earthquakeDepthValue: "earthquakeDepthValue",
+    earthquakeLocationValue: "earthquakeLocationValue",
+    earthquakeStatusValue: "earthquakeStatusValue",
+    activeIncidentsCount: "activeIncidentsCount",
+    populationAtRiskCount: "populationAtRiskCount",
+    resourcesDeployedCount: "resourcesDeployedCount",
+    responseTimeCount: "responseTimeCount",
+    successRateCount: "successRateCount",
+    aiAccuracyCount: "aiAccuracyCount",
+    dashboardMissionStatus: "dashboardMissionStatus",
+    dashboardAlertsList: "dashboardAlertsList",
+    alertsPageAlertsList: "alertsPageAlertsList",
+    dashboardAiRecommendations: "dashboardAiRecommendations",
+    dashboardMissionControlList: "dashboardMissionControlList",
+    dashboardResourceAllocation: "dashboardResourceAllocation",
+    incidentTimeline: "incidentTimeline",
+    reportSection: "reportSection",
+    navigationDestination: "navigationDestination",
+    navigationDistance: "navigationDistance",
+    navigationETA: "navigationETA",
+    blockedRoads: "blockedRoads",
+    navigationStatus: "navigationStatus",
+    navigationRouteList: "navigationRouteList",
+    aiSummary: "aiSummary",
+    riskLevelValue: "riskLevelValue",
+    disasterSeverityValue: "disasterSeverityValue",
+    populationImpactValue: "populationImpactValue",
+    infrastructureDamageValue: "infrastructureDamageValue",
+    responsePriorityValue: "responsePriorityValue",
+    confidenceValue: "confidenceValue",
+    nationalActiveDisasters: "nationalActiveDisasters",
+    nationalHighestRiskDisaster: "nationalHighestRiskDisaster",
+    nationalMostAffectedState: "nationalMostAffectedState",
+    nationalPopulationAtRisk: "nationalPopulationAtRisk",
+    nationalResourcesDeployed: "nationalResourcesDeployed",
+    nationalThreatLevel: "nationalThreatLevel",
+    satelliteCount: "satelliteCount",
+    floodCount: "floodCount",
+    fireCount: "fireCount",
+    accuracyCount: "accuracyCount",
+    alertsList: "dashboardAlertsList",
+    missionStatus: "dashboardMissionStatus",
+    aiRecommendations: "dashboardAiRecommendations",
+    missionControlList: "dashboardMissionControlList",
+    resourceAllocation: "dashboardResourceAllocation"
+};
+
 function getDashboardElement(elementId) {
 
-    if (!dashboardState.domCache[elementId]) {
-        dashboardState.domCache[elementId] = document.getElementById(elementId);
+    const resolvedId = UI_COMPONENTS[elementId] || elementId;
+
+    if (!dashboardState.domCache[resolvedId]) {
+        dashboardState.domCache[resolvedId] = document.getElementById(resolvedId);
     }
 
-    return dashboardState.domCache[elementId];
+    return dashboardState.domCache[resolvedId];
 
 }
 

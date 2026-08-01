@@ -434,12 +434,12 @@ if (!sessionStorage.getItem("loggedIn")) {
             <div class="bottom-panels">
                 <div class="panel" id="missionSection">
                     <h2><i class="fas fa-crosshairs"></i> Mission Status</h2>
-                    <div id="missionStatus"><p>No mission data</p></div>
+                    <div id="dashboardMissionStatus"><p>No mission data</p></div>
                 </div>
 
                 <div class="panel" id="alertsSection">
                     <h2><i class="fas fa-triangle-exclamation"></i> Active Alerts</h2>
-                    <ul id="alertsList">
+                    <ul id="dashboardAlertsList">
                         <li>No active alerts</li>
                     </ul>
                 </div>
@@ -477,19 +477,19 @@ if (!sessionStorage.getItem("loggedIn")) {
 
                 <div class="panel">
                     <h2><i class="fas fa-robot"></i> AI Recommendations</h2>
-                    <ul id="aiRecommendations">
+                    <ul id="dashboardAiRecommendations">
                         <li>No recommendations available</li>
                     </ul>
                 </div>
 
                 <div class="panel">
                     <h2><i class="fas fa-users-gear"></i> Mission Control</h2>
-                    <div id="missionControlList"></div>
+                    <div id="dashboardMissionControlList"></div>
                 </div>
 
                 <div class="panel" id="resourcesSection">
                     <h2><i class="fas fa-boxes-stacked"></i> Resource Allocation</h2>
-                    <ul id="resourceAllocation">
+                    <ul id="dashboardResourceAllocation">
                         <li>No resources available</li>
                     </ul>
                 </div>
@@ -796,7 +796,7 @@ if (!sessionStorage.getItem("loggedIn")) {
                 </header>
 
                 <div class="glass-panel panel-block">
-                    <ul id="alertsList" class="alert-list"></ul>
+                    <ul id="alertsPageAlertsList" class="alert-list"></ul>
                 </div>
             </div>
         </section>
