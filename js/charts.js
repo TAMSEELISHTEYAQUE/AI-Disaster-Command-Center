@@ -20,7 +20,31 @@ function destroyChart(canvasId) {
         chartRegistry[canvasId] = null;
     }
 }
+/* =====================================================
+   ENTERPRISE CHART CONFIG
+===================================================== */
 
+const CHART_THEME = {
+
+    textColor: "#FFFFFF",
+
+    gridColor: "rgba(255,255,255,0.08)",
+
+    tooltipBackground: "#0f172a",
+
+    tooltipBorder: "rgba(0,212,255,0.25)",
+
+    primary: "#00D4FF",
+
+    success: "#10B981",
+
+    warning: "#F59E0B",
+
+    danger: "#EF4444",
+
+    info: "#3B82F6"
+
+};
 /* =====================================================
    ANALYTICS CHARTS
 ===================================================== */
@@ -42,7 +66,30 @@ function initializeCharts() {
     createIncidentFrequencyChart(range);
 
 }
+/* =====================================================
+   DASHBOARD REFRESH
+===================================================== */
 
+function renderDashboardCharts() {
+
+    const range =
+        IncidentDatabase.dashboard.activeFilter || "today";
+
+    createTrendChart(range);
+
+    createDistributionChart(range);
+
+    createStateChart(range);
+
+    createRiskChart(range);
+
+    createRiskTrendChart(range);
+
+    createResourceUsageChart(range);
+
+    createIncidentFrequencyChart(range);
+
+}
 /* =====================================================
    DISASTER TREND CHART
 ===================================================== */
@@ -471,3 +518,16 @@ function createIncidentFrequencyChart(range = "today") {
     storeChartInstance("incidentFrequencyChart", chartInstance);
 
 }
+/* =====================================================
+   ANALYTICS PLACEHOLDERS
+===================================================== */
+
+function createPopulationImpactChart() {}
+
+function createMissionPerformanceChart() {}
+
+function createResponseTimeChart() {}
+
+function createResourceEfficiencyChart() {}
+
+function createAIReliabilityChart() {}

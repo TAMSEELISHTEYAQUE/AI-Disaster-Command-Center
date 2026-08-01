@@ -25,7 +25,23 @@ const supportedDisasterCatalog = [
     "Oil Spill",
     "Building Collapse"
 ];
+/* =====================================================
+   AI MODELS
+===================================================== */
 
+const AI_MODELS = {
+
+    classification: "ADC Classification Engine",
+
+    prediction: "ADC Prediction Engine",
+
+    recommendation: "ADC Resource Optimizer",
+
+    navigation: "ADC Route Intelligence",
+
+    report: "ADC Report Generator"
+
+};
 function getSupportedDisasters() {
     return supportedDisasterCatalog;
 }
@@ -262,7 +278,7 @@ function generateRecommendations() {
 
 function updateAIRecommendations() {
 
-    const list = document.getElementById("aiRecommendations");
+    const list = document.getElementById("dashboardAiRecommendations");
 
     if (!list) return;
 
@@ -278,9 +294,79 @@ function updateAIRecommendations() {
 
 }
 
+function getAIRouteRecommendations() {
+    const incident = IncidentDatabase.currentIncident || {};
+    const navigation = IncidentDatabase.navigation || {};
+    const risk = calculateRiskForDisaster(incident);
+    const baseRoutes = [
+        { route: "Primary Rescue Corridor", eta: navigation.eta || "22 min", score: 96, status: "Safe" },
+        { route: "Northern Diversion Route", eta: navigation.eta ? `${Math.max(18, Number.parseInt(navigation.eta, 10) + 6)} min` : "28 min", score: 82, status: "Clear" },
+        { route: "Medical Relief Spur", eta: navigation.eta ? `${Math.max(21, Number.parseInt(navigation.eta, 10) + 10)} min` : "31 min", score: 74, status: "Moderate" },
+        { route: "Shelter Access Loop", eta: navigation.eta ? `${Math.max(27, Number.parseInt(navigation.eta, 10) + 14)} min` : "36 min", score: 68, status: "Alert" }
+    ];
+
+    return baseRoutes.map((entry) => ({
+        ...entry,
+        score: entry.score - (risk > 85 ? 5 : risk > 65 ? 2 : 0),
+        rationale: entry.status === "Safe" ? "Low congestion, clear access, good shelter proximity" : entry.status === "Clear" ? "Diversion available but slightly longer transit" : entry.status === "Moderate" ? "Requires escort and traffic monitoring" : "Use only if primary route is blocked"
+    }));
+}
+
+function updateAIRouteRecommendations() {
+    const list = document.getElementById("aiRouteRecommendations");
+    if (!list) return;
+
+    const routes = getAIRouteRecommendations();
+    list.innerHTML = "";
+
+    routes.forEach((route) => {
+        const li = document.createElement("li");
+        li.className = "ai-decision-item";
+        li.innerHTML = `
+            <div class="decision-main">
+                <strong>${route.route}</strong>
+                <span>${route.status}</span>
+            </div>
+            <div class="decision-meta">ETA ${route.eta} • AI score ${route.score}/100</div>
+            <small>${route.rationale}</small>
+        `;
+        list.appendChild(li);
+    });
+}
+
+function getAIResourceMatrix() {
+    const resources = getResourceDeployment();
+    return resources.map((resource) => ({
+        name: resource.name,
+        count: resource.count,
+        status: resource.count >= 8 ? "Ready" : resource.count >= 5 ? "Staged" : "Limited"
+    }));
+}
+
+function updateAIResourceAllocation() {
+    const list = document.getElementById("aiResourceAllocation");
+    if (!list) return;
+
+    const resources = getAIResourceMatrix();
+    list.innerHTML = "";
+
+    resources.forEach((resource) => {
+        const li = document.createElement("li");
+        li.className = "ai-decision-item";
+        li.innerHTML = `
+            <div class="decision-main">
+                <strong>${resource.name}</strong>
+                <span>${resource.status}</span>
+            </div>
+            <div class="decision-meta">${resource.count} units allocated</div>
+        `;
+        list.appendChild(li);
+    });
+}
+
 function updateResourceAllocation() {
 
-    const list = document.getElementById("resourceAllocation");
+    const list = document.getElementById("dashboardResourceAllocation");
 
     if (!list) return;
 
@@ -293,6 +379,8 @@ function updateResourceAllocation() {
         li.textContent = `${resource.name}: ${resource.count} units`;
         list.appendChild(li);
     });
+
+    updateAIResourceAllocation();
 
 }
 
@@ -391,10 +479,54 @@ function initializeAI() {
     updateAIRecommendations();
     updateAISummary();
     updateResourceAllocation();
-
+    updateAIRouteRecommendations();
+    updateAIResourceAllocation();
+console.log(
+    "AI Engine:",
+    AI_MODELS.classification
+);
     setInterval(updateAssessmentPanel, 8000);
     setInterval(updateAIRecommendations, 8000);
     setInterval(updateAISummary, 8000);
     setInterval(updateResourceAllocation, 8000);
+    setInterval(updateAIRouteRecommendations, 8000);
+    setInterval(updateAIResourceAllocation, 8000);
+
+}
+/* =====================================================
+   FUTURE AI MODULES
+===================================================== */
+
+function explainDecision() {
+
+    return "AI recommendation generated from disaster severity, weather, population exposure and resource availability.";
+
+}
+
+function predictMissionSuccess() {
+
+    return "87%";
+
+}
+
+function estimateRecoveryTimeline() {
+
+    return "48 Hours";
+
+}
+
+function generateEvacuationPlan() {
+
+    return [
+
+        "Identify high-risk zones",
+
+        "Deploy transport resources",
+
+        "Open temporary shelters",
+
+        "Monitor evacuation progress"
+
+    ];
 
 }

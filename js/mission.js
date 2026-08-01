@@ -21,7 +21,7 @@ function getMissionPhase(severity) {
 
 function updateMissionStatus() {
 
-    const statusElement = document.getElementById("missionStatus");
+    const statusElement = document.getElementById("dashboardMissionStatus");
 
     if (!statusElement) return;
 
@@ -42,7 +42,7 @@ function updateMissionStatus() {
 
 function updateMissionControl() {
 
-    const target = document.getElementById("missionControlList");
+    const target = document.getElementById("dashboardMissionControlList");
 
     if (!target) return;
 

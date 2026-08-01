@@ -140,5 +140,115 @@ const IncidentDatabase = {
         hospitals: 17
 
     }
+,
 
+/* =====================================================
+   MULTI-HAZARD INCIDENTS
+===================================================== */
+
+disasters: [
+
+    {
+        id: generateIncidentId("Flood"),
+        type: "Flood",
+        severity: "High",
+        status: "Active",
+        location: "Assam",
+        coordinates: [26.20, 91.00],
+        radius: 18000,
+        recommendation: "Deploy rescue boats immediately."
+    },
+
+    {
+        id: generateIncidentId("Cyclone"),
+        type: "Cyclone",
+        severity: "Moderate",
+        status: "Monitoring",
+        location: "Odisha",
+        coordinates: [20.95, 85.09],
+        radius: 22000,
+        recommendation: "Prepare coastal evacuation."
+    },
+
+    {
+        id: generateIncidentId("Wildfire"),
+        type: "Wildfire",
+        severity: "High",
+        status: "Active",
+        location: "Uttarakhand",
+        coordinates: [30.06, 79.01],
+        radius: 12000,
+        recommendation: "Deploy aerial firefighting units."
+    }
+
+],
+
+/* =====================================================
+   ACTIVE MISSIONS
+===================================================== */
+
+missions: [
+
+    {
+        missionId: "MIS-001",
+        incident: "Flood",
+        commander: "Operator Alpha",
+        status: "En Route",
+        eta: "18 min",
+        progress: 45
+    }
+
+],
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+navigation: {
+
+    destination: "Flood Zone - Assam",
+
+    distance: "18.4 km",
+
+    eta: "22 min",
+
+    safestRoute: true,
+
+    blockedRoads: 2,
+
+    alternativeRoutes: 3
+
+},
+
+/* =====================================================
+   REPORTS
+===================================================== */
+
+reports: {
+
+    totalReports: 18,
+
+    latestReport: "AI_Disaster_Report.pdf",
+
+    lastGenerated: "--"
+
+},
+
+/* =====================================================
+   SYSTEM HEALTH
+===================================================== */
+
+systemHealth: {
+
+    ai: "Online",
+
+    satellite: "Connected",
+
+    database: "Healthy",
+
+    communication: "Online",
+
+    navigation: "Ready"
+
+}
 };

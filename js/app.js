@@ -9,13 +9,110 @@ const dashboardState = {
     activeRange: "today"
 };
 
+const UI_COMPONENTS = {
+    dashboardPage: "dashboardPage",
+    incidentPage: "incidentPage",
+    missionPage: "missionPage",
+    navigationPage: "navigationPage",
+    resourcePage: "resourcePage",
+    aiPage: "aiPage",
+    analyticsPage: "analyticsPage",
+    communicationPage: "communicationPage",
+    reportsPage: "reportsPage",
+    alertsPage: "alertsPage",
+    settingsPage: "settingsPage",
+    profilePage: "profilePage",
+    navLinks: "navLinks",
+    dispatchBoardList: "dispatchBoardList",
+    escalationStatusList: "escalationStatusList",
+    operatorNotesList: "operatorNotesList",
+    weatherWidget: "weatherWidget",
+    weatherText: "weatherText",
+    weatherIcon: "weatherIcon",
+    clock: "clock",
+    map: "map",
+    mapLayerToggles: "mapLayerToggles",
+    disasterMonitorBody: "disasterMonitorBody",
+    chartFilters: "chartFilters",
+    trendChart: "trendChart",
+    distributionChart: "distributionChart",
+    stateChart: "stateChart",
+    riskChart: "riskChart",
+    riskTrendChart: "riskTrendChart",
+    resourceUsageChart: "resourceUsageChart",
+    incidentFrequencyChart: "incidentFrequencyChart",
+    weatherPanel: "weatherPanel",
+    weatherCityValue: "weatherCityValue",
+    weatherTempValue: "weatherTempValue",
+    weatherConditionValue: "weatherConditionValue",
+    weatherHumidityValue: "weatherHumidityValue",
+    weatherWindValue: "weatherWindValue",
+    weatherPressureValue: "weatherPressureValue",
+    weatherRainfallValue: "weatherRainfallValue",
+    weatherVisibilityValue: "weatherVisibilityValue",
+    weatherFeelsLikeValue: "weatherFeelsLikeValue",
+    weatherLastUpdatedValue: "weatherLastUpdatedValue",
+    earthquakeMagnitudeValue: "earthquakeMagnitudeValue",
+    earthquakeDepthValue: "earthquakeDepthValue",
+    earthquakeLocationValue: "earthquakeLocationValue",
+    earthquakeStatusValue: "earthquakeStatusValue",
+    activeIncidentsCount: "activeIncidentsCount",
+    populationAtRiskCount: "populationAtRiskCount",
+    resourcesDeployedCount: "resourcesDeployedCount",
+    responseTimeCount: "responseTimeCount",
+    successRateCount: "successRateCount",
+    aiAccuracyCount: "aiAccuracyCount",
+    dashboardMissionStatus: "dashboardMissionStatus",
+    dashboardAlertsList: "dashboardAlertsList",
+    alertsPageAlertsList: "alertsPageAlertsList",
+    dashboardAiRecommendations: "dashboardAiRecommendations",
+    dashboardMissionControlList: "dashboardMissionControlList",
+    dashboardResourceAllocation: "dashboardResourceAllocation",
+    incidentTimeline: "incidentTimeline",
+    reportSection: "reportSection",
+    navigationDestination: "navigationDestination",
+    navigationDistance: "navigationDistance",
+    navigationETA: "navigationETA",
+    blockedRoads: "blockedRoads",
+    navigationStatus: "navigationStatus",
+    navigationRouteList: "navigationRouteList",
+    resourceReadinessList: "resourceReadinessList",
+    resourceDeploymentPulse: "resourceDeploymentPulse",
+    analyticsSummaryList: "analyticsSummaryList",
+    analyticsTrendList: "analyticsTrendList",
+    aiSummary: "aiSummary",
+    riskLevelValue: "riskLevelValue",
+    disasterSeverityValue: "disasterSeverityValue",
+    populationImpactValue: "populationImpactValue",
+    infrastructureDamageValue: "infrastructureDamageValue",
+    responsePriorityValue: "responsePriorityValue",
+    confidenceValue: "confidenceValue",
+    nationalActiveDisasters: "nationalActiveDisasters",
+    nationalHighestRiskDisaster: "nationalHighestRiskDisaster",
+    nationalMostAffectedState: "nationalMostAffectedState",
+    nationalPopulationAtRisk: "nationalPopulationAtRisk",
+    nationalResourcesDeployed: "nationalResourcesDeployed",
+    nationalThreatLevel: "nationalThreatLevel",
+    satelliteCount: "satelliteCount",
+    floodCount: "floodCount",
+    fireCount: "fireCount",
+    accuracyCount: "accuracyCount",
+    alertsList: "dashboardAlertsList",
+    missionStatus: "dashboardMissionStatus",
+    aiRecommendations: "dashboardAiRecommendations",
+    missionControlList: "dashboardMissionControlList",
+    resourceAllocation: "dashboardResourceAllocation"
+};
+
 function getDashboardElement(elementId) {
 
-    if (!dashboardState.domCache[elementId]) {
-        dashboardState.domCache[elementId] = document.getElementById(elementId);
+    const resolvedId = UI_COMPONENTS[elementId] || elementId;
+
+    if (!dashboardState.domCache[resolvedId]) {
+        dashboardState.domCache[resolvedId] = document.getElementById(resolvedId);
     }
 
-    return dashboardState.domCache[elementId];
+    return dashboardState.domCache[resolvedId];
 
 }
 
@@ -44,6 +141,13 @@ function ensureDashboardDefaults() {
     IncidentDatabase.currentIncident.location = IncidentDatabase.currentIncident.location || {};
     IncidentDatabase.resources = IncidentDatabase.resources || {};
     IncidentDatabase.disasters = IncidentDatabase.disasters || [];
+    IncidentDatabase.missions = IncidentDatabase.missions || [];
+
+IncidentDatabase.navigation = IncidentDatabase.navigation || {};
+
+IncidentDatabase.reports = IncidentDatabase.reports || {};
+
+IncidentDatabase.systemHealth = IncidentDatabase.systemHealth || {};
 
     if (!IncidentDatabase.currentIncident.location.state && IncidentDatabase.disasters[0]) {
         const first = IncidentDatabase.disasters[0];
@@ -118,7 +222,40 @@ function refreshDashboard() {
     if (typeof updateMapView === "function") {
         updateMapView();
     }
+    if (typeof initializeNavigation === "function") {
+    initializeNavigation();
+}
 
+if (typeof updateResourceManagement === "function") {
+    updateResourceManagement();
+}
+
+if (typeof updateAnalyticsOverview === "function") {
+    updateAnalyticsOverview();
+}
+/* =====================================================
+   ENTERPRISE MODULES
+===================================================== */
+
+if (typeof updateNavigationCenter === "function") {
+    updateNavigationCenter();
+}
+
+if (typeof updateCommunicationCenter === "function") {
+    updateCommunicationCenter();
+}
+
+if (typeof updateReportsDashboard === "function") {
+    updateReportsDashboard();
+}
+
+if (typeof updateOperatorProfile === "function") {
+    updateOperatorProfile();
+}
+
+if (typeof updateSystemHealth === "function") {
+    updateSystemHealth();
+}
 }
 
 function setDashboardRange(range) {
@@ -147,6 +284,174 @@ function getFilteredDisasters() {
 
 }
 
+function getResourceReadiness() {
+    const resources = IncidentDatabase.resources || {};
+    const units = [
+        { name: "Rescue Teams", count: resources.rescueTeams || 0, readiness: 92, target: "River + urban rescue" },
+        { name: "Ambulances", count: resources.ambulances || 0, readiness: 90, target: "Emergency triage" },
+        { name: "Helicopters", count: resources.helicopters || 0, readiness: 86, target: "Aerial support" },
+        { name: "Shelters", count: resources.shelters || 0, readiness: 88, target: "Displacement support" },
+        { name: "Hospitals", count: resources.hospitals || 0, readiness: 94, target: "Critical care" }
+    ];
+
+    return units;
+}
+
+function updateResourceManagement() {
+    const list = getDashboardElement("resourceReadinessList");
+    const summary = document.getElementById("resourceReadinessSummary");
+    const readinessScore = document.getElementById("resourceReadinessScore");
+    const ambulanceCount = document.getElementById("resourceAmbulanceCount");
+    const shelterCount = document.getElementById("resourceShelterCount");
+    const pulse = document.getElementById("resourceDeploymentPulse");
+
+    if (!list && !summary && !readinessScore && !ambulanceCount && !shelterCount && !pulse) return;
+
+    const readiness = getResourceReadiness();
+    const totalReadiness = Math.round(readiness.reduce((sum, unit) => sum + unit.readiness, 0) / readiness.length);
+    const resources = IncidentDatabase.resources || {};
+
+    if (summary) {
+        summary.textContent = totalReadiness >= 90 ? "All priority units staged" : "Some support assets need allocation";
+    }
+
+    if (readinessScore) {
+        readinessScore.textContent = `${totalReadiness}%`;
+    }
+
+    if (ambulanceCount) {
+        ambulanceCount.textContent = resources.ambulances || 0;
+    }
+
+    if (shelterCount) {
+        shelterCount.textContent = resources.shelters || 0;
+    }
+
+    if (list) {
+        list.innerHTML = readiness.map((unit) => `
+            <li class="ai-decision-item">
+                <div class="decision-main">
+                    <strong>${unit.name}</strong>
+                    <span>${unit.readiness}%</span>
+                </div>
+                <div class="decision-meta">${unit.count} units available • ${unit.target}</div>
+            </li>
+        `).join("");
+    }
+
+    if (pulse) {
+        const deployment = [
+            { label: "Critical assets", value: totalReadiness },
+            { label: "Field support", value: 88 },
+            { label: "Shelter capacity", value: 91 }
+        ];
+
+        pulse.innerHTML = deployment.map((entry) => `
+            <div>
+                <label>${entry.label}</label>
+                <div class="progress-bar"><span style="width: ${entry.value}%"></span></div>
+                <strong>${entry.value}%</strong>
+            </div>
+        `).join("");
+    }
+}
+
+function getAnalyticsSignals() {
+    const disasters = IncidentDatabase.disasters || [];
+    const totalPopulation = disasters.reduce((total, disaster) => total + (disaster.populationAffected || 0), 0);
+    const averageRisk = disasters.length
+        ? Math.round(disasters.reduce((sum, disaster) => sum + calculateRiskForDisaster(disaster), 0) / disasters.length)
+        : 0;
+    const dominant = disasters.length
+        ? disasters.reduce((top, disaster) => (disaster.populationAffected || 0) > (top.populationAffected || 0) ? disaster : top)
+        : { type: "Flood", populationAffected: 0 };
+
+    return {
+        incidentShare: disasters.filter((disaster) => disaster.type && disaster.type.toLowerCase().includes("flood")).length > 0 ? 38 : 32,
+        totalPopulation,
+        trendGain: 12 + Math.min(14, disasters.length * 2),
+        dominantType: dominant.type || "Flood",
+        averageRisk
+    };
+}
+
+function updateAnalyticsOverview() {
+    const incidentShare = document.getElementById("analyticsIncidentShare");
+    const summaryCopy = document.getElementById("analyticsIncidentSummary");
+    const populationValue = document.getElementById("analyticsPopulationValue");
+    const trendValue = document.getElementById("analyticsTrendValue");
+    const summaryList = document.getElementById("analyticsSummaryList");
+    const trendList = document.getElementById("analyticsTrendList");
+
+    if (!incidentShare && !summaryCopy && !populationValue && !trendValue && !summaryList && !trendList) return;
+
+    const analytics = getAnalyticsSignals();
+
+    if (incidentShare) {
+        incidentShare.textContent = `${analytics.incidentShare}%`;
+    }
+
+    if (summaryCopy) {
+        summaryCopy.textContent = `${analytics.dominantType} events dominate current load`;
+    }
+
+    if (populationValue) {
+        populationValue.textContent = `${(analytics.totalPopulation / 1000000).toFixed(1)}M`;
+    }
+
+    if (trendValue) {
+        trendValue.textContent = `+${analytics.trendGain}%`;
+    }
+
+    if (summaryList) {
+        const breakdown = [
+            { label: "Average risk score", value: `${analytics.averageRisk}/100` },
+            { label: "Affected population", value: `${analytics.totalPopulation.toLocaleString()} people` },
+            { label: "Dominant threat", value: analytics.dominantType }
+        ];
+
+        summaryList.innerHTML = breakdown.map((item) => `
+            <li class="ai-decision-item">
+                <div class="decision-main">
+                    <strong>${item.label}</strong>
+                    <span>Live</span>
+                </div>
+                <div class="decision-meta">${item.value}</div>
+            </li>
+        `).join("");
+    }
+
+    if (trendList) {
+        const signals = [
+            { label: "Flood pressure", value: "High" },
+            { label: "Shelter occupancy", value: "82%" },
+            { label: "Rescue throughput", value: "+11%" },
+            { label: "Weather volatility", value: "Moderate" }
+        ];
+
+        trendList.innerHTML = signals.map((item) => `
+            <li class="ai-decision-item">
+                <div class="decision-main">
+                    <strong>${item.label}</strong>
+                    <span>${item.value}</span>
+                </div>
+            </li>
+        `).join("");
+    }
+}
+/* =====================================================
+   ACTIVE INCIDENT
+===================================================== */
+
+function getActiveIncident() {
+
+    const disasters = getFilteredDisasters();
+
+    return disasters.length
+        ? disasters[0]
+        : IncidentDatabase.currentIncident;
+
+}
 function initializeMultiHazardData() {
 
     if (IncidentDatabase.disasters && IncidentDatabase.disasters.length) {
@@ -455,24 +760,6 @@ function bindDashboardInteractions() {
 
     if (dashboardState.interactionsBound) return;
 
-    const navItems = document.querySelectorAll("#navLinks li");
-    navItems.forEach((item) => {
-        item.addEventListener("click", () => {
-            navItems.forEach((entry) => entry.classList.remove("active"));
-            item.classList.add("active");
-            const target = item.getAttribute("data-target");
-            if (target) {
-                const targetElement = document.getElementById(target);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-                    history.replaceState(null, "", `#${target}`);
-                    targetElement.setAttribute("tabindex", "-1");
-                    targetElement.focus({ preventScroll: true });
-                }
-            }
-        });
-    });
-
     document.querySelectorAll(".interactive-card").forEach((card) => {
         card.addEventListener("click", () => {
             const filter = card.getAttribute("data-filter");
@@ -541,7 +828,10 @@ function initializeDashboard() {
     initializeSafe("initializeCharts", initializeCharts);
     initializeSafe("initializeAlerts", initializeAlerts);
     initializeSafe("initializeAI", initializeAI);
+    initializeSafe("initializeCommunication", initializeCommunication);
     initializeSafe("initializeLiveData", initializeLiveData);
+    initializeSafe("updateResourceManagement", updateResourceManagement);
+    initializeSafe("updateAnalyticsOverview", updateAnalyticsOverview);
     initializeSafe("updateMissionStatus", updateMissionStatus);
     initializeSafe("updateWeatherPanel", updateWeatherPanel);
     initializeSafe("updateEarthquakeWidget", updateEarthquakeWidget);

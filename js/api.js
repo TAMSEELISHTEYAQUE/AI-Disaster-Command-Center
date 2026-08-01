@@ -7,7 +7,22 @@ const API = {
 
     WEATHER_API_KEY: "a02b3861f04590cda768b35d6f7e74dc",
 
-    WEATHER_BASE_URL: "https://api.openweathermap.org/data/2.5"
+    WEATHER_BASE_URL: "https://api.openweathermap.org/data/2.5",
+
+    EARTHQUAKE_API:
+        "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",
+
+    NASA_EONET_API:
+        "https://eonet.gsfc.nasa.gov/api/v3/events",
+
+    GDACS_API:
+        "https://www.gdacs.org/gdacsapi/api/events/geteventlist",
+
+    OVERPASS_API:
+        "https://overpass-api.de/api/interpreter",
+
+    OSRM_API:
+        "https://router.project-osrm.org"
 
 };
 
@@ -34,7 +49,13 @@ function initializeAPI() {
     if (typeof fetchEarthquakeData === "function") {
         fetchEarthquakeData();
     }
+if (typeof fetchSatelliteEvents === "function") {
+    fetchSatelliteEvents();
+}
 
+if (typeof fetchNavigationData === "function") {
+    fetchNavigationData();
+}
 }
 
 
@@ -100,5 +121,26 @@ function updateWeatherWidget() {
     const safeCity = IncidentDatabase.weather.city || "Unknown";
 
     weatherText.textContent = `${safeTemperature}°C ${safeCity}`;
+
+}
+/* =====================================================
+   FUTURE API PLACEHOLDERS
+===================================================== */
+
+async function fetchSatelliteEvents() {
+
+    console.log("Satellite API Ready");
+
+}
+
+async function fetchNavigationData() {
+
+    console.log("Navigation API Ready");
+
+}
+
+async function fetchTrafficData() {
+
+    console.log("Traffic API Ready");
 
 }

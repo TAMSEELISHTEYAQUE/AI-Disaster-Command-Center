@@ -48,7 +48,7 @@ function createAlertItem(alert) {
 
 function updateAlerts() {
 
-    const list = document.getElementById("alertsList");
+    const list = document.getElementById("dashboardAlertsList") || document.getElementById("alertsPageAlertsList");
 
     if (!list) return;
 

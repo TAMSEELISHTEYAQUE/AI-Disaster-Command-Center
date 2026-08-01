@@ -24,13 +24,44 @@ function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 
 }
+function generateIncidentId(disasterType = "GEN") {
 
-function generateIncidentId() {
+    const year = new Date().getFullYear();
 
-    return "ADC-" + Date.now();
+    const typeMap = {
+        Flood: "FLD",
+        Earthquake: "EQK",
+        Cyclone: "CYC",
+        Tsunami: "TSU",
+        Wildfire: "WLF",
+        Landslide: "LND",
+        Avalanche: "AVL",
+        Heatwave: "HTW",
+        Drought: "DRT",
+        Industrial: "IND",
+        Chemical: "CHM",
+        Gas: "GAS",
+        Building: "BLD",
+        Fire: "FIR",
+        Road: "RDA",
+        Train: "TRN",
+        Aviation: "AIR",
+        Maritime: "MAR",
+        Disease: "DIS",
+        Terror: "TER",
+        Stampede: "STM",
+        Health: "HLT"
+    };
+
+    const prefix = typeMap[disasterType] || "GEN";
+
+    const serial = String(
+        Math.floor(Math.random() * 99999)
+    ).padStart(5, "0");
+
+    return `ADC-${year}-${prefix}-${serial}`;
 
 }
-
 /* =====================================================
    LIVE CLOCK
 ===================================================== */
@@ -187,5 +218,49 @@ function updateList(listId, items, displayCount = 4) {
         list.appendChild(li);
 
     });
+
+}
+/* =====================================================
+   DISASTER HELPERS
+===================================================== */
+
+function getSeverityColor(severity) {
+
+    switch ((severity || "").toLowerCase()) {
+
+        case "critical":
+            return "#C62828";
+
+        case "high":
+            return "#EF4444";
+
+        case "moderate":
+            return "#D6A100";
+
+        case "low":
+            return "#1F8F4D";
+
+        default:
+            return "#00BFFF";
+
+    }
+
+}
+
+function getDisasterTypeMeta(type) {
+
+    const disasters = {
+        Flood: { icon: "🌊", color: "#3B82F6" },
+        Cyclone: { icon: "🌀", color: "#8B5CF6" },
+        Wildfire: { icon: "🔥", color: "#EF4444" },
+        Earthquake: { icon: "🌍", color: "#F59E0B" },
+        Heatwave: { icon: "☀️", color: "#F97316" },
+        Drought: { icon: "🏜️", color: "#A3A3A3" }
+    };
+
+    return disasters[String(type)] || {
+        icon: "⚠",
+        color: "#00BFFF"
+    };
 
 }
