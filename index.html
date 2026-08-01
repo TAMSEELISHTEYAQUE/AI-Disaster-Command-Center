@@ -508,29 +508,359 @@ if (!sessionStorage.getItem("loggedIn")) {
                     Generate AI Incident Report
                 </button>
             </section>
-<section id="incidentPage" class="workspace-page"></section>
+        </section>
 
-<section id="missionPage" class="workspace-page"></section>
+        <section id="incidentPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Operational Command</p>
+                        <h2><i class="fas fa-triangle-exclamation"></i> Incident Management</h2>
+                    </div>
+                    <button class="primary-button" type="button">Escalate Incident</button>
+                </header>
 
-<section id="navigationPage" class="workspace-page"></section>
+                <div class="module-grid three-up">
+                    <article class="glass-panel metric-card">
+                        <small>Active Incidents</small>
+                        <strong>06</strong>
+                        <span>2 critical, 3 high, 1 moderate</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Response Units</small>
+                        <strong>42</strong>
+                        <span>Ambulances, boats, firefighting crews</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Evacuation Status</small>
+                        <strong>88%</strong>
+                        <span>Population awareness and route clearance</span>
+                    </article>
+                </div>
 
-<section id="resourcePage" class="workspace-page"></section>
+                <div class="split-grid">
+                    <div class="glass-panel panel-block">
+                        <h3>Incident Timeline</h3>
+                        <ul class="timeline-list">
+                            <li><span>06:30</span><p>Flood alert escalated in Assam corridor.</p></li>
+                            <li><span>07:10</span><p>Medical teams pre-positioned near Barpeta.</p></li>
+                            <li><span>07:45</span><p>Alternate routing activated for relief convoy.</p></li>
+                        </ul>
+                    </div>
+                    <div class="glass-panel panel-block">
+                        <h3>Operational Summary</h3>
+                        <div class="summary-stack">
+                            <div><label>Highest-priority zone</label><strong>Assam Flood Corridor</strong></div>
+                            <div><label>Primary risk</label><strong>River overflow + road disruption</strong></div>
+                            <div><label>AI recommendation</label><strong>Prioritize boat rescue and shelter staging</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section id="aiPage" class="workspace-page"></section>
+        <section id="missionPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Execution Layer</p>
+                        <h2><i class="fas fa-crosshairs"></i> Mission Control</h2>
+                    </div>
+                    <button class="primary-button" type="button">Dispatch Mission</button>
+                </header>
 
-<section id="analyticsPage" class="workspace-page"></section>
+                <div class="module-grid two-up">
+                    <article class="glass-panel panel-block">
+                        <h3>Mission Board</h3>
+                        <div class="mission-list">
+                            <div class="mission-item">
+                                <span class="mission-tag critical">Critical</span>
+                                <strong>Mission Alpha</strong>
+                                <small>Assam Flood Relief · ETA 18 min</small>
+                            </div>
+                            <div class="mission-item">
+                                <span class="mission-tag warning">En Route</span>
+                                <strong>Mission Bravo</strong>
+                                <small>Odisha Cyclone Shelter · ETA 26 min</small>
+                            </div>
+                            <div class="mission-item">
+                                <span class="mission-tag success">Ready</span>
+                                <strong>Mission Charlie</strong>
+                                <small>Uttarakhand Fire Response · ETA 34 min</small>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="glass-panel panel-block">
+                        <h3>Mission KPIs</h3>
+                        <div class="summary-stack">
+                            <div><label>Completion rate</label><strong>74%</strong></div>
+                            <div><label>Avg. response time</label><strong>12 min</strong></div>
+                            <div><label>Asset utilization</label><strong>91%</strong></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-<section id="communicationPage" class="workspace-page"></section>
+        <section id="navigationPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">GIS Coordination</p>
+                        <h2><i class="fas fa-route"></i> Navigation Center</h2>
+                    </div>
+                    <button class="primary-button" type="button">Optimize Routes</button>
+                </header>
 
-<section id="reportsPage" class="workspace-page"></section>
+                <div class="module-grid two-up">
+                    <article class="glass-panel panel-block">
+                        <h3>Route Intelligence</h3>
+                        <div class="route-metrics">
+                            <div><label>Destination</label><strong id="navigationDestination">Flood Zone - Assam</strong></div>
+                            <div><label>Distance</label><strong id="navigationDistance">18.4 km</strong></div>
+                            <div><label>ETA</label><strong id="navigationETA">22 min</strong></div>
+                            <div><label>Blocked Roads</label><strong id="blockedRoads">2</strong></div>
+                        </div>
+                    </article>
+                    <article class="glass-panel panel-block">
+                        <h3>Layer Overlay</h3>
+                        <ul class="layer-list">
+                            <li><span class="layer-dot hazard"></span> Hazards</li>
+                            <li><span class="layer-dot rescue"></span> Rescue routes</li>
+                            <li><span class="layer-dot hospital"></span> Hospitals</li>
+                            <li><span class="layer-dot shelter"></span> Shelters</li>
+                            <li><span class="layer-dot traffic"></span> Traffic</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-<section id="alertsPage" class="workspace-page"></section>
+        <section id="resourcePage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Logistics</p>
+                        <h2><i class="fas fa-truck-medical"></i> Resource Management</h2>
+                    </div>
+                    <button class="primary-button" type="button">Sync Inventory</button>
+                </header>
 
-<section id="settingsPage" class="workspace-page"></section>
+                <div class="module-grid three-up">
+                    <article class="glass-panel metric-card">
+                        <small>Rescue Teams</small>
+                        <strong>14</strong>
+                        <span>Prepared for river and urban rescue</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Ambulances</small>
+                        <strong>42</strong>
+                        <span>Across the affected districts</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Relief Camps</small>
+                        <strong>28</strong>
+                        <span>Capacity for immediate sheltering</span>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-<section id="profilePage" class="workspace-page"></section>
+        <section id="aiPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Decision Support</p>
+                        <h2><i class="fas fa-brain"></i> AI Intelligence</h2>
+                    </div>
+                    <button class="primary-button" type="button">Run Simulation</button>
+                </header>
+
+                <div class="module-grid three-up">
+                    <article class="glass-panel metric-card">
+                        <small>Risk Forecast</small>
+                        <strong>92/100</strong>
+                        <span>High-probability flood escalation</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Confidence</small>
+                        <strong>98.4%</strong>
+                        <span>Model confidence score</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Response Priority</small>
+                        <strong>Critical</strong>
+                        <span>Suggested immediate intervention</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="analyticsPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Insights</p>
+                        <h2><i class="fas fa-chart-pie"></i> Analytics</h2>
+                    </div>
+                    <button class="primary-button" type="button">Export Snapshot</button>
+                </header>
+
+                <div class="module-grid three-up">
+                    <article class="glass-panel metric-card">
+                        <small>Incidents by Type</small>
+                        <strong>38%</strong>
+                        <span>Flood events dominate current load</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Population Impact</small>
+                        <strong>1.2M</strong>
+                        <span>People affected across active zones</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Trend Gain</small>
+                        <strong>+14%</strong>
+                        <span>Compared with prior 24-hour window</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="communicationPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Field Coordination</p>
+                        <h2><i class="fas fa-comments"></i> Communication</h2>
+                    </div>
+                    <button class="primary-button" type="button">Broadcast Alert</button>
+                </header>
+
+                <div class="module-grid two-up">
+                    <article class="glass-panel panel-block">
+                        <h3>Active Channels</h3>
+                        <ul class="channel-list">
+                            <li>Command net: online</li>
+                            <li>District control: stable</li>
+                            <li>ICU/medical backhaul: connected</li>
+                        </ul>
+                    </article>
+                    <article class="glass-panel panel-block">
+                        <h3>Latest Broadcast</h3>
+                        <p class="broadcast-copy">Relief routes reopened for northbound emergency convoys. Shelter capacity confirmed at three staging points.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="reportsPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Governance</p>
+                        <h2><i class="fas fa-file-alt"></i> Reports</h2>
+                    </div>
+                    <button class="primary-button" type="button" id="generateReport">Generate PDF</button>
+                </header>
+
+                <div class="module-grid three-up">
+                    <article class="glass-panel metric-card">
+                        <small>Daily Brief</small>
+                        <strong>Ready</strong>
+                        <span>Issued 05:30 IST</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Executive Summary</small>
+                        <strong>Verified</strong>
+                        <span>QR signature attached</span>
+                    </article>
+                    <article class="glass-panel metric-card">
+                        <small>Last Export</small>
+                        <strong>AI_Disaster_Report.pdf</strong>
+                        <span>24 min ago</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="alertsPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Live Watch</p>
+                        <h2><i class="fas fa-bell"></i> Alerts</h2>
+                    </div>
+                    <button class="primary-button" type="button">Acknowledge All</button>
+                </header>
+
+                <div class="glass-panel panel-block">
+                    <ul id="alertsList" class="alert-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="settingsPage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">System Controls</p>
+                        <h2><i class="fas fa-cog"></i> Settings</h2>
+                    </div>
+                    <button class="primary-button" type="button">Save Profile</button>
+                </header>
+
+                <div class="module-grid two-up">
+                    <article class="glass-panel panel-block">
+                        <h3>Monitoring Preferences</h3>
+                        <div class="toggle-list">
+                            <label><input type="checkbox" checked> Auto-refresh hazard feed</label>
+                            <label><input type="checkbox" checked> AI escalation alerts</label>
+                            <label><input type="checkbox" checked> Route risk notifications</label>
+                        </div>
+                    </article>
+                    <article class="glass-panel panel-block">
+                        <h3>Operator Mode</h3>
+                        <div class="toggle-list">
+                            <label><input type="radio" name="mode" checked> Command view</label>
+                            <label><input type="radio" name="mode"> Tactical view</label>
+                            <label><input type="radio" name="mode"> Executive view</label>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="profilePage" class="workspace-page">
+            <div class="workspace-shell">
+                <header class="page-header">
+                    <div>
+                        <p class="eyebrow">Operator Profile</p>
+                        <h2><i class="fas fa-user"></i> Profile</h2>
+                    </div>
+                    <button class="primary-button" type="button">Edit Profile</button>
+                </header>
+
+                <div class="module-grid two-up">
+                    <article class="glass-panel panel-block profile-card">
+                        <div class="avatar">AO</div>
+                        <div>
+                            <h3>Admin Operator</h3>
+                            <p>National Emergency Coordination Cell</p>
+                            <span>Shift: 06:00 - 18:00 IST</span>
+                        </div>
+                    </article>
+                    <article class="glass-panel panel-block">
+                        <h3>Certifications</h3>
+                        <ul class="channel-list">
+                            <li>Incident Command System Level 3</li>
+                            <li>GIS Mapping & Routing</li>
+                            <li>AI Safety Oversight</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
         </main>
-</section>
 </div>
 
 <!-- Leaflet JS -->
@@ -566,7 +896,7 @@ if (!sessionStorage.getItem("loggedIn")) {
 <script src="js/liveData.js"></script>
 
 <script src="js/mission.js"></script>
-<script src="js/app.js"></script>
+<script src="js/navigation.js"></script>
 <!-- App (always last) -->
 <script src="js/app.js"></script>
 </body>

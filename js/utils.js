@@ -246,7 +246,19 @@ function getSeverityColor(severity) {
     }
 
 }
-    return disasters[type] || {
+
+function getDisasterTypeMeta(type) {
+
+    const disasters = {
+        Flood: { icon: "🌊", color: "#3B82F6" },
+        Cyclone: { icon: "🌀", color: "#8B5CF6" },
+        Wildfire: { icon: "🔥", color: "#EF4444" },
+        Earthquake: { icon: "🌍", color: "#F59E0B" },
+        Heatwave: { icon: "☀️", color: "#F97316" },
+        Drought: { icon: "🏜️", color: "#A3A3A3" }
+    };
+
+    return disasters[String(type)] || {
         icon: "⚠",
         color: "#00BFFF"
     };

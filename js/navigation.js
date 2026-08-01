@@ -4,56 +4,42 @@
 
 function showWorkspacePage(pageId) {
 
+    const safeId = pageId || "dashboardPage";
+
     document
         .querySelectorAll(".workspace-page")
         .forEach(page => {
-
             page.classList.remove("active-page");
-
         });
 
-    const page = document.getElementById(pageId);
+    const page = document.getElementById(safeId);
 
     if (page) {
-
         page.classList.add("active-page");
-
     }
 
     document
         .querySelectorAll("#navLinks li")
         .forEach(item => {
-
-            item.classList.remove("active");
-
+            item.classList.toggle("active", item.dataset.page === safeId);
         });
-
-    const active = document.querySelector(
-        `[data-page="${pageId}"]`
-    );
-
-    if (active) {
-
-        active.classList.add("active");
-
-    }
 
 }
 
 function initializeNavigation() {
 
-    document
-        .querySelectorAll("#navLinks li")
-        .forEach(item => {
+    const navItems = document.querySelectorAll("#navLinks li");
 
-            item.addEventListener("click", () => {
+    navItems.forEach((item) => {
+        if (item.dataset.bound === "true") return;
 
-                showWorkspacePage(
-                    item.dataset.page
-                );
-
-            });
-
+        item.dataset.bound = "true";
+        item.addEventListener("click", () => {
+            showWorkspacePage(item.dataset.page);
         });
+    });
+
+    const firstPage = document.querySelector(".workspace-page")?.id || "dashboardPage";
+    showWorkspacePage(firstPage);
 
 }
