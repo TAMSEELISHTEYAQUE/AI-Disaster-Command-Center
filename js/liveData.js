@@ -40,6 +40,10 @@ function refreshDashboard() {
         updateReportsDashboard();
     }
 
+    if (typeof updateCommunicationCenter === "function") {
+        updateCommunicationCenter();
+    }
+
     if (typeof renderDashboardCharts === "function") {
         renderDashboardCharts();
     }

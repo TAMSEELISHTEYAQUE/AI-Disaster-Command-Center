@@ -31,6 +31,165 @@ function buildReportSummary() {
     };
 }
 
+function buildReportPreviewHtml(summary) {
+    const resources = IncidentDatabase.resources || {};
+    const navigation = IncidentDatabase.navigation || {};
+    const missions = Array.isArray(IncidentDatabase.missions) ? IncidentDatabase.missions : [];
+    const recommendations = Array.isArray(summary.recommendations) ? summary.recommendations : [summary.recommendations || "Activate response teams"];
+    const routeStatus = navigation.safestRoute ? "Primary route active" : "Fallback route active";
+
+    return `
+        <html>
+        <head>
+            <title>AI Disaster Report Preview</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background: #f3f8ff;
+                    color: #0f172a;
+                    margin: 0;
+                    padding: 24px;
+                }
+                .report-shell {
+                    max-width: 980px;
+                    margin: 0 auto;
+                    background: #fff;
+                    border: 1px solid #d2e2f6;
+                    border-radius: 18px;
+                    overflow: hidden;
+                    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+                }
+                .report-header {
+                    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+                    color: white;
+                    padding: 22px 28px;
+                }
+                .report-header h1 {
+                    margin: 0 0 8px;
+                    font-size: 28px;
+                }
+                .report-body {
+                    padding: 28px;
+                }
+                .report-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(220px, 1fr));
+                    gap: 16px;
+                    margin: 18px 0 28px;
+                }
+                .report-card {
+                    background: #f8fbff;
+                    border: 1px solid #dfeaf7;
+                    border-radius: 12px;
+                    padding: 14px 16px;
+                }
+                .report-card strong {
+                    display: block;
+                    margin-top: 8px;
+                    font-size: 1.1rem;
+                }
+                .section-title {
+                    margin: 0 0 12px;
+                    font-size: 18px;
+                    color: #0f172a;
+                }
+                ul {
+                    margin: 0;
+                    padding-left: 18px;
+                    line-height: 1.9;
+                }
+                .qrcode {
+                    display: inline-block;
+                    padding: 10px 12px;
+                    border: 2px solid #0f172a;
+                    font-weight: 700;
+                    letter-spacing: 0.18em;
+                    border-radius: 8px;
+                    background: #eef8ff;
+                }
+                @media print {
+                    body { background: white; }
+                    .report-shell { box-shadow: none; border: none; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="report-shell">
+                <div class="report-header">
+                    <h1>AI Disaster Command Center</h1>
+                    <div>Government Emergency Operations Platform</div>
+                    <div>Generated: ${summary.generatedAt}</div>
+                </div>
+                <div class="report-body">
+                    <h2 class="section-title">Executive Summary</h2>
+                    <p>${summary.disasterType} incident in ${summary.state} with ${summary.severity} severity and ${summary.riskScore}/100 AI risk score. Response priority: ${summary.priority}. Forecast confidence: ${summary.aiConfidence}%.</p>
+
+                    <div class="report-grid">
+                        <div class="report-card"><span>Incident ID</span><strong>${summary.incidentId}</strong></div>
+                        <div class="report-card"><span>State / District</span><strong>${summary.state} / ${summary.district}</strong></div>
+                        <div class="report-card"><span>Population Affected</span><strong>${summary.populationAffected.toLocaleString()}</strong></div>
+                        <div class="report-card"><span>Status</span><strong>${summary.status}</strong></div>
+                        <div class="report-card"><span>AI Confidence</span><strong>${summary.aiConfidence}%</strong></div>
+                        <div class="report-card"><span>Route Status</span><strong>${routeStatus}</strong></div>
+                    </div>
+
+                    <h2 class="section-title">Incident Overview</h2>
+                    <ul>
+                        <li>Disaster Type: ${summary.disasterType}</li>
+                        <li>Severity: ${summary.severity}</li>
+                        <li>Response Priority: ${summary.priority}</li>
+                        <li>Destination: ${navigation.destination || "Flood Zone - Assam"}</li>
+                        <li>Distance: ${navigation.distance || "18.4 km"}</li>
+                        <li>ETA: ${navigation.eta || "22 min"}</li>
+                    </ul>
+
+                    <h2 class="section-title">AI Analysis & Recommendations</h2>
+                    <ul>
+                        ${recommendations.map((item) => `<li>${item}</li>`).join("")}
+                    </ul>
+
+                    <h2 class="section-title">Mission Timeline</h2>
+                    <ul>
+                        ${missions.length ? missions.map((mission) => `<li>${mission.missionId || "Mission"}: ${mission.incident || "Incident"} | ${mission.status || "Active"} | ETA ${mission.eta || "--"}</li>`).join("") : "<li>No active mission data available</li>"}
+                    </ul>
+
+                    <h2 class="section-title">Resource Deployment</h2>
+                    <ul>
+                        <li>Rescue Teams: ${resources.rescueTeams || 0}</li>
+                        <li>Ambulances: ${resources.ambulances || 0}</li>
+                        <li>Helicopters: ${resources.helicopters || 0}</li>
+                        <li>Shelters: ${resources.shelters || 0}</li>
+                        <li>Hospitals: ${resources.hospitals || 0}</li>
+                    </ul>
+
+                    <h2 class="section-title">Officer & Verification</h2>
+                    <div class="report-grid">
+                        <div class="report-card"><span>Officer</span><strong>Admin Operator</strong></div>
+                        <div class="report-card"><span>Shift</span><strong>06:00 - 18:00 IST</strong></div>
+                    </div>
+                    <div class="qrcode">QR-${summary.incidentId}</div>
+                </div>
+            </div>
+        </body>
+        </html>
+    `;
+}
+
+function previewIncidentReport() {
+    const summary = buildReportSummary();
+    const reportWindow = window.open("", "_blank", "width=1100,height=900");
+
+    if (!reportWindow) {
+        console.warn("⚠ Report preview was blocked by the browser.");
+        return;
+    }
+
+    reportWindow.document.write(buildReportPreviewHtml(summary));
+    reportWindow.document.close();
+    reportWindow.focus();
+    setTimeout(() => reportWindow.print(), 300);
+}
+
 function generateIncidentReport() {
 
     if (!window.jspdf || !window.jspdf.jsPDF) {
@@ -180,11 +339,18 @@ function generateIncidentReport() {
 }
 
 function initializeReport() {
-    const buttons = document.querySelectorAll("[data-report-trigger]");
-    buttons.forEach((button) => {
+    const triggerButtons = document.querySelectorAll("[data-report-trigger]");
+    triggerButtons.forEach((button) => {
         if (button.dataset.bound === "true") return;
         button.dataset.bound = "true";
         button.addEventListener("click", generateIncidentReport);
+    });
+
+    const previewButtons = document.querySelectorAll("[data-report-preview]");
+    previewButtons.forEach((button) => {
+        if (button.dataset.previewBound === "true") return;
+        button.dataset.previewBound = "true";
+        button.addEventListener("click", previewIncidentReport);
     });
 }
 

@@ -148,6 +148,12 @@ const IncidentDatabase = {
             { name: "Primary Rescue Corridor", status: "Safe", eta: "22 min", distance: "18.4 km" },
             { name: "Northern Diversion Route", status: "Clear", eta: "28 min", distance: "21.1 km" },
             { name: "Medical Relief Spur", status: "Moderate", eta: "31 min", distance: "24.0 km" }
+        ],
+        vehicles: [
+            { unit: "R-14", type: "Ambulance", eta: "14 min", status: "En route", progress: 74 },
+            { unit: "R-27", type: "Rescue Boat", eta: "18 min", status: "Clearing channel", progress: 62 },
+            { unit: "M-09", type: "Medical Team", eta: "11 min", status: "On station", progress: 81 },
+            { unit: "F-06", type: "Fire Unit", eta: "26 min", status: "Re-routing", progress: 56 }
         ]
     },
 
