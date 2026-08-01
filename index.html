@@ -118,18 +118,65 @@ if (!sessionStorage.getItem("loggedIn")) {
 
             <ul id="navLinks">
 
-    <li class="active" data-target="overview"><i class="fas fa-chart-line"></i> Dashboard</li>
+    <li class="active" data-page="dashboardPage">
+    <i class="fas fa-chart-line"></i>
+    Dashboard
+</li>
 
-    <li data-target="mapSection"><i class="fas fa-satellite"></i> Satellite Map</li>
+<li data-page="incidentPage">
+    <i class="fas fa-triangle-exclamation"></i>
+    Incident Management
+</li>
 
-    <li data-target="aiSection"><i class="fas fa-brain"></i> AI Analysis</li>
+<li data-page="missionPage">
+    <i class="fas fa-crosshairs"></i>
+    Mission Control
+</li>
 
-    <li data-target="alertsSection"><i class="fas fa-triangle-exclamation"></i> Disaster Alerts</li>
+<li data-page="navigationPage">
+    <i class="fas fa-route"></i>
+    Navigation Center
+</li>
 
-    <li data-target="resourcesSection"><i class="fas fa-truck-medical"></i> Rescue Resources</li>
+<li data-page="resourcePage">
+    <i class="fas fa-truck-medical"></i>
+    Resource Management
+</li>
 
-    <li data-target="reportSection"><i class="fas fa-gear"></i> Settings</li>
+<li data-page="aiPage">
+    <i class="fas fa-brain"></i>
+    AI Intelligence
+</li>
 
+<li data-page="analyticsPage">
+    <i class="fas fa-chart-pie"></i>
+    Analytics
+</li>
+
+<li data-page="communicationPage">
+    <i class="fas fa-comments"></i>
+    Communication
+</li>
+
+<li data-page="reportsPage">
+    <i class="fas fa-file-alt"></i>
+    Reports
+</li>
+
+<li data-page="alertsPage">
+    <i class="fas fa-bell"></i>
+    Alerts
+</li>
+
+<li data-page="settingsPage">
+    <i class="fas fa-cog"></i>
+    Settings
+</li>
+
+<li data-page="profilePage">
+    <i class="fas fa-user"></i>
+    Profile
+</li>
 </ul>
 
         </aside>
@@ -137,7 +184,7 @@ if (!sessionStorage.getItem("loggedIn")) {
         <!-- ================= MAIN CONTENT ================= -->
 
         <main class="main-content">
-
+<section id="dashboardPage" class="workspace-page active-page">
             <h2>🛰 Multi-Hazard AI Command Center</h2>
 
             <div class="cards">
@@ -461,9 +508,29 @@ if (!sessionStorage.getItem("loggedIn")) {
                     Generate AI Incident Report
                 </button>
             </section>
+<section id="incidentPage" class="workspace-page"></section>
 
+<section id="missionPage" class="workspace-page"></section>
+
+<section id="navigationPage" class="workspace-page"></section>
+
+<section id="resourcePage" class="workspace-page"></section>
+
+<section id="aiPage" class="workspace-page"></section>
+
+<section id="analyticsPage" class="workspace-page"></section>
+
+<section id="communicationPage" class="workspace-page"></section>
+
+<section id="reportsPage" class="workspace-page"></section>
+
+<section id="alertsPage" class="workspace-page"></section>
+
+<section id="settingsPage" class="workspace-page"></section>
+
+<section id="profilePage" class="workspace-page"></section>
         </main>
-
+</section>
 </div>
 
 <!-- Leaflet JS -->
@@ -499,7 +566,7 @@ if (!sessionStorage.getItem("loggedIn")) {
 <script src="js/liveData.js"></script>
 
 <script src="js/mission.js"></script>
-
+<script src="js/app.js"></script>
 <!-- App (always last) -->
 <script src="js/app.js"></script>
 </body>

@@ -125,6 +125,9 @@ function refreshDashboard() {
     if (typeof updateMapView === "function") {
         updateMapView();
     }
+    if (typeof initializeNavigation === "function") {
+    initializeNavigation();
+}
 /* =====================================================
    ENTERPRISE MODULES
 ===================================================== */

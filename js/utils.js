@@ -246,27 +246,6 @@ function getSeverityColor(severity) {
     }
 
 }
-
-function getDisasterMeta(type) {
-
-    const disasters = {
-
-        Flood:      { icon: "🌊", color: "#2196F3" },
-        Earthquake: { icon: "🌍", color: "#795548" },
-        Cyclone:    { icon: "🌀", color: "#8E24AA" },
-        Tsunami:    { icon: "🌊", color: "#1565C0" },
-        Wildfire:   { icon: "🔥", color: "#E53935" },
-        Landslide:  { icon: "⛰", color: "#8D6E63" },
-        Avalanche:  { icon: "❄", color: "#81D4FA" },
-        Heatwave:   { icon: "☀", color: "#FB8C00" },
-        Drought:    { icon: "🌾", color: "#A1887F" },
-        Industrial: { icon: "🏭", color: "#607D8B" },
-        Chemical:   { icon: "☣", color: "#9C27B0" },
-        Disease:    { icon: "🦠", color: "#43A047" },
-        Terror:     { icon: "🚨", color: "#D32F2F" }
-
-    };
-
     return disasters[type] || {
         icon: "⚠",
         color: "#00BFFF"

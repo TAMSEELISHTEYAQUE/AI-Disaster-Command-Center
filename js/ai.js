@@ -25,7 +25,23 @@ const supportedDisasterCatalog = [
     "Oil Spill",
     "Building Collapse"
 ];
+/* =====================================================
+   AI MODELS
+===================================================== */
 
+const AI_MODELS = {
+
+    classification: "ADC Classification Engine",
+
+    prediction: "ADC Prediction Engine",
+
+    recommendation: "ADC Resource Optimizer",
+
+    navigation: "ADC Route Intelligence",
+
+    report: "ADC Report Generator"
+
+};
 function getSupportedDisasters() {
     return supportedDisasterCatalog;
 }
@@ -391,10 +407,50 @@ function initializeAI() {
     updateAIRecommendations();
     updateAISummary();
     updateResourceAllocation();
-
+console.log(
+    "AI Engine:",
+    AI_MODELS.classification
+);
     setInterval(updateAssessmentPanel, 8000);
     setInterval(updateAIRecommendations, 8000);
     setInterval(updateAISummary, 8000);
     setInterval(updateResourceAllocation, 8000);
+
+}
+/* =====================================================
+   FUTURE AI MODULES
+===================================================== */
+
+function explainDecision() {
+
+    return "AI recommendation generated from disaster severity, weather, population exposure and resource availability.";
+
+}
+
+function predictMissionSuccess() {
+
+    return "87%";
+
+}
+
+function estimateRecoveryTimeline() {
+
+    return "48 Hours";
+
+}
+
+function generateEvacuationPlan() {
+
+    return [
+
+        "Identify high-risk zones",
+
+        "Deploy transport resources",
+
+        "Open temporary shelters",
+
+        "Monitor evacuation progress"
+
+    ];
 
 }
