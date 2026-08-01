@@ -503,7 +503,7 @@ if (!sessionStorage.getItem("loggedIn")) {
             </div>
 
             <section class="report-section" id="reportSection">
-                <button type="button" id="generateReport" class="report-btn">
+                <button type="button" class="report-btn" data-report-trigger>
                     <i class="fas fa-file-pdf"></i>
                     Generate AI Incident Report
                 </button>
@@ -620,6 +620,7 @@ if (!sessionStorage.getItem("loggedIn")) {
                             <div><label>Distance</label><strong id="navigationDistance">18.4 km</strong></div>
                             <div><label>ETA</label><strong id="navigationETA">22 min</strong></div>
                             <div><label>Blocked Roads</label><strong id="blockedRoads">2</strong></div>
+                            <div><label>Route Status</label><strong id="navigationStatus">Primary route active</strong></div>
                         </div>
                     </article>
                     <article class="glass-panel panel-block">
@@ -631,6 +632,7 @@ if (!sessionStorage.getItem("loggedIn")) {
                             <li><span class="layer-dot shelter"></span> Shelters</li>
                             <li><span class="layer-dot traffic"></span> Traffic</li>
                         </ul>
+                        <div id="navigationRouteList" class="route-list" aria-live="polite"></div>
                     </article>
                 </div>
             </div>
@@ -760,7 +762,7 @@ if (!sessionStorage.getItem("loggedIn")) {
                         <p class="eyebrow">Governance</p>
                         <h2><i class="fas fa-file-alt"></i> Reports</h2>
                     </div>
-                    <button class="primary-button" type="button" id="generateReport">Generate PDF</button>
+                    <button class="primary-button" type="button" data-report-trigger>Generate PDF</button>
                 </header>
 
                 <div class="module-grid three-up">

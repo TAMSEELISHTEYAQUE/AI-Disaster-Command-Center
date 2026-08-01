@@ -159,59 +159,21 @@ function updateNavigationCenter() {
 
     if (!window.map) return;
 
-    const navigation = IncidentDatabase.navigation;
-
+    const navigation = IncidentDatabase.navigation || {};
     const destination = document.getElementById("navigationDestination");
     const distance = document.getElementById("navigationDistance");
     const eta = document.getElementById("navigationETA");
     const blocked = document.getElementById("blockedRoads");
+    const status = document.getElementById("navigationStatus");
 
-    if (destination) {
-        destination.textContent = navigation.destination || "--";
-    }
+    if (destination) destination.textContent = navigation.destination || "--";
+    if (distance) distance.textContent = navigation.distance || "--";
+    if (eta) eta.textContent = navigation.eta || "--";
+    if (blocked) blocked.textContent = navigation.blockedRoads ?? "--";
+    if (status) status.textContent = navigation.safestRoute ? "Primary route active" : "Fallback route selected";
 
-    if (distance) {
-        distance.textContent = navigation.distance || "--";
-    }
-
-    if (eta) {
-        eta.textContent = navigation.eta || "--";
-    }
-
-    if (blocked) {
-        blocked.textContent = navigation.blockedRoads ?? "--";
-    }
-
-}
-/* =====================================================
-   NAVIGATION CENTER
-===================================================== */
-
-function updateNavigationCenter() {
-
-    if (!window.map) return;
-
-    const navigation = IncidentDatabase.navigation;
-
-    const destination = document.getElementById("navigationDestination");
-    const distance = document.getElementById("navigationDistance");
-    const eta = document.getElementById("navigationETA");
-    const blocked = document.getElementById("blockedRoads");
-
-    if (destination) {
-        destination.textContent = navigation.destination || "--";
-    }
-
-    if (distance) {
-        distance.textContent = navigation.distance || "--";
-    }
-
-    if (eta) {
-        eta.textContent = navigation.eta || "--";
-    }
-
-    if (blocked) {
-        blocked.textContent = navigation.blockedRoads ?? "--";
+    if (typeof updateNavigationRouteList === "function") {
+        updateNavigationRouteList();
     }
 
 }

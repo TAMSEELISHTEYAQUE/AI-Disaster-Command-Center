@@ -4,8 +4,32 @@
 ===================================================== */
 
 /* =====================================================
-   PDF REPORT GENERATION
+   ENTERPRISE REPORT GENERATION
 ===================================================== */
+
+function buildReportSummary() {
+    const incident = IncidentDatabase.currentIncident || {};
+    const risk = typeof calculateRisk === "function" ? calculateRisk() : 0;
+    const priority = typeof calculatePriority === "function" ? calculatePriority() : "Moderate";
+    const recommendations = typeof generateRecommendationForDisaster === "function"
+        ? generateRecommendationForDisaster(incident)
+        : ["Activate response teams", "Open relief shelters", "Maintain AI monitoring"];
+
+    return {
+        incidentId: incident.incidentId || "ADC-2026-001",
+        disasterType: incident.disasterType || "Flood",
+        severity: incident.severity || "High",
+        state: incident.location && incident.location.state ? incident.location.state : "Assam",
+        district: incident.location && incident.location.district ? incident.location.district : "Barpeta",
+        populationAffected: incident.populationAffected || 0,
+        aiConfidence: incident.aiConfidence || 98,
+        riskScore: risk,
+        priority,
+        recommendations: Array.isArray(recommendations) ? recommendations.slice(0, 4) : [recommendations],
+        generatedAt: formatDateTime(),
+        status: incident.status || "Active"
+    };
+}
 
 function generateIncidentReport() {
 
@@ -15,139 +39,156 @@ function generateIncidentReport() {
     }
 
     const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+    const summary = buildReportSummary();
+    const resources = IncidentDatabase.resources || {};
+    const navigation = IncidentDatabase.navigation || {};
+    const missions = Array.isArray(IncidentDatabase.missions) ? IncidentDatabase.missions : [];
+    const disasters = Array.isArray(IncidentDatabase.disasters) ? IncidentDatabase.disasters : [];
 
-    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 18;
+    let y = 18;
 
+    doc.setFillColor(15, 23, 42);
+    doc.rect(0, 0, pageWidth, 52, "F");
+    doc.setTextColor(255, 255, 255);
     doc.setFontSize(22);
-doc.setTextColor(0, 102, 255);
-doc.text("AI DISASTER COMMAND CENTER", 20, 20);
+    doc.text("AI DISASTER COMMAND CENTER", margin, 18);
+    doc.setFontSize(10);
+    doc.text("Government Emergency Operations Platform", margin, 28);
+    doc.text(`Generated: ${summary.generatedAt}`, margin, 36);
+    doc.text(`Verification QR: ADC-${summary.incidentId}`, margin, 44);
 
-doc.setFontSize(15);
-doc.setTextColor(40, 40, 40);
-doc.text("Enterprise Incident Assessment Report", 20, 30);
+    doc.setDrawColor(59, 130, 246);
+    doc.line(margin, 50, pageWidth - margin, 50);
 
-doc.setDrawColor(0,102,255);
-doc.line(20,35,190,35);
+    doc.setTextColor(15, 23, 42);
+    doc.setFontSize(16);
+    y = 62;
+    doc.text("Executive Summary", margin, y);
+    y += 12;
+    doc.setFontSize(10);
+    const summaryText = `Disaster Type: ${summary.disasterType} | Severity: ${summary.severity} | State: ${summary.state} | District: ${summary.district} | Status: ${summary.status}. The operational AI assessment indicates a ${summary.priority} priority response with a ${summary.riskScore}/100 risk score and ${summary.aiConfidence}% forecast confidence.`;
+    const wrappedSummary = doc.splitTextToSize(summaryText, pageWidth - margin * 2);
+    doc.text(wrappedSummary, margin, y);
+    y += wrappedSummary.length * 5 + 8;
+
     doc.setFontSize(12);
+    doc.text("Incident Overview", margin, y);
+    y += 8;
+    doc.setFontSize(10);
+    const incidentSummary = [
+        `Incident ID: ${summary.incidentId}`,
+        `Disaster Type: ${summary.disasterType}`,
+        `Severity: ${summary.severity}`,
+        `State / District: ${summary.state}, ${summary.district}`,
+        `Population Affected: ${summary.populationAffected.toLocaleString()}`,
+        `AI Confidence: ${summary.aiConfidence}%`,
+        `Risk Score: ${summary.riskScore}/100`,
+        `Response Priority: ${summary.priority}`
+    ];
+    incidentSummary.forEach((line) => {
+        doc.text(line, margin + 4, y);
+        y += 7;
+    });
 
-    doc.text("Generated: " + formatDateTime(), 20, 35);
+    if (y > 150) {
+        doc.addPage();
+        y = 20;
+    }
 
-    doc.text(
-        "Incident ID: " + IncidentDatabase.currentIncident.incidentId,
-        20,
-        50
-    );
+    doc.setFontSize(12);
+    doc.text("AI Analysis & Recommendations", margin, y);
+    y += 8;
+    doc.setFontSize(10);
+    summary.recommendations.forEach((recommendation, index) => {
+        doc.text(`${index + 1}. ${recommendation}`, margin + 4, y);
+        y += 7;
+    });
 
-    doc.text(
-        "Disaster Type: " + IncidentDatabase.currentIncident.disasterType,
-        20,
-        60
-    );
+    y += 8;
+    doc.text("Mission Timeline", margin, y);
+    y += 8;
+    missions.length ? missions.forEach((mission) => {
+        doc.text(`• ${mission.missionId || "Mission"}: ${mission.incident || "Incident"} | Status: ${mission.status || "Active"} | ETA: ${mission.eta || "--"}`, margin + 4, y);
+        y += 7;
+    }) : doc.text("• No active mission data available", margin + 4, y);
 
-    doc.text(
-        "Severity: " + IncidentDatabase.currentIncident.severity,
-        20,
-        70
-    );
+    y += 8;
+    doc.text("Resource Deployment", margin, y);
+    y += 8;
+    const resourceLines = [
+        `Rescue Teams: ${resources.rescueTeams || 0}`,
+        `Ambulances: ${resources.ambulances || 0}`,
+        `Helicopters: ${resources.helicopters || 0}`,
+        `Shelters: ${resources.shelters || 0}`,
+        `Hospitals: ${resources.hospitals || 0}`,
+        `Relief Camps: ${resources.ReliefCamps || 0}`
+    ];
+    resourceLines.forEach((line) => {
+        doc.text(`• ${line}`, margin + 4, y);
+        y += 7;
+    });
 
-    doc.text(
-        "State: " + IncidentDatabase.currentIncident.location.state,
-        20,
-        80
-    );
+    y += 8;
+    doc.text("Route Intelligence", margin, y);
+    y += 8;
+    const routeText = [
+        `Destination: ${navigation.destination || "Flood Zone - Assam"}`,
+        `Distance: ${navigation.distance || "18.4 km"}`,
+        `ETA: ${navigation.eta || "22 min"}`,
+        `Blocked Roads: ${navigation.blockedRoads ?? 2}`,
+        `Alternative Routes: ${navigation.alternativeRoutes ?? 3}`,
+        `Status: ${navigation.safestRoute ? "Primary route active" : "Secondary route active"}`
+    ];
+    routeText.forEach((line) => {
+        doc.text(`• ${line}`, margin + 4, y);
+        y += 7;
+    });
 
-    doc.text(
-        "Population Affected: " +
-        IncidentDatabase.currentIncident.populationAffected,
-        20,
-        90
-    );
+    if (y > 250) {
+        doc.addPage();
+        y = 20;
+    }
 
-    doc.text(
-        "AI Confidence: " +
-        IncidentDatabase.currentIncident.aiConfidence + "%",
-        20,
-        100
-    );
-doc.setFontSize(13);
+    doc.setFontSize(12);
+    doc.text("Officer & Verification Details", margin, y);
+    y += 10;
+    doc.setFontSize(10);
+    doc.text("Officer: Admin Operator / National Emergency Coordination Cell", margin + 4, y);
+    y += 7;
+    doc.text("Shift: 06:00 - 18:00 IST", margin + 4, y);
+    y += 7;
+    doc.text(`QR Verification ID: ${summary.incidentId}`, margin + 4, y);
+    y += 7;
+    doc.text("Seal: Verified by AI Command Center Operations Desk", margin + 4, y);
+    y += 10;
 
-doc.text(
-    "Executive Summary",
-    20,
-    115
-);
+    doc.setFontSize(12);
+    doc.text("Operational Notes", margin, y);
+    y += 8;
+    doc.setFontSize(10);
+    doc.text("This report is intended for emergency operations planning, field coordination, and executive situational awareness. Distribution is restricted to public safety and disaster response personnel.", margin + 4, y, { maxWidth: pageWidth - margin * 2 });
 
-doc.setFontSize(11);
-
-doc.text(
-    "This report has been generated automatically by the AI Disaster Command Center using integrated incident intelligence, operational resources and AI-assisted analysis.",
-    20,
-    122,
-    { maxWidth: 170 }
-);
-    doc.text("Recommended Actions", 20, 120);
-
-    doc.text("- Deploy Rescue Teams", 30, 135);
-    doc.text("- Increase Satellite Monitoring", 30, 145);
-    doc.text("- Notify Local Authorities", 30, 155);
-doc.setFontSize(13);
-
-doc.text(
-    "System Information",
-    20,
-    175
-);
-
-doc.setFontSize(11);
-
-doc.text(
-    "AI Status : " + IncidentDatabase.systemHealth.ai,
-    20,
-    185
-);
-
-doc.text(
-    "Navigation : " + IncidentDatabase.systemHealth.navigation,
-    20,
-    193
-);
-
-doc.text(
-    "Database : " + IncidentDatabase.systemHealth.database,
-    20,
-    201
-);
-
-doc.text(
-    "Communication : " + IncidentDatabase.systemHealth.communication,
-    20,
-    209
-);
-    doc.save("AI_Disaster_Report.pdf");
+    doc.save(`AI_Disaster_Report_${summary.incidentId}.pdf`);
+    IncidentDatabase.reports = IncidentDatabase.reports || {};
+    IncidentDatabase.reports.lastGenerated = summary.generatedAt;
+    IncidentDatabase.reports.latestReport = `AI_Disaster_Report_${summary.incidentId}.pdf`;
 
 }
-/* =====================================================
-   INITIALIZE REPORT
-===================================================== */
 
 function initializeReport() {
-
-    const button = document.getElementById("generateReport");
-
-    if (!button) return;
-
-    button.addEventListener("click", generateIncidentReport);
-
+    const buttons = document.querySelectorAll("[data-report-trigger]");
+    buttons.forEach((button) => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", generateIncidentReport);
+    });
 }
-/* =====================================================
-   REPORT DASHBOARD
-===================================================== */
 
 function updateReportsDashboard() {
-
     if (!IncidentDatabase.reports) return;
-
-    IncidentDatabase.reports.lastGenerated =
-        formatDateTime();
-
+    IncidentDatabase.reports.lastGenerated = formatDateTime();
 }
